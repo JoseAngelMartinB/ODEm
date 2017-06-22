@@ -25,8 +25,8 @@ The following Matlab products:
  - 'Global Optimization Toolbox' version 3.4.1 or higher
 ```
 
-### Known Isues
- - If you run the program in an Operating System different from Windows the Save Results option may not work.
+### Known Issues
+ - If you run the program in an Operating System different from Windows the 'Save Results' option may not work.
 
 
 ## Documentation
