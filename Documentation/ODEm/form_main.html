@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of form_main</title>
+  <meta name="keywords" content="form_main">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; form_main.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>form_main
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = form_main(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="Fmin_Experiments.html" class="code" title="function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin )">Fmin_Experiments</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="criterion.html" class="code" title="function Phi = criterion(X,omega,opt )">criterion</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="form_design.html" class="code" title="function varargout = form_design(varargin)">form_design</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="form_methods.html" class="code" title="function varargout = form_methods(varargin)">form_methods</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="form_problem.html" class="code" title="function varargout = form_problem(varargin)">form_problem</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="form_result.html" class="code" title="function varargout = form_result(varargin)">form_result</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="generate_LB_UB.html" class="code" title="function [ LB, UB ] = generate_LB_UB( bounds, co, m, type )">generate_LB_UB</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="make_result_table.html" class="code" title="function make_result_table()">make_result_table</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function form_main_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = form_main_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function problem_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function design_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function methods_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function run_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function form_main_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function problem_name_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function design_text_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function text2_CreateFcn(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = form_main(varargin)</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="comment">% THIS IS THE MAIN FILE OF THE PROGRAM.</span>
+0009 <span class="comment">% YOU SHOULD EXECUTE ONLY THIS FILE. THIS FILE WILL LOAD THE INTERFACE.</span>
+0010 
+0011 <span class="comment">% FORM_MAIN MATLAB code for form_main.fig</span>
+0012 <span class="comment">%      FORM_MAIN, by itself, creates a new FORM_MAIN or raises the existing</span>
+0013 <span class="comment">%      singleton*.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%      H = FORM_MAIN returns the handle to a new FORM_MAIN or the handle to</span>
+0016 <span class="comment">%      the existing singleton*.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%      FORM_MAIN('CALLBACK',hObject,eventData,handles,...) calls the local</span>
+0019 <span class="comment">%      function named CALLBACK in FORM_MAIN.M with the given input arguments.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%      FORM_MAIN('Property','Value',...) creates a new FORM_MAIN or raises the</span>
+0022 <span class="comment">%      existing singleton*.  Starting from the left, property value pairs are</span>
+0023 <span class="comment">%      applied to the GUI before form_main_OpeningFcn gets called.  An</span>
+0024 <span class="comment">%      unrecognized property name or invalid value makes property application</span>
+0025 <span class="comment">%      stop.  All inputs are passed to form_main_OpeningFcn via varargin.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one</span>
+0028 <span class="comment">%      instance to run (singleton)&quot;.</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+0031 
+0032 <span class="comment">% Edit the above text to modify the response to help form_main</span>
+0033 
+0034 <span class="comment">% Last Modified by GUIDE v2.5 13-Nov-2016 16:30:23</span>
+0035 
+0036 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0037 gui_Singleton = 1;
+0038 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0039                    <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0040                    <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction form_main_OpeningFcn(hObject, eventdata, handles, varargin)">form_main_OpeningFcn</a>, <span class="keyword">...</span>
+0041                    <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = form_main_OutputFcn(hObject, eventdata, handles)">form_main_OutputFcn</a>, <span class="keyword">...</span>
+0042                    <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0043                    <span class="string">'gui_Callback'</span>,   []);
+0044 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0045     gui_State.gui_Callback = str2func(varargin{1});
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="keyword">if</span> nargout
+0049     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0050 <span class="keyword">else</span>
+0051     gui_mainfcn(gui_State, varargin{:});
+0052 <span class="keyword">end</span>
+0053 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0054 
+0055 
+0056 <span class="comment">% --- Executes just before form_main is made visible.</span>
+0057 <a name="_sub1" href="#_subfunctions" class="code">function form_main_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0058 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0059 <span class="comment">% hObject    handle to figure</span>
+0060 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0061 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0062 <span class="comment">% varargin   command line arguments to form_main (see VARARGIN)</span>
+0063 
+0064 <span class="comment">% Choose default command line output for form_main</span>
+0065 handles.output = hObject;
+0066 
+0067 <span class="comment">% Update handles structure</span>
+0068 guidata(hObject, handles);
+0069 
+0070 <span class="comment">% UIWAIT makes form_main wait for user response (see UIRESUME)</span>
+0071 <span class="comment">% uiwait(handles.form_main);</span>
+0072 
+0073 
+0074 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0075 <a name="_sub2" href="#_subfunctions" class="code">function varargout = form_main_OutputFcn(hObject, eventdata, handles) </a>
+0076 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0077 <span class="comment">% hObject    handle to figure</span>
+0078 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0079 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0080 
+0081 <span class="comment">% Get default command line output from handles structure</span>
+0082 varargout{1} = handles.output;
+0083 
+0084 
+0085 <span class="comment">% --- Executes on button press in problem.</span>
+0086 <a name="_sub3" href="#_subfunctions" class="code">function problem_Callback(hObject, eventdata, handles)</a>
+0087 <span class="comment">% hObject    handle to problem (see GCBO)</span>
+0088 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0089 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0090 <span class="keyword">global</span> design;
+0091 <a href="form_problem.html" class="code" title="function varargout = form_problem(varargin)">form_problem</a>;
+0092 set(handles.run_info, <span class="string">'String'</span>, <span class="string">''</span>);
+0093 set(handles.run_info, <span class="string">'ForegroundColor'</span>, <span class="string">'black'</span>);
+0094 set(handles.design_text,<span class="string">'ForegroundColor'</span>,<span class="string">'black'</span>);
+0095 <span class="keyword">if</span> design.p == 0
+0096     design_text = <span class="string">'Appro. D-design'</span>;
+0097 <span class="keyword">elseif</span> design.p == 1
+0098     design_text = <span class="string">'Appro. A-Design'</span>;
+0099 <span class="keyword">else</span>
+0100     design_text = [<span class="string">'Appro. Other: p = '</span> num2str(design.p) <span class="string">' design'</span>];
+0101 <span class="keyword">end</span>
+0102 set(handles.design_text,<span class="string">'String'</span>,design_text);
+0103 
+0104 
+0105 
+0106 <span class="comment">% --- Executes on button press in design.</span>
+0107 <a name="_sub4" href="#_subfunctions" class="code">function design_Callback(hObject, eventdata, handles)</a>
+0108 <span class="comment">% hObject    handle to design (see GCBO)</span>
+0109 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0110 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0111 <span class="keyword">global</span> problem_name;
+0112 <span class="keyword">if</span> strcmp(problem_name, <span class="string">'%%%none%%%'</span>)
+0113     set(handles.design_text,<span class="string">'String'</span>,<span class="string">'Select a problem first'</span>);
+0114     set(handles.design_text,<span class="string">'ForegroundColor'</span>,<span class="string">'red'</span>);
+0115 <span class="keyword">else</span>
+0116     <a href="form_design.html" class="code" title="function varargout = form_design(varargin)">form_design</a>;
+0117 <span class="keyword">end</span>
+0118 
+0119 <span class="comment">% --- Executes on button press in methods.</span>
+0120 <a name="_sub5" href="#_subfunctions" class="code">function methods_Callback(hObject, eventdata, handles)</a>
+0121 <span class="comment">% hObject    handle to methods (see GCBO)</span>
+0122 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0123 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0124 <a href="form_methods.html" class="code" title="function varargout = form_methods(varargin)">form_methods</a>;
+0125 
+0126 
+0127 <span class="comment">% --- Executes on button press in run.</span>
+0128 <a name="_sub6" href="#_subfunctions" class="code">function run_Callback(hObject, eventdata, handles)</a>
+0129 <span class="comment">% hObject    handle to run (see GCBO)</span>
+0130 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0131 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0132 <span class="comment">% opt = evalin('base', 'opt');</span>
+0133 <span class="keyword">global</span> problem_name opt design alg algs_exacts hybrid more_opt sol solution results;
+0134 
+0135 <span class="comment">% Check if problem is selected</span>
+0136 <span class="keyword">if</span> ~strcmp(problem_name, <span class="string">'%%%none%%%'</span>) &amp; isempty(alg) == 0
+0137     set(handles.run_info, <span class="string">'String'</span>, <span class="string">'Computing results...'</span>);
+0138     set(handles.run_info, <span class="string">'ForegroundColor'</span>, <span class="string">'black'</span>);
+0139     drawnow;
+0140     
+0141     N = opt.m*(opt.co+1);
+0142     auxX=@(x) reshape(x(1:(N-opt.m)),[opt.m,opt.co]);
+0143     auxW=@(x) reshape(x(N-opt.m+1:N),[opt.m,1])/sum(reshape(x(N-opt.m+1:N),[opt.m,1]));
+0144 
+0145     <span class="comment">% Check if the design is exact or approximated</span>
+0146     <span class="keyword">if</span> design.exact == 0
+0147         f = @(x) <a href="criterion.html" class="code" title="function Phi = criterion(X,omega,opt )">criterion</a>(auxX(x),auxW(x),opt);
+0148     <span class="keyword">else</span>
+0149         f = @(x) <a href="criterion.html" class="code" title="function Phi = criterion(X,omega,opt )">criterion</a>(auxX(x),(1/opt.m)*ones(1,opt.m),opt);
+0150     <span class="keyword">end</span>
+0151 
+0152     [LB, UB] = <a href="generate_LB_UB.html" class="code" title="function [ LB, UB ] = generate_LB_UB( bounds, co, m, type )">generate_LB_UB</a>(opt.bounds, opt.co, opt.m, 2);
+0153     
+0154     algs_exacts = [];
+0155     
+0156     <span class="keyword">for</span> element = alg
+0157         <span class="keyword">if</span> hybrid.hybrid == 1
+0158            <span class="keyword">if</span> element &gt; 3
+0159               algs_exacts(end + 1) = element - 3;
+0160            <span class="keyword">end</span>
+0161         <span class="keyword">end</span>
+0162     <span class="keyword">end</span>    
+0163     
+0164     <span class="comment">% GENERATE THE LIST OF ALGORITHMS FOR THE RESULT FORM</span>
+0165     <span class="keyword">global</span> alg_names hybrid_combinations list_alg;
+0166     list_alg = [];
+0167     <span class="keyword">if</span> hybrid.hybrid == 1 <span class="comment">% It is an hybrid experiment</span>
+0168         hybrid_combinations = [];
+0169         <span class="keyword">for</span> element = alg
+0170             <span class="keyword">if</span> element &lt; 4 <span class="comment">% Heuristic algorithm of the hybrid combination</span>
+0171                 <span class="keyword">for</span> element_exact = algs_exacts <span class="comment">% Exact algorithm of the hybrid combination</span>
+0172                     <span class="keyword">if</span> ~isempty(list_alg)
+0173                         list_alg = [list_alg char(10)];
+0174                     <span class="keyword">end</span>
+0175                         list_alg = [list_alg strcat(alg_names{element,1}, <span class="string">'+'</span>, alg_names{element_exact + 3,1})]; 
+0176                         hybrid_combinations = [hybrid_combinations; element element_exact];
+0177                 <span class="keyword">end</span>
+0178             <span class="keyword">end</span>
+0179         <span class="keyword">end</span>
+0180     <span class="keyword">else</span>
+0181         <span class="keyword">for</span> element = alg
+0182             <span class="keyword">if</span> ~isempty(list_alg)
+0183                 list_alg = [list_alg char(10)];
+0184             <span class="keyword">end</span>
+0185                 list_alg = [list_alg alg_names{element,1}];
+0186         <span class="keyword">end</span>
+0187     <span class="keyword">end</span>
+0188     
+0189 
+0190     <span class="comment">% EXECUTE THE ALGORITTHM</span>
+0191     <span class="keyword">if</span> hybrid.hybrid == 0
+0192         <span class="comment">% Create auxiliar structure for simulated anealing</span>
+0193         <span class="keyword">if</span> ismember(3, alg)
+0194             info_sa.co = opt.co;
+0195             info_sa.bounds = opt.bounds;
+0196             info_sa.m = opt.m;
+0197             info_sa.type = 1;
+0198             [sol, solution.CPU] = <a href="Fmin_Experiments.html" class="code" title="function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin )">Fmin_Experiments</a>(f, LB, UB, <span class="string">'name-problem'</span>, problem_name, <span class="string">'Iters'</span>, more_opt.global_it, <span class="string">'ItersExact'</span>, more_opt.exacts_it, <span class="string">'Alg'</span>, alg, <span class="string">'Pop'</span>, more_opt.population, <span class="string">'Nc'</span>, Inf, <span class="string">'replicas'</span>, more_opt.replicas, <span class="string">'OptSa'</span>, info_sa);
+0199         <span class="keyword">else</span>
+0200             [sol, solution.CPU] = <a href="Fmin_Experiments.html" class="code" title="function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin )">Fmin_Experiments</a>(f, LB, UB, <span class="string">'name-problem'</span>, problem_name, <span class="string">'Iters'</span>, more_opt.global_it, <span class="string">'ItersExact'</span>, more_opt.exacts_it, <span class="string">'Alg'</span>, alg, <span class="string">'Pop'</span>, more_opt.population, <span class="string">'Nc'</span>, Inf, <span class="string">'replicas'</span>, more_opt.replicas);
+0201         <span class="keyword">end</span>
+0202     <span class="keyword">elseif</span> hybrid.hybrid == 1
+0203         <span class="comment">% Create auxiliar structure for simulated anealing</span>
+0204         <span class="keyword">if</span> ismember(3, alg)
+0205             info_sa.co = opt.co;
+0206             info_sa.bounds = opt.bounds;
+0207             info_sa.m = opt.m;
+0208             info_sa.type = 1;
+0209             [sol, solution.CPU] = <a href="Fmin_Experiments.html" class="code" title="function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin )">Fmin_Experiments</a>(f, LB, UB, <span class="string">'name-problem'</span>, problem_name, <span class="string">'Iters'</span>, more_opt.global_it, <span class="string">'ItersExact'</span>, more_opt.exacts_it, <span class="string">'Alg'</span>, alg, <span class="string">'AlgExact'</span>, algs_exacts, <span class="string">'Pop'</span>, more_opt.population, <span class="string">'Nc'</span>, hybrid.nc, <span class="string">'replicas'</span>, more_opt.replicas, <span class="string">'OptSa'</span>, info_sa);
+0210         <span class="keyword">else</span>
+0211             [sol, solution.CPU] = <a href="Fmin_Experiments.html" class="code" title="function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin )">Fmin_Experiments</a>(f, LB, UB, <span class="string">'name-problem'</span>, problem_name, <span class="string">'Iters'</span>, more_opt.global_it, <span class="string">'ItersExact'</span>, more_opt.exacts_it, <span class="string">'Alg'</span>, alg, <span class="string">'AlgExact'</span>, algs_exacts, <span class="string">'Pop'</span>, more_opt.population, <span class="string">'Nc'</span>, hybrid.nc, <span class="string">'replicas'</span>, more_opt.replicas);
+0212         <span class="keyword">end</span>
+0213     <span class="keyword">end</span>
+0214     
+0215     solution.aux_x = auxX(sol.best_solution);
+0216     solution.aux_w = auxW(sol.best_solution);
+0217 
+0218     <span class="comment">% Generate result data</span>
+0219     <a href="make_result_table.html" class="code" title="function make_result_table()">make_result_table</a>();
+0220         
+0221     <span class="comment">% For depuration porpouses:</span>
+0222     <span class="comment">%assignin('base','alg_exacts',algs_exacts);</span>
+0223     <span class="comment">%assignin('base','alg',alg);</span>
+0224     <span class="comment">%assignin('base','solution',solution);</span>
+0225     assignin(<span class="string">'base'</span>,<span class="string">'results'</span>,results);
+0226     
+0227     <span class="comment">% Show the results</span>
+0228     <a href="form_result.html" class="code" title="function varargout = form_result(varargin)">form_result</a>();
+0229     set(handles.run_info, <span class="string">'String'</span>, <span class="string">''</span>);
+0230    
+0231 <span class="keyword">else</span>
+0232     <span class="keyword">if</span> strcmp(problem_name, <span class="string">'%%%none%%%'</span>)
+0233         set(handles.run_info,<span class="string">'String'</span>,<span class="string">'Select a problem first'</span>);
+0234         set(handles.run_info,<span class="string">'ForegroundColor'</span>,<span class="string">'red'</span>);
+0235     <span class="keyword">elseif</span> isempty(alg) == 1
+0236         set(handles.run_info,<span class="string">'String'</span>,<span class="string">'Select at least one method'</span>);
+0237         set(handles.run_info,<span class="string">'ForegroundColor'</span>,<span class="string">'red'</span>);
+0238     <span class="keyword">end</span>
+0239 <span class="keyword">end</span>
+0240 
+0241 
+0242 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0243 <a name="_sub7" href="#_subfunctions" class="code">function form_main_CreateFcn(hObject, eventdata, handles)</a>
+0244 <span class="comment">% hObject    handle to form_main (see GCBO)</span>
+0245 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0246 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0247 evalin(<span class="string">'base'</span>, <span class="string">'clearvars *'</span>)
+0248 clc;
+0249 warning (<span class="string">'off'</span>,<span class="string">'all'</span>); <span class="comment">% Turn warnings off</span>
+0250 <span class="keyword">global</span> file problem_name opt design alg hybrid more_opt problem_line alg_names;
+0251 file = <span class="string">'ProblemData.dat'</span>; <span class="comment">% Default location of the problems</span>
+0252 problem_name = <span class="string">'%%%none%%%'</span>;
+0253 problem_line = 0;
+0254 design.p = 0;
+0255 design.exact = 0;
+0256 design.MM = 0;
+0257 alg = [];
+0258 hybrid.hybrid = 0;
+0259 hybrid.nc = 0;
+0260 more_opt.more = 0;
+0261 more_opt.replicas = 1;
+0262 more_opt.global_it = 500;
+0263 more_opt.ill_cond = 0;
+0264 more_opt.eta = 1e-10;
+0265 more_opt.population = 50;
+0266 more_opt.exacts_it = 100;
+0267 alg_names = {<span class="string">'PSO'</span>;     <span class="comment">% H - 1</span>
+0268     <span class="string">'GA'</span>;               <span class="comment">% H - 2</span>
+0269     <span class="string">'SA'</span>;               <span class="comment">% H - 3</span>
+0270     <span class="string">'AS'</span>;               <span class="comment">% E - 4</span>
+0271     <span class="string">'IP'</span>;               <span class="comment">% E - 5</span>
+0272     <span class="string">'SQP'</span>;              <span class="comment">% E - 6</span>
+0273     <span class="string">'NM'</span>;               <span class="comment">% E - 7</span>
+0274     <span class="string">'PS'</span>};              <span class="comment">% E - 8</span>
+0275 
+0276 <span class="comment">%Show the logo</span>
+0277 logo = imread(<span class="string">'logo.jpg'</span>);
+0278 axes(<span class="string">'Position'</span>,[0 0.5 0.28 0.6]);
+0279 imshow(logo);
+0280 
+0281 
+0282 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0283 <a name="_sub8" href="#_subfunctions" class="code">function problem_name_CreateFcn(hObject, eventdata, handles)</a>
+0284 <span class="comment">% hObject    handle to problem_name (see GCBO)</span>
+0285 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0286 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0287 set(hObject, <span class="string">'String'</span>, <span class="string">'No problem selected.'</span>);
+0288 set(hObject, <span class="string">'ForegroundColor'</span> , <span class="string">'red'</span>);
+0289 
+0290 
+0291 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0292 <a name="_sub9" href="#_subfunctions" class="code">function design_text_CreateFcn(hObject, eventdata, handles)</a>
+0293 <span class="comment">% hObject    handle to design_text (see GCBO)</span>
+0294 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0295 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0296 <span class="keyword">global</span> design;
+0297 
+0298 <span class="keyword">if</span> design.exact == 0
+0299     <span class="keyword">if</span> design.p == 0
+0300         design_text = <span class="string">'Appro. D-design'</span>;
+0301     <span class="keyword">elseif</span> design.p == 1
+0302         design_text = <span class="string">'Appro. A-Design'</span>;
+0303     <span class="keyword">else</span>
+0304         design_text = [<span class="string">'Appro. Other: p = '</span> num2str(design.p) <span class="string">' design'</span>];
+0305     <span class="keyword">end</span>
+0306 <span class="keyword">else</span>
+0307     <span class="keyword">if</span> design.p == 0
+0308         design_text = <span class="string">'Exact. D-design'</span>;
+0309     <span class="keyword">elseif</span> design.p == 1
+0310         design_text = <span class="string">'Exact. A-Design'</span>;
+0311     <span class="keyword">else</span>
+0312         design_text = [<span class="string">'Exact. Other: p = '</span> num2str(design.p) <span class="string">' design'</span>];
+0313     <span class="keyword">end</span>
+0314 <span class="keyword">end</span>
+0315 
+0316 set(hObject, <span class="string">'String'</span>, design_text);
+0317 
+0318 
+0319 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0320 <a name="_sub10" href="#_subfunctions" class="code">function text2_CreateFcn(hObject, eventdata, handles)</a>
+0321 <span class="comment">% hObject    handle to text2 (see GCBO)</span>
+0322 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0323 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

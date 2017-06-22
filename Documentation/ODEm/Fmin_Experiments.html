@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of Fmin_Experiments</title>
+  <meta name="keywords" content="Fmin_Experiments">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; Fmin_Experiments.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>Fmin_Experiments
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin ) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="Experiments.html" class="code" title="function [global_data, CPU] = Experiments( name_problem, opt, file_names, exp_conf )">Experiments</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="form_main.html" class="code" title="function varargout = form_main(varargin)">form_main</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin )</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0009 <span class="comment">% - Opt:</span>
+0010 <span class="comment">%   * fun</span>
+0011 <span class="comment">%   * xlow</span>
+0012 <span class="comment">%   * xup</span>
+0013 <span class="comment">%   * N</span>
+0014 <span class="comment">%   * info_problem</span>
+0015 <span class="comment">%       . co</span>
+0016 <span class="comment">%       . bounds</span>
+0017 <span class="comment">%       . m</span>
+0018 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0019 
+0020     opt.fun = f;
+0021     opt.xlow = xlow;
+0022     opt.xup = xup;
+0023     
+0024     <span class="keyword">if</span> size(xlow, 2) == size(xup, 2)
+0025         opt.N = size(xlow, 2);
+0026     <span class="keyword">else</span>
+0027         fprintf(<span class="string">'Error: The xlow and xup vectors must be the same.\n'</span>); 
+0028     <span class="keyword">end</span>
+0029 
+0030     file_names.ficheroExp = <span class="string">'./all_experiments.mat'</span>;
+0031     file_names.directory_res = <span class="string">'./Results/'</span>;
+0032     
+0033     <span class="keyword">if</span> mod(size(varargin, 2), 2) ~= 0
+0034        fprintf(<span class="string">'Error: The optional parameters must have a string and a value.\n'</span>); 
+0035        <span class="keyword">return</span>;
+0036     <span class="keyword">end</span>
+0037     
+0038     list_params = {};
+0039     
+0040     <span class="keyword">for</span> idx = 1 : 2 : size(varargin, 2)
+0041         <span class="keyword">switch</span> varargin{idx}
+0042             <span class="keyword">case</span> <span class="string">'Iters'</span>
+0043                 exp_conf.iter_max =  varargin{idx + 1};
+0044                 list_params{length(list_params) + 1} = varargin{idx};
+0045             <span class="keyword">case</span> <span class="string">'ItersExact'</span>
+0046                 exp_conf.iter_exact =  varargin{idx + 1};
+0047                 list_params{length(list_params) + 1} = varargin{idx};
+0048             <span class="keyword">case</span> <span class="string">'Alg'</span>
+0049                 exp_conf.alg_types = varargin{idx + 1};
+0050                 list_params{length(list_params) + 1} = varargin{idx};
+0051             <span class="keyword">case</span> <span class="string">'AlgExact'</span>
+0052                 exp_conf.alg_exacts = varargin{idx + 1};
+0053                 list_params{length(list_params) + 1} = varargin{idx};
+0054             <span class="keyword">case</span> <span class="string">'Pop'</span>
+0055                 exp_conf.list_pob =  varargin{idx + 1};
+0056                 list_params{length(list_params) + 1} = varargin{idx};
+0057             <span class="keyword">case</span> <span class="string">'Nc'</span>
+0058                 exp_conf.list_nc =  varargin{idx + 1};
+0059                 list_params{length(list_params) + 1} = varargin{idx};
+0060             <span class="keyword">case</span> <span class="string">'name-problem'</span>
+0061                 name_problem = varargin{idx + 1};
+0062                 list_params{length(list_params) + 1} = varargin{idx};
+0063             <span class="keyword">case</span> <span class="string">'OptSa'</span>
+0064                 opt.info_problem = varargin{idx + 1};
+0065                 list_params{length(list_params) + 1} = varargin{idx};
+0066             <span class="keyword">case</span> <span class="string">'replicas'</span>
+0067                 exp_conf.replicas = varargin{idx + 1};
+0068                 list_params{length(list_params) + 1} = varargin{idx};
+0069             <span class="keyword">otherwise</span>
+0070                 fprintf(<span class="string">'Error: %s is a unknown parameter.\n'</span>, varargin{idx}); 
+0071                 <span class="keyword">return</span>;    
+0072         <span class="keyword">end</span>
+0073     <span class="keyword">end</span>
+0074     
+0075     list_all_params = {<span class="string">'Iters'</span>, <span class="string">'ItersExact'</span>, <span class="string">'Alg'</span>, <span class="string">'AlgExact'</span>, <span class="string">'Pop'</span>, <span class="string">'Nc'</span>, <span class="string">'name-problem'</span>, <span class="string">'OptSa'</span>, <span class="string">'replicas'</span>};
+0076     
+0077     <span class="keyword">for</span> idx = 1 : size(list_all_params, 2)
+0078         <span class="keyword">if</span> ~ismember(list_all_params{idx}, list_params)
+0079             <span class="keyword">switch</span> list_all_params{idx}
+0080                 <span class="keyword">case</span> <span class="string">'Iters'</span>
+0081                     exp_conf.iter_max =  500;
+0082                 <span class="keyword">case</span> <span class="string">'ItersExact'</span>
+0083                     exp_conf.iter_exact =  100;
+0084                 <span class="keyword">case</span> <span class="string">'Alg'</span>
+0085                     exp_conf.alg_types = 2;
+0086                 <span class="keyword">case</span> <span class="string">'AlgExact'</span>
+0087                     exp_conf.alg_exacts = 2;
+0088                 <span class="keyword">case</span> <span class="string">'Pop'</span>
+0089                     exp_conf.list_pob =  50;
+0090                 <span class="keyword">case</span> <span class="string">'Nc'</span>
+0091                     exp_conf.list_nc =  5;
+0092                 <span class="keyword">case</span> <span class="string">'name-problem'</span>
+0093                     name_problem = <span class="string">'Design-Experiments'</span>;
+0094                 <span class="keyword">case</span> <span class="string">'OptSa'</span>
+0095                     opt.info_problem = 0;
+0096                 <span class="keyword">case</span> <span class="string">'replicas'</span>
+0097                     exp_conf.replicas = 1;
+0098             <span class="keyword">end</span>
+0099         <span class="keyword">end</span>
+0100     <span class="keyword">end</span>
+0101     
+0102     [global_data, CPU] = <a href="Experiments.html" class="code" title="function [global_data, CPU] = Experiments( name_problem, opt, file_names, exp_conf )">Experiments</a>( name_problem, opt, file_names, exp_conf );
+0103     
+0104 <span class="keyword">end</span>
+0105</pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

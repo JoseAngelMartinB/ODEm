@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of save_in_xml</title>
+  <meta name="keywords" content="save_in_xml">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; save_in_xml.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>save_in_xml
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function status = save_in_xml(file) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="form_result.html" class="code" title="function varargout = form_result(varargin)">form_result</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function status = save_in_xml(file)</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="keyword">global</span> results problem_name design opt;
+0009 
+0010 n_results = size(results,2);
+0011 status = -1;
+0012 line_in_summary = 1;
+0013 summary_alg = {};
+0014 summary_x = [];
+0015 summary_eff = {};
+0016 
+0017 
+0018 <span class="comment">% Iterate over all the results computed</span>
+0019 <span class="keyword">for</span> i = 1:n_results
+0020     <span class="comment">% Store the name of the algorithm</span>
+0021     alg_name = results{i}.longName;
+0022     sheet = results{i}.sortName;
+0023     disp(strcat(<span class="string">'Saving Result for method '</span>, alg_name));
+0024     [status,message] = xlswrite(file,{problem_name; alg_name},sheet,<span class="string">'A1'</span>);
+0025     
+0026     
+0027     <span class="comment">% Table with weigths and X</span>
+0028     xlRange = 4;
+0029     data = results{i}.data;
+0030     data_size = size(data);
+0031     <span class="keyword">if</span> design.exact == 0
+0032         data_cabeceras = {<span class="string">'Weigth'</span>};
+0033     <span class="keyword">else</span>
+0034         data_cabeceras = {<span class="string">'Subject'</span>};
+0035         subjects = [1:1:opt.m];
+0036         data(:,1) = subjects(1,:);
+0037     <span class="keyword">end</span>
+0038     <span class="keyword">for</span> j = (2:data_size(2))
+0039         data_cabeceras(end + 1) = {strcat(<span class="string">'X'</span>, num2str(j - 1))};
+0040     <span class="keyword">end</span>
+0041     [status,message] = xlswrite(file,data_cabeceras,sheet,strcat(<span class="string">'A'</span>,num2str(xlRange)));
+0042     xlRange = xlRange + 1;
+0043     [status,message] = xlswrite(file,data,sheet,strcat(<span class="string">'A'</span>,num2str(xlRange)));
+0044     xlRange = xlRange + data_size(1) + 1;
+0045     
+0046     
+0047     <span class="comment">% Design</span>
+0048     <span class="keyword">if</span> design.p == 0
+0049         design_str = <span class="string">'D-Design'</span>;
+0050     <span class="keyword">elseif</span> design.p == 1
+0051         design_str = <span class="string">'A-Design'</span>;
+0052     <span class="keyword">else</span>
+0053         design_str = [<span class="string">'Other design: p = '</span> num2str(design.p)];
+0054     <span class="keyword">end</span>
+0055     <span class="keyword">if</span> design.exact == 0
+0056         appr_exact_str = [<span class="string">'Approximated design.'</span>];
+0057     <span class="keyword">else</span>
+0058         appr_exact_str = [<span class="string">'Exact design. Experimental subjects = '</span> num2str(opt.m)];
+0059     <span class="keyword">end</span>
+0060     [status,message] = xlswrite(file,{<span class="string">'Type of design:'</span>, design_str, appr_exact_str},sheet,strcat(<span class="string">'A'</span>,num2str(xlRange)));
+0061     xlRange = xlRange + 1;
+0062     
+0063     
+0064     <span class="comment">% Z</span>
+0065     <span class="keyword">if</span> design.p == 0
+0066         <span class="keyword">if</span> results{i}.Phi == -1
+0067             [status,message] = xlswrite(file,{<span class="string">'Z*:'</span>, <span class="string">'---'</span>},sheet,strcat(<span class="string">'A'</span>,num2str(xlRange)));
+0068             z = <span class="string">'---'</span>;
+0069         <span class="keyword">else</span>
+0070             f_opt = results{i}.Phi;
+0071             [status,message] = xlswrite(file,{<span class="string">'Z*:'</span>, sprintf(<span class="string">'%.2f%'</span>,f_opt)},sheet,strcat(<span class="string">'A'</span>,num2str(xlRange)));
+0072             z = sprintf(<span class="string">'%.2f%'</span>,f_opt);
+0073         <span class="keyword">end</span>
+0074     <span class="keyword">else</span>
+0075         f_opt = results{i}.f_opt;
+0076         [status,message] = xlswrite(file,{<span class="string">'Z*:'</span>, sprintf(<span class="string">'%.2f%'</span>,f_opt)},sheet,strcat(<span class="string">'A'</span>,num2str(xlRange)));
+0077         z = sprintf(<span class="string">'%.2f%'</span>,f_opt);
+0078     <span class="keyword">end</span>
+0079     xlRange = xlRange + 1;
+0080     
+0081     
+0082     <span class="comment">% CPU time</span>
+0083     time = results{i}.time;
+0084     [status,message] = xlswrite(file,{<span class="string">'CPU time:'</span>, time},sheet,strcat(<span class="string">'A'</span>,num2str(xlRange)));
+0085     xlRange = xlRange + 1;
+0086     
+0087     
+0088     <span class="comment">% Efficiency</span>
+0089     <span class="keyword">if</span> results{i}.efficiency &gt; 1 || results{i}.efficiency &lt; 0 <span class="comment">% Avoid wrong efficiency</span>
+0090         eff_per = sprintf(<span class="string">'---'</span>);
+0091     <span class="keyword">else</span>
+0092         eff_per = sprintf(<span class="string">'%.2f%%'</span>,100*results{i}.efficiency);
+0093     <span class="keyword">end</span>
+0094     [status,message] = xlswrite(file,{<span class="string">'Efficiency:'</span>, eff_per},sheet,strcat(<span class="string">'A'</span>,num2str(xlRange)));
+0095     xlRange = xlRange + 1; 
+0096     
+0097     
+0098     <span class="comment">%Summary</span>
+0099     summary_alg(line_in_summary,1) = {sheet};
+0100     <span class="keyword">for</span> j = (0:data_size(2)-2)
+0101         summary_alg(line_in_summary + j, 2) = {strcat(<span class="string">'X'</span>, num2str(j+1))};
+0102         new_data = data(:, j+2);
+0103         size_new_data = size(new_data);
+0104         summary_x(line_in_summary + j, 1:size_new_data(1)) = new_data';
+0105     <span class="keyword">end</span>
+0106     <span class="keyword">if</span> design.exact == 0
+0107         summary_alg(line_in_summary + data_size(2) - 1, 2) = {<span class="string">'W'</span>};
+0108     <span class="keyword">else</span>
+0109         summary_alg(line_in_summary + data_size(2) - 1, 2) = {<span class="string">'Subject'</span>};
+0110     <span class="keyword">end</span>
+0111     new_data = data(:, 1);
+0112     size_new_data = size(new_data);
+0113     summary_x(line_in_summary + data_size(2) - 1, 1:size_new_data(1)) = new_data';
+0114     summary_eff(line_in_summary, 1:3) = {eff_per,z,time};
+0115     summary_eff(line_in_summary + data_size(2) - 1, 3) = {<span class="string">''</span>}; <span class="comment">% Prevents error in dimensions when writing XML</span>
+0116     line_in_summary = line_in_summary + data_size(2);
+0117     
+0118 <span class="keyword">end</span>
+0119 
+0120 
+0121 <span class="comment">% Summary sheet</span>
+0122 size_summary_x = size(summary_x);
+0123 head_summary(1,1) = {<span class="string">'Method'</span>};
+0124 head_summary(1,size_summary_x(2)+3:size_summary_x(2)+5) = {<span class="string">'Efficiency'</span>, <span class="string">'Z'</span>, <span class="string">'CPU'</span>};
+0125 [status,message] = xlswrite(file,{<span class="string">'Summary of all the results:'</span>},<span class="string">'Summary'</span>,<span class="string">'A1'</span>);
+0126 [status,message] = xlswrite(file,head_summary,<span class="string">'Summary'</span>,<span class="string">'A3'</span>);
+0127 [status,message] = xlswrite(file,[summary_alg,num2cell(summary_x),summary_eff],<span class="string">'Summary'</span>,<span class="string">'A4'</span>);
+0128 
+0129 disp(strcat(file, {<span class="string">' has been saved'</span>}));
+0130 
+0131 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

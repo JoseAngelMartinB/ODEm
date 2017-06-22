@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of make_result_table</title>
+  <meta name="keywords" content="make_result_table">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; make_result_table.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>make_result_table
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function make_result_table() </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="Efficiency_YBT.html" class="code" title="function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt )">Efficiency_YBT</a>	</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="form_main.html" class="code" title="function varargout = form_main(varargin)">form_main</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function generate_results(algorithm, algorithm_exact,counter)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function make_result_table()</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="keyword">global</span> alg hybrid_combinations hybrid algs_exacts results;
+0009 
+0010 <span class="comment">%%% 0. Initialize data structures %%%</span>
+0011 results = {};
+0012 
+0013 <span class="comment">%%% Iterate over all the methods %%%</span>
+0014 <span class="keyword">if</span> hybrid.hybrid == 1 <span class="comment">% It is an hybrid experiment</span>
+0015     hybrid_combinations = [];
+0016     counter = 1;
+0017     <span class="keyword">for</span> algorithm = alg
+0018         <span class="keyword">if</span> algorithm &lt; 4 <span class="comment">% Heuristic algorithm of the hybrid</span>
+0019             <span class="keyword">for</span> algorithm_exact = algs_exacts <span class="comment">% Exact algorithm of the hybrid</span>
+0020                 hybrid_combinations = [hybrid_combinations; algorithm algorithm_exact];
+0021                 <a href="#_sub1" class="code" title="subfunction generate_results(algorithm, algorithm_exact,counter)">generate_results</a>(algorithm, algorithm_exact, counter);
+0022                 counter = counter + 1;
+0023             <span class="keyword">end</span>
+0024         <span class="keyword">end</span>
+0025     <span class="keyword">end</span>
+0026 <span class="keyword">else</span>
+0027     <span class="keyword">for</span> algorithm = alg
+0028         <a href="#_sub1" class="code" title="subfunction generate_results(algorithm, algorithm_exact,counter)">generate_results</a>(algorithm, 0, 1);
+0029     <span class="keyword">end</span>
+0030 <span class="keyword">end</span>
+0031 
+0032 <span class="keyword">end</span> 
+0033 
+0034 
+0035 <a name="_sub1" href="#_subfunctions" class="code">function generate_results(algorithm, algorithm_exact,counter)</a>
+0036 <span class="keyword">global</span> solution opt design hybrid_combinations hybrid alg_names alg_types results;
+0037 
+0038 <span class="keyword">if</span> hybrid.hybrid == 1 <span class="comment">% It is an hybrid experiment</span>
+0039     long_alg_name = strcat(alg_types{algorithm,2}, {<span class="string">' + '</span>}, alg_types{algorithm_exact + 3,2},<span class="string">' ('</span>,alg_names{algorithm,1},<span class="string">'+'</span>,alg_names{algorithm_exact + 3,1},<span class="string">')'</span> );
+0040     short_alg_name = strcat(alg_names{algorithm,1}, <span class="string">'+'</span>, alg_names{algorithm_exact + 3,1});
+0041     algorithm = counter;
+0042 <span class="keyword">else</span>
+0043     long_alg_name = strcat(alg_types{algorithm,2},<span class="string">' ('</span>,alg_names{algorithm,1},<span class="string">')'</span>);
+0044     short_alg_name = alg_names{algorithm,1};
+0045 <span class="keyword">end</span>
+0046 
+0047 
+0048 <span class="comment">%%% 1. Generate result table %%%</span>
+0049 
+0050     N = opt.m*(opt.co+1);
+0051     auxX=@(x) reshape(x(1:(N-opt.m)),[opt.m,opt.co]);
+0052     auxW=@(x) reshape(x(N-opt.m+1:N),[opt.m,1])/sum(reshape(x(N-opt.m+1:N),[opt.m,1]));
+0053 
+0054     <span class="keyword">if</span> hybrid.hybrid == 1 <span class="comment">% It is an hybrid experiment</span>
+0055 
+0056         aux_x = auxX(solution.CPU{hybrid_combinations(algorithm, 1),hybrid_combinations(algorithm, 2),1,1,1,2});
+0057         aux_w = auxW(solution.CPU{hybrid_combinations(algorithm, 1),hybrid_combinations(algorithm, 2),1,1,1,2});
+0058     <span class="keyword">else</span>
+0059         <span class="keyword">if</span> algorithm &gt; 3
+0060             aux_x = auxX(solution.CPU{algorithm,1,1,1,1,2});
+0061             aux_w = auxW(solution.CPU{algorithm,1,1,1,1,2});
+0062         <span class="keyword">else</span>
+0063             aux_x = auxX(solution.CPU{algorithm,2,1,1,1,2});
+0064             aux_w = auxW(solution.CPU{algorithm,2,1,1,1,2});
+0065         <span class="keyword">end</span>
+0066     <span class="keyword">end</span>
+0067 
+0068     data_not_order = [aux_w, aux_x];
+0069     [rows, cols] = size(data_not_order);
+0070 
+0071     data = sortrows(data_not_order, (2:cols));
+0072     <span class="comment">% Remove rows with weigth 0 and join similar points</span>
+0073     <span class="keyword">if</span> design.exact == 0
+0074         condition = data(:,1) == 0;
+0075         data(condition,:) = [];
+0076 
+0077         <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Join similar points</span>
+0078         epsilon = 1e-3; <span class="comment">% Minimun distance to considerate two points different</span>
+0079         D = squareform(pdist(data(:,2:size(data,2)),<span class="string">'euclidean'</span>));
+0080 
+0081         rows = size(data,1);
+0082         i = 1;
+0083         j = 2;
+0084         <span class="keyword">while</span> i &lt; rows
+0085             <span class="keyword">while</span> j &lt;= rows
+0086                 <span class="keyword">if</span> D(i,j) &lt; epsilon
+0087                     e = mean([data(i,:);data(j,:)]);
+0088                     e(1) = 2*e(1);
+0089                     <span class="comment">% Remove this row</span>
+0090                     data(j,:) = [];
+0091                     D(:,j) = [];
+0092                     rows = rows - 1;
+0093                     <span class="comment">% Change the row</span>
+0094                     data(i,:) = e;
+0095                 <span class="keyword">else</span>
+0096                     j = j + 1;
+0097                 <span class="keyword">end</span>
+0098             <span class="keyword">end</span> 
+0099             i = i + 1;
+0100             j = i + 1;
+0101             D = squareform(pdist(data(:,2:size(data,2)),<span class="string">'euclidean'</span>));
+0102         <span class="keyword">end</span>
+0103         <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0104     <span class="keyword">end</span>
+0105 
+0106     
+0107 <span class="comment">%%% 2. Calculate Efficiency %%%</span>
+0108     <span class="keyword">try</span>
+0109         N = opt.m*(opt.co+1);
+0110         auxX=@(x) reshape(x(1:(N-opt.m)),[opt.m,opt.co]);
+0111         auxW=@(x) reshape(x(N-opt.m+1:N),[opt.m,1])/sum(reshape(x(N-opt.m+1:N),[opt.m,1]));
+0112         <span class="keyword">if</span> design.exact == 0
+0113             <span class="keyword">if</span> hybrid.hybrid == 1 <span class="comment">% It is an hybrid experiment</span>
+0114                 [Phi, efficiency, Phi_L] = <a href="Efficiency_YBT.html" class="code" title="function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt )">Efficiency_YBT</a>(auxX(solution.CPU{hybrid_combinations(algorithm, 1),hybrid_combinations(algorithm, 2),1,1,1,2}),auxW(solution.CPU{hybrid_combinations(algorithm, 1),hybrid_combinations(algorithm, 2),1,1,1,2}),opt);
+0115             <span class="keyword">else</span>
+0116                 <span class="keyword">if</span> algorithm &gt; 3
+0117                     [Phi, efficiency, Phi_L] = <a href="Efficiency_YBT.html" class="code" title="function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt )">Efficiency_YBT</a>(auxX(solution.CPU{algorithm,1,1,1,1,2}),auxW(solution.CPU{algorithm,1,1,1,1,2}),opt);
+0118                 <span class="keyword">else</span>
+0119                     [Phi, efficiency, Phi_L] = <a href="Efficiency_YBT.html" class="code" title="function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt )">Efficiency_YBT</a>(auxX(solution.CPU{algorithm,2,1,1,1,2}),auxW(solution.CPU{algorithm,2,1,1,1,2}),opt);
+0120                 <span class="keyword">end</span>
+0121             <span class="keyword">end</span>
+0122         <span class="keyword">else</span>
+0123             <span class="keyword">if</span> hybrid.hybrid == 1 <span class="comment">% It is an hybrid experiment</span>
+0124                 [Phi, efficiency, Phi_L] = <a href="Efficiency_YBT.html" class="code" title="function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt )">Efficiency_YBT</a>(auxX(solution.CPU{hybrid_combinations(algorithm, 1),hybrid_combinations(algorithm, 2),1,1,1,2}),(1/opt.m)*ones(1,opt.m),opt);
+0125             <span class="keyword">else</span>
+0126                 <span class="keyword">if</span> algorithm &gt; 3
+0127                     [Phi, efficiency, Phi_L] = <a href="Efficiency_YBT.html" class="code" title="function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt )">Efficiency_YBT</a>(auxX(solution.CPU{algorithm,1,1,1,1,2}),(1/opt.m)*ones(1,opt.m),opt);
+0128                 <span class="keyword">else</span>
+0129                     [Phi, efficiency, Phi_L] = <a href="Efficiency_YBT.html" class="code" title="function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt )">Efficiency_YBT</a>(auxX(solution.CPU{algorithm,2,1,1,1,2}),(1/opt.m)*ones(1,opt.m),opt);
+0130                 <span class="keyword">end</span>
+0131             <span class="keyword">end</span>
+0132         <span class="keyword">end</span>
+0133     <span class="keyword">catch</span>
+0134         Phi = -1;
+0135         efficiency = -2;
+0136         Phi_L = 0;    
+0137     <span class="keyword">end</span>
+0138     
+0139     
+0140 <span class="comment">%%% 3. Calculate Z %%%</span>
+0141     <span class="keyword">if</span> hybrid.hybrid == 1 <span class="comment">% It is an hybrid experiment</span>
+0142         f_opt = solution.CPU{hybrid_combinations(algorithm,1),hybrid_combinations(algorithm,2),1,1,1,1};
+0143     <span class="keyword">else</span>
+0144         f_opt = solution.CPU{algorithm,1,1,1,1,1};
+0145     <span class="keyword">end</span>
+0146     
+0147     
+0148 <span class="comment">%%% 4. Calculate time %%%</span>
+0149     <span class="keyword">if</span> hybrid.hybrid == 1 <span class="comment">% It is an hybrid experiment</span>
+0150         time = solution.CPU{hybrid_combinations(algorithm,1),hybrid_combinations(algorithm,2),1,1,1,5};
+0151     <span class="keyword">else</span>
+0152         <span class="keyword">if</span> algorithm &gt; 3
+0153             time = solution.CPU{algorithm,1,1,1,1,5};
+0154         <span class="keyword">else</span>
+0155             time = solution.CPU{algorithm,2,1,1,1,5};
+0156         <span class="keyword">end</span>
+0157     <span class="keyword">end</span>
+0158     
+0159 
+0160 <span class="comment">%%% 5. Store the data %%%</span>
+0161     f1 = <span class="string">'hybrid'</span>;      v1 = hybrid.hybrid;
+0162     f2 = <span class="string">'sortName'</span>;    v2 = short_alg_name;
+0163     f3 = <span class="string">'longName'</span>;    v3 = long_alg_name;
+0164     f4 = <span class="string">'data'</span>;        v4 = data;
+0165     f5 = <span class="string">'Phi'</span>;         v5 = Phi;
+0166     f6 = <span class="string">'efficiency'</span>;  v6 = efficiency;
+0167     f7 = <span class="string">'Phi_L'</span>;       v7 = Phi_L;
+0168     f8 = <span class="string">'f_opt'</span>;       v8 = f_opt;
+0169     f9 = <span class="string">'time'</span>;           v9 = time;
+0170 
+0171     data_structure = struct(f1, v1, f2, v2, f3, v3, f4, v4, f5, v5, f6, v6, f7, v7, f8, v8, f9, v9); 
+0172     results{end + 1} = data_structure;
+0173 
+0174 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

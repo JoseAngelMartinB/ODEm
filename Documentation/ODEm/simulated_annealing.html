@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of simulated_annealing</title>
+  <meta name="keywords" content="simulated_annealing">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; simulated_annealing.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>simulated_annealing
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [ x_opt, f_opt, results, output_f] = simulated_annealing( f, LB, UB, population, opt, options_exact ) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="NeigborhoodSA.html" class="code" title="function xnew = NeigborhoodSA (optimValues,PROBLEMDATA,opt)">NeigborhoodSA</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="myoutputSA.html" class="code" title="function [stop,options,optchanged]  = myoutputSA(options,optimvalues,flag)">myoutputSA</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="optExact.html" class="code" title="function [ x_opt, f_opt, results, output_f] = optExact( f, LB, UB, population, opt )">optExact</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="solver.html" class="code" title="function [ x_opt, f_opt, results, output_f ] = solver( current_alg, fun, LB, UB, population_ini, opt_h, options_exact )">solver</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [ x_opt, f_opt, results, output_f] = simulated_annealing( f, LB, UB, population, opt, options_exact )</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007     
+0008     <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0009     <span class="comment">%   f - function to optimize</span>
+0010     <span class="comment">%   LB - Lower bound to define space´s restrictions</span>
+0011     <span class="comment">%   UB - Upper bound to define space´s restrictions</span>
+0012     <span class="comment">%   population - matrix of population: each row is a set of points</span>
+0013     <span class="comment">%   opt - Options to configure different exact algorithms</span>
+0014     <span class="comment">%       display - in order to print results each iteration: 'iter', 'none'</span>
+0015     <span class="comment">%       FE_max - maximum number of iterations to be reinitialized</span>
+0016     <span class="comment">%       FE_max_SA - number of iterations of the SA to be reinitialized</span>
+0017     <span class="comment">%       in SA, to consider a number of population</span>
+0018     <span class="comment">%       pob - size of the population</span>
+0019     <span class="comment">%       nc - number of successful evaluations</span>
+0020     <span class="comment">%       mfinal - maximum number of successful evaluations</span>
+0021     <span class="comment">%       problem - characteristics of the objetive function</span>
+0022     <span class="comment">%   options_exact - options related to exact algorithms</span>
+0023     <span class="comment">%</span>
+0024     <span class="comment">%--- OUTPUT ------</span>
+0025     <span class="comment">%   x_opt - is the solution vector of points</span>
+0026     <span class="comment">%   f_opt - is the value of the optimized quality function</span>
+0027     <span class="comment">%   results - funcion´s value of each iteration</span>
+0028     <span class="comment">%   output_f - information about algorithms evaluations</span>
+0029     <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0030 
+0031     <span class="comment">%%%%%</span>
+0032     <span class="comment">% Setting options</span>
+0033     <span class="comment">%%%%%%</span>
+0034     <span class="keyword">global</span>  best_solution_consola_sa best_fval_sa;
+0035     best_solution_consola_sa = [];
+0036     best_fval_sa = realmax;
+0037     
+0038     pob = opt.pob;
+0039     nc = opt.nc;
+0040     FE_max_SA = opt.FE_max_SA;
+0041     FE_max = opt.FE_max;
+0042     lim_max_evals = 0;
+0043     displ = opt.display;
+0044     Mfinal = opt.mfinal;
+0045     problem = opt.problem;
+0046 
+0047     <span class="keyword">if</span> problem.type == 1 <span class="comment">%(pob&lt;=1 &amp;&amp; nc&lt;=2) % standard enviroment SA</span>
+0048         options = saoptimset(<span class="string">'Display'</span>,displ,<span class="string">'MaxFunEvals'</span>,FE_max_SA,<span class="string">'InitialTemperature'</span>,0.001);
+0049         lim_max_evals = FE_max_SA;
+0050     <span class="keyword">elseif</span> problem.type == 2 <span class="comment">%(pob&lt;=1 &amp;&amp; nc&gt;=3) % standard enviroment SA</span>
+0051         options = saoptimset(<span class="string">'Display'</span>,displ,<span class="string">'MaxFunEvals'</span>,FE_max,<span class="string">'OutputFcn'</span>, @<a href="myoutputSA.html" class="code" title="function [stop,options,optchanged]  = myoutputSA(options,optimvalues,flag)">myoutputSA</a>,<span class="string">'InitialTemperature'</span>,0.001);
+0052         lim_max_evals = FE_max;
+0053     <span class="keyword">elseif</span> problem.type == 3 <span class="comment">%(pob&gt;=2 &amp;&amp; nc&lt;=2) % special enviroment SA</span>
+0054         NSA=@(inpt1,inpt2) <a href="NeigborhoodSA.html" class="code" title="function xnew = NeigborhoodSA (optimValues,PROBLEMDATA,opt)">NeigborhoodSA</a>(inpt1,inpt2,problem);
+0055         options = saoptimset(<span class="string">'Display'</span>,displ,<span class="string">'MaxFunEvals'</span>,FE_max_SA,<span class="string">'AnnealingFcn'</span>, NSA,<span class="string">'InitialTemperature'</span>,0.001);
+0056         lim_max_evals = FE_max_SA;
+0057     <span class="keyword">elseif</span> problem.type == 4 <span class="comment">%(pob&gt;=2 &amp;&amp; nc&gt;=3) % special enviroment SA</span>
+0058         NSA=@(inpt1,inpt2) <a href="NeigborhoodSA.html" class="code" title="function xnew = NeigborhoodSA (optimValues,PROBLEMDATA,opt)">NeigborhoodSA</a>(inpt1,inpt2,problem);
+0059         options = saoptimset(<span class="string">'OutputFcn'</span>, @<a href="myoutputSA.html" class="code" title="function [stop,options,optchanged]  = myoutputSA(options,optimvalues,flag)">myoutputSA</a>,<span class="string">'Display'</span>,displ,<span class="string">'MaxFunEvals'</span>,FE_max,<span class="string">'AnnealingFcn'</span>, NSA);
+0060         lim_max_evals = FE_max;
+0061     <span class="keyword">end</span>
+0062     
+0063     <span class="comment">%%%%%%%%%%%</span>
+0064     <span class="comment">% Execution</span>
+0065     <span class="comment">%%%%%%%%%%%</span>
+0066 
+0067     EvaActual=0;
+0068     M=0;
+0069     results=[]; <span class="comment">% Storing the results</span>
+0070     fval2=realmax;
+0071     best_x=population(1,:);
+0072 
+0073     tic;
+0074     <span class="keyword">while</span> FE_max&gt;EvaActual
+0075 
+0076         [x,fval,exitFlag,output_h]=simulannealbnd(f,best_x,LB,UB,options);
+0077         
+0078         <span class="keyword">if</span> (isfield(output_h, <span class="string">'funcCount'</span>) == 0)
+0079             output_h.funcCount = lim_max_evals;
+0080         <span class="keyword">end</span>
+0081         
+0082         EvaActual=EvaActual+output_h.funcCount;
+0083 
+0084         <span class="keyword">if</span> fval&lt;fval2
+0085             fval2=fval;
+0086             M=M+1;
+0087             <span class="keyword">if</span> nc == 3
+0088                 results = [results; best_solution_consola_sa];
+0089             <span class="keyword">else</span>
+0090                 results=[results; [fval,EvaActual,toc]];
+0091             <span class="keyword">end</span>
+0092             best_x=x;
+0093         <span class="keyword">end</span>
+0094 
+0095         <span class="keyword">if</span>(M==Mfinal)
+0096             
+0097             [ alfas, fval, exitflag, output] = <a href="optExact.html" class="code" title="function [ x_opt, f_opt, results, output_f] = optExact( f, LB, UB, population, opt )">optExact</a>( f, LB, UB, best_x, options_exact );
+0098 
+0099             EvaActual=EvaActual+output.funcCount;
+0100             M=0;
+0101             
+0102             <span class="keyword">if</span> fval &lt; fval2
+0103                 best_x=alfas;
+0104                 fval2 = fval;
+0105                 results=[results;[fval,EvaActual,output.time]];
+0106             <span class="keyword">end</span>
+0107             
+0108         <span class="keyword">end</span> <span class="comment">% if MFinal</span>
+0109         
+0110     <span class="keyword">end</span> <span class="comment">% While FEMax</span>
+0111     
+0112     output_f.time = toc;
+0113     x_opt = best_x;
+0114     f_opt = fval2;
+0115     output_f.funcCount = EvaActual; <span class="comment">% Number of real evaluations of the function</span>
+0116     
+0117     <span class="comment">% Print final results</span>
+0118     
+0119     <span class="keyword">if</span> opt.mfinal == Inf
+0120         msg = <span class="string">'Simulated Annealing'</span>;
+0121     <span class="keyword">else</span>
+0122         msg = [<span class="string">'Simulated Annealing'</span>, <span class="string">' '</span>, options_exact.alg];
+0123     <span class="keyword">end</span>
+0124     
+0125     disp([<span class="string">'*********  FINAL RESULTS '</span>, msg, <span class="string">'  *************************'</span>]);
+0126     g = sprintf(<span class="string">'%f '</span>, x_opt);
+0127     fprintf(<span class="string">'x opt: %s\n'</span>, g);
+0128     fprintf(<span class="string">'f value: %f\n'</span>, f_opt);
+0129     fprintf(<span class="string">'Number of evaluations: %d\n'</span>, output_f.funcCount);
+0130     fprintf(<span class="string">'Total time: %f seconds\n'</span>, output_f.time);
+0131     disp(<span class="string">'**********************************************************************'</span>);
+0132   
+0133 <span class="keyword">end</span>
+0134</pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

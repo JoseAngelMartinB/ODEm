@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of NeigborhoodSA</title>
+  <meta name="keywords" content="NeigborhoodSA">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; NeigborhoodSA.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>NeigborhoodSA
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function xnew = NeigborhoodSA (optimValues,PROBLEMDATA,opt) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="simulated_annealing.html" class="code" title="function [ x_opt, f_opt, results, output_f] = simulated_annealing( f, LB, UB, population, opt, options_exact )">simulated_annealing</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function xnew = NeigborhoodSA (optimValues,PROBLEMDATA,opt)</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="comment">% global opt</span>
+0009 <span class="comment">% %choose a random support point</span>
+0010 <span class="comment">% opt.m=7;</span>
+0011 <span class="comment">% opt.co=2;</span>
+0012 <span class="comment">% opt.bounds=[0     1;</span>
+0013 <span class="comment">%      0     1;</span>
+0014 
+0015     N=opt.m*opt.co;  
+0016     Xrand=(opt.bounds(:,1)+(opt.bounds(:,2)-opt.bounds(:,1)).*rand(opt.co,1))';
+0017 
+0018     xnew = optimValues.x;
+0019     i=randi(opt.m);
+0020     c_ini=((i-1)*opt.co+1);
+0021     c_fin=c_ini+(opt.co-1);
+0022 
+0023     index=c_ini:1:c_fin;
+0024     xnew(index)=Xrand;
+0025 <span class="keyword">end</span>
+0026 
+0027 <span class="comment">% OPTIMVALUES</span>
+0028 <span class="comment">% ?  optimvalues ? Structure containing information about the current state of the solver. The structure contains the following fields:</span>
+0029 <span class="comment">% o    x ? Current point</span>
+0030 <span class="comment">% o    fval ? Objective function value at x</span>
+0031 <span class="comment">% o    bestx ? Best point found so far</span>
+0032 <span class="comment">% o    bestfval ? Objective function value at best point</span>
+0033 <span class="comment">% o    temperature ? Current temperature, a vector the same length as x</span>
+0034 <span class="comment">% o    iteration ? Current iteration</span>
+0035 <span class="comment">% o    funccount ? Number of function evaluations</span>
+0036 <span class="comment">% o    t0 ? Start time for algorithm</span>
+0037 <span class="comment">% o    k ? Annealing parameter, a vector the same length as x</span>
+0038 <span class="comment">% PROBLEMDATA</span>
+0039 <span class="comment">% problemData is a structure containing the following information:</span>
+0040 <span class="comment">% ?    objective: function handle to the objective function</span>
+0041 <span class="comment">% ?    x0: the start point</span>
+0042 <span class="comment">% ?    nvar: number of decision variables</span>
+0043 <span class="comment">% ?    lb: lower bound on decision variables</span>
+0044 <span class="comment">% ?    ub: upper bound on decision variables</span>
+0045 <span class="comment">%</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

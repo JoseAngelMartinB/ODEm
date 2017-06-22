@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of alea_sphere</title>
+  <meta name="keywords" content="alea_sphere">
+  <meta name="description" content="******* Random point in a hypersphere ********">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; alea_sphere.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>alea_sphere
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>******* Random point in a hypersphere ********</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [x] = alea_sphere(D, radius) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">  ******* Random point in a hypersphere ********
+ Put  a random point inside the hypersphere S(0,radius) (center 0, radius 1).
+ Uniform distribution % Developed by: Maurice Clerc (May 2011)</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="alea.html" class="code" title="function r = alea (a,b)">alea</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="alea_normal.html" class="code" title="function y1= alea_normal (mean, std_dev)">alea_normal</a>	Use the polar form of the Box-Muller transformation to obtain a pseudo</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="SPSO2011_NM.html" class="code" title="function [best_x, best_f, max_FEs, evolt, evolbest_f, evolt_time] = SPSO2011_NM(N,D, FE_max, fun, err, LB, UB, opt_f,normalize,Mfinal,Pob_ini,K,displ,options_exact)">SPSO2011_NM</a>	Standard PSO 2011</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [x] = alea_sphere(D, radius)</a>
+0002 
+0003 <span class="comment">%  ******* Random point in a hypersphere ********</span>
+0004 <span class="comment">% Put  a random point inside the hypersphere S(0,radius) (center 0, radius 1).</span>
+0005 <span class="comment">% Uniform distribution % Developed by: Maurice Clerc (May 2011)</span>
+0006     
+0007 x = zeros(1,D); <span class="comment">%**</span>
+0008 
+0009 <span class="comment">% --------- Step 1. Direction</span>
+0010 
+0011 l = 0; 
+0012 
+0013 <span class="keyword">for</span> j=1:1:D
+0014    <span class="comment">% x(j) = randn; %?</span>
+0015     x(j)=<a href="alea_normal.html" class="code" title="function y1= alea_normal (mean, std_dev)">alea_normal</a>(0,1); <span class="comment">%**</span>
+0016     l = l + x(j)*x(j);
+0017 <span class="keyword">end</span>
+0018     
+0019 l=sqrt(l);
+0020 
+0021 <span class="comment">% --------- Step 2. Random radius</span>
+0022 
+0023 r=<a href="alea.html" class="code" title="function r = alea (a,b)">alea</a>(0,1);
+0024 
+0025 x= r*radius*x/l;
+0026     
+0027 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

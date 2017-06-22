@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of SPSO2011_NM</title>
+  <meta name="keywords" content="SPSO2011_NM">
+  <meta name="description" content="Standard PSO 2011">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; SPSO2011_NM.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>SPSO2011_NM
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Standard PSO 2011</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [best_x, best_f, max_FEs, evolt, evolbest_f, evolt_time] = SPSO2011_NM(N,D, FE_max, fun, err, LB, UB, opt_f,normalize,Mfinal,Pob_ini,K,displ,options_exact) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Standard PSO 2011
+ Developed by: Dr. Mahamed G.H. Omran (omran.m@gust.edu.kw) 7-May-2011
+ Modified and improved by: Maurice Clerc 23-May-2011</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="alea.html" class="code" title="function r = alea (a,b)">alea</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="alea_sphere.html" class="code" title="function [x] = alea_sphere(D, radius)">alea_sphere</a>	******* Random point in a hypersphere ********</li><li><a href="optExact.html" class="code" title="function [ x_opt, f_opt, results, output_f] = optExact( f, LB, UB, population, opt )">optExact</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="spso.html" class="code" title="function [ x_opt, f_opt, results, output_f ] = spso( f, LB, UB, population, opt, options_exact )">spso</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [best_x, best_f, max_FEs, evolt, evolbest_f, evolt_time] = SPSO2011_NM(N,D, FE_max, fun, err, LB, UB, opt_f,normalize,Mfinal,Pob_ini,K,displ,options_exact)</a>
+0002 
+0003 <span class="comment">% Standard PSO 2011</span>
+0004 <span class="comment">% Developed by: Dr. Mahamed G.H. Omran (omran.m@gust.edu.kw) 7-May-2011</span>
+0005 <span class="comment">% Modified and improved by: Maurice Clerc 23-May-2011</span>
+0006 
+0007 <span class="comment">% x swarm</span>
+0008 <span class="comment">% f swarm fitness</span>
+0009 <span class="comment">% N swarm size</span>
+0010 <span class="comment">% fun -- function specifier</span>
+0011 <span class="comment">% D -- Problem dimension</span>
+0012 <span class="comment">% LB -- Lower bound</span>
+0013 <span class="comment">% UB -- Upper bound</span>
+0014 <span class="comment">% opt_f -- global optimum for fun</span>
+0015 
+0016 <span class="comment">% Compatibility with the original C version</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">% 1) RNG and numerical instability.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">% We (Clerc and Omran) conducted several experiments on some benchmark functions.</span>
+0021 <span class="comment">% For several functions the results are very similar to the ones of</span>
+0022 <span class="comment">% the C version while for one function (CEC F6) the SR is really different:</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% F6 results (C code):</span>
+0025 <span class="comment">% a) No normalization</span>
+0026 <span class="comment">% Avg. fitness = 5.69e+01 (2.06e+02)</span>
+0027 <span class="comment">% SR= 49.20 %</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% b) Normalization</span>
+0030 <span class="comment">% Avg. fitness = 6.44e+01 (1.57e+02)</span>
+0031 <span class="comment">% SR= 37.2 %</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">% F6 results (Matlab code)</span>
+0034 <span class="comment">% a) No normalization</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">% Avg. fitness = 6.05e+01(1.58e+02)</span>
+0037 <span class="comment">% SR = 0%</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">% b) Normalization</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">% Avg. fitness = 5.12e+01(1.37e+02)</span>
+0042 <span class="comment">% SR = 0%</span>
+0043 <span class="comment">%</span>
+0044 <span class="comment">% We suspect that there is a problem with the Matlab RNG and/or numerical</span>
+0045 <span class="comment">% instability (we implemented a simple RNG using C and Matlab and run our</span>
+0046 <span class="comment">% programs and still we got different results).</span>
+0047 <span class="comment">%</span>
+0048 <span class="comment">% 2) Normalization</span>
+0049 <span class="comment">%</span>
+0050 <span class="comment">% It is recommended that you use this option (i.e. randomize = 1) when</span>
+0051 <span class="comment">% the search space in not a hypercube.</span>
+0052 <span class="comment">% If the search space is a hypercube, It is better not normalize</span>
+0053 <span class="comment">% (there is a small difference between the position without any normalisation and the de-normalised one.).</span>
+0054 <span class="comment">%</span>
+0055 <span class="comment">% 3) Random permutation</span>
+0056 <span class="comment">%</span>
+0057 <span class="comment">% The random permutation of the numbering of the particles before</span>
+0058 <span class="comment">% each step is not included in the Matlab version(usually, it does not</span>
+0059 <span class="comment">% make a great difference in the C version).</span>
+0060 
+0061 
+0062 w =( 1/(2*log(2)));
+0063 c1 = 0.5 + log(2);
+0064 c2 = c1;
+0065 
+0066 x=zeros(N,D);
+0067 
+0068 <span class="comment">% velocity</span>
+0069 v = zeros(size(x));
+0070 
+0071 <span class="keyword">if</span> (normalize&gt;0)
+0072     xMin=0;
+0073     xMax=1;
+0074 <span class="keyword">end</span>
+0075 
+0076 <span class="keyword">for</span> i=1:1:N
+0077     <span class="keyword">for</span> j=1:1:D
+0078         <span class="keyword">if</span> (normalize==0)
+0079             xMin=LB(j);
+0080             xMax=UB(j);
+0081         <span class="keyword">end</span>
+0082         
+0083         x(i,j) = <a href="alea.html" class="code" title="function r = alea (a,b)">alea</a>(xMin,xMax);
+0084         v(i,j) = <a href="alea.html" class="code" title="function r = alea (a,b)">alea</a>(xMin-x(i,j), xMax-x(i,j));
+0085     <span class="keyword">end</span>
+0086 <span class="keyword">end</span>
+0087 <span class="keyword">if</span> (size(Pob_ini,1) &gt;=1)
+0088     x=Pob_ini;
+0089 <span class="keyword">end</span>
+0090 
+0091 f = zeros(1,N);
+0092 
+0093 <span class="comment">% calculate fitness</span>
+0094 <span class="keyword">for</span> i = 1:1:N
+0095     <span class="keyword">if</span> (normalize&gt;0)
+0096         f(i) = feval(fun,(x(i,:) .* (UB - LB) + LB));
+0097     <span class="keyword">else</span>
+0098         f(i) = feval(fun,x(i,:));
+0099     <span class="keyword">end</span>
+0100 <span class="keyword">end</span>
+0101 
+0102 
+0103 <span class="comment">% initialize the personal experience</span>
+0104 p_x = x;
+0105 p_f = f;
+0106 
+0107 
+0108 <span class="comment">% index of the global best particle</span>
+0109 [best_f, g] = min(p_f);
+0110 
+0111 <span class="comment">%PSO_run = zeros(1,t_max); %a PSO run</span>
+0112 FEs=N; <span class="comment">% N initialisations.  *****FEs = 0;</span>
+0113 <span class="comment">%max_FEs = 0;</span>
+0114 
+0115 count = 1;
+0116 
+0117 <span class="comment">% K neighbors for each particle -- based on Clerc description</span>
+0118 <span class="comment">% http://clerc.maurice.free.fr/pso/random_topology.pdf</span>
+0119 <span class="comment">% P. 2 (Method 2)</span>
+0120 <span class="comment">%K = 25;</span>
+0121 
+0122 p=1-power(1-1/N,K); <span class="comment">% Probability to be an informant</span>
+0123 
+0124 stop=0;
+0125 
+0126 <span class="comment">% Variables para el dibujado</span>
+0127 evolt=ones(1,floor(FE_max/N))*-1; 
+0128 evolbest_f=ones(1,floor(FE_max/N))*-1;
+0129 evolt_time=[];
+0130 contador=0;
+0131 
+0132 <span class="comment">%Variable para lanzar NM</span>
+0133 M=0;
+0134 
+0135 <span class="keyword">while</span> stop&lt;1
+0136     <span class="comment">% In the C version, random permutation is applied here. This is</span>
+0137     <span class="comment">% currently not implemented in this code.</span>
+0138     
+0139     <span class="keyword">if</span> count &gt; 0  <span class="comment">% No improvement in the best solution. So randomize topology</span>
+0140         
+0141         <span class="comment">%      L = eye(N,N); % Matlab function, but does not exist in FreeMat</span>
+0142         L=zeros(N,N);
+0143         <span class="keyword">for</span> s=1:1:N
+0144             L(s,s)=1;
+0145         <span class="keyword">end</span>
+0146         
+0147         <span class="keyword">for</span> s = 1:1:N <span class="comment">% Each particle (column) informs at most K other at random</span>
+0148             <span class="keyword">for</span> r=1:1:N
+0149                 <span class="keyword">if</span> (r~=s)
+0150                     <span class="keyword">if</span> (<a href="alea.html" class="code" title="function r = alea (a,b)">alea</a>(0,1)&lt;p)
+0151                         L(s,r) = 1;
+0152                     <span class="keyword">end</span>
+0153                 <span class="keyword">end</span>
+0154             <span class="keyword">end</span>
+0155         <span class="keyword">end</span>
+0156         
+0157     <span class="keyword">end</span> <span class="comment">% if</span>
+0158     
+0159     
+0160     <span class="keyword">for</span> i = 1:1:N  <span class="comment">% For each particle (line) ..</span>
+0161         
+0162         <span class="comment">%  ...find the best informant g</span>
+0163         MIN = Inf;
+0164         <span class="keyword">for</span> s=1:1:N
+0165             <span class="keyword">if</span> (L(s,i) == 1)
+0166                 <span class="keyword">if</span> p_f(s) &lt; MIN
+0167                     MIN = p_f(s);
+0168                     g_best = s;
+0169                 <span class="keyword">end</span>
+0170             <span class="keyword">end</span>
+0171         <span class="keyword">end</span>
+0172         
+0173         <span class="comment">% define a point p' on x-p, beyond p</span>
+0174         p_x_p = x(i,:) + c1*(p_x(i,:) - x(i,:));
+0175         <span class="comment">% ... define a point g' on x-g, beyond g</span>
+0176         p_x_l = x(i,:) + c2*(p_x(g_best,:) - x(i,:));
+0177         
+0178         <span class="keyword">if</span> (g_best == i) <span class="comment">% If the best informant is the particle itself, define the gravity center G as the middle of x-p'</span>
+0179             G = 0.5*(x(i,:) + p_x_p);
+0180         <span class="keyword">else</span> <span class="comment">% Usual  way to define G</span>
+0181             sw = 1/3;
+0182             G = sw*(x(i,:) + p_x_p + p_x_l);
+0183         <span class="keyword">end</span>
+0184         
+0185         
+0186         rad = norm(G - x(i,:)); <span class="comment">% radius = Euclidean norm of x-G</span>
+0187         x_p = <a href="alea_sphere.html" class="code" title="function [x] = alea_sphere(D, radius)">alea_sphere</a>(D,rad)+ G; <span class="comment">% Generate a random point in the hyper-sphere around G (uniform distribution)</span>
+0188         v(i,:) = w*v(i,:) + x_p - x(i,:); <span class="comment">% Update the velocity = w*v(t) + (G-x(t)) + random_vector</span>
+0189         <span class="comment">% The result is v(t+1)</span>
+0190         x(i,:) = x(i,:) + v(i,:); <span class="comment">% Apply the new velocity to the current position. The result is x(t+1)</span>
+0191         
+0192         <span class="comment">% Check for constraint violations</span>
+0193         <span class="keyword">for</span> j = 1:1:D
+0194             <span class="keyword">if</span> (normalize==0)
+0195                 xMin=LB(j);
+0196                 xMax=UB(j);
+0197             <span class="keyword">else</span>
+0198                 xMin = 0;
+0199                 xMax = 1;
+0200             <span class="keyword">end</span>
+0201             
+0202             <span class="keyword">if</span> x(i,j) &gt; xMax
+0203                 x(i,j) = xMax;
+0204                 v(i,j) = -0.5*v(i,j); <span class="comment">% variant: 0</span>
+0205             <span class="keyword">end</span>
+0206             
+0207             <span class="keyword">if</span> x(i,j) &lt; xMin
+0208                 x(i,j) = xMin;
+0209                 v(i,j) = -0.5*v(i,j); <span class="comment">% variant: 0</span>
+0210             <span class="keyword">end</span>
+0211         <span class="keyword">end</span> <span class="comment">%j</span>
+0212         
+0213         
+0214         
+0215         FEs = FEs + 1;
+0216         <span class="keyword">if</span> (FEs&gt;=FE_max) <span class="comment">% Too many FE</span>
+0217             <span class="keyword">break</span>;
+0218         <span class="keyword">end</span>
+0219     <span class="keyword">end</span> <span class="comment">%i</span>
+0220     
+0221     <span class="keyword">for</span> i=1:N
+0222         <span class="keyword">if</span> (normalize&gt;0)
+0223             f(i) = feval(fun,(x(i,:) .* (UB - LB) + LB));
+0224             <span class="comment">% f(i) = rosenbrock(x(i,:).* (UB - LB) + LB);</span>
+0225             
+0226         <span class="keyword">else</span>
+0227             f(i) = feval(fun,x(i,:));
+0228             <span class="comment">% f(i) = rosenbrock(x(i,:));</span>
+0229         <span class="keyword">end</span>
+0230     <span class="keyword">end</span>
+0231     
+0232     <span class="comment">% Update personal best</span>
+0233     
+0234     <span class="keyword">for</span> i=1:1:N
+0235         <span class="keyword">if</span> f(i) &lt;= p_f(i)
+0236             p_x(i,:) = x(i,:);
+0237             p_f(i) = f(i);
+0238         <span class="keyword">end</span> <span class="comment">%if</span>
+0239     <span class="keyword">end</span> <span class="comment">%i</span>
+0240     
+0241     <span class="comment">% Update global best</span>
+0242     [b_f, g] = min(p_f);
+0243     
+0244     <span class="keyword">if</span> b_f &lt; best_f
+0245         
+0246         best_f = b_f;
+0247         count = 0;
+0248         
+0249         contador=contador+1;
+0250         evolt(contador)=FEs; 
+0251         evolbest_f(contador)=best_f;
+0252         evolt_time(contador)=toc;
+0253         M=M+1; <span class="comment">% Number of hits</span>
+0254         
+0255         <span class="comment">% Show the new minimun</span>
+0256         
+0257         <span class="keyword">if</span> (strcmp(displ, <span class="string">'iter'</span>))
+0258             disp(<span class="string">'------'</span>);
+0259             fprintf(<span class="string">'f value: %f\n'</span>, best_f);
+0260             fprintf(<span class="string">'Number of evaluations: %d\n'</span>, FEs);
+0261             disp(<span class="string">'------'</span>);
+0262         <span class="keyword">end</span>
+0263         
+0264     <span class="keyword">else</span>
+0265         count = count + 1; <span class="comment">% If no improvement, the topology will be initialised for the next iteration</span>
+0266     <span class="keyword">end</span>
+0267     
+0268     
+0269     <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0270     <span class="comment">%   EXACT ALGORITHMS</span>
+0271     <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0272     
+0273     <span class="keyword">if</span>(M==Mfinal)
+0274         
+0275         best_x = p_x(g,:);
+0276         
+0277         [ x_opt, f_opt, exitflag, output] = <a href="optExact.html" class="code" title="function [ x_opt, f_opt, results, output_f] = optExact( f, LB, UB, population, opt )">optExact</a>( fun, LB, UB, best_x, options_exact );
+0278         
+0279         FEs=FEs+output.funcCount;
+0280         M=0;
+0281         
+0282         <span class="comment">% Update the values of the particle</span>
+0283         <span class="keyword">if</span> (f_opt &lt; best_f)
+0284            best_f = f_opt;
+0285            x(g,:)=p_x(g,:);
+0286            p_x(g,:)=x_opt;
+0287         
+0288            f(g)=f_opt;
+0289            p_f(g) = f(g);
+0290            
+0291            contador=contador+1;
+0292            evolt(contador)=FEs; 
+0293            evolbest_f(contador)=best_f;
+0294            evolt_time(contador)=output.time;
+0295            
+0296         <span class="keyword">end</span>
+0297     <span class="keyword">end</span>
+0298     
+0299     <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0300     <span class="comment">% END OF EXACT ALGORITHMS</span>
+0301     <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0302     
+0303     <span class="keyword">if</span> (FEs&gt;=FE_max)
+0304         stop=1;
+0305         <span class="keyword">break</span>;
+0306     <span class="keyword">end</span>
+0307     
+0308 <span class="keyword">end</span> <span class="comment">%t</span>
+0309 
+0310 <span class="keyword">if</span> normalize &gt; 0
+0311     best_x = p_x(g,:) .* (UB - LB) + LB;
+0312 <span class="keyword">else</span>
+0313     best_x = p_x(g,:);
+0314 <span class="keyword">end</span>
+0315 
+0316 max_FEs = FEs;
+0317 
+0318 <span class="keyword">end</span> <span class="comment">%SPSO2011</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

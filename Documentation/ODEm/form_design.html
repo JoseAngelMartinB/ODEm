@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of form_design</title>
+  <meta name="keywords" content="form_design">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; form_design.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>form_design
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = form_design(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="design_opt_load.html" class="code" title="function opt=design_opt_load(file,line)">design_opt_load</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="form_main.html" class="code" title="function varargout = form_main(varargin)">form_main</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function form_design_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = form_design_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function other_p_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function other_p_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function form_design_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function approximated_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function exact_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function approximated_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function exact_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function design_buttongroup_SelectionChangedFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub11" class="code">function exact_buttongroup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub12" class="code">function AD_buttongroup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub13" class="code">function AD_buttongroup_SelectionChangedFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub14" class="code">function save_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub15" class="code">function dDesign_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub16" class="code">function aDesign_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub17" class="code">function other_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub18" class="code">function n_expsub_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub19" class="code">function n_expsub_CreateFcn(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = form_design(varargin)</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="comment">% FORM_DESIGN MATLAB code for form_design.fig</span>
+0009 <span class="comment">%      FORM_DESIGN, by itself, creates a new FORM_DESIGN or raises the existing</span>
+0010 <span class="comment">%      singleton*.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%      H = FORM_DESIGN returns the handle to a new FORM_DESIGN or the handle to</span>
+0013 <span class="comment">%      the existing singleton*.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%      FORM_DESIGN('CALLBACK',hObject,eventData,handles,...) calls the local</span>
+0016 <span class="comment">%      function named CALLBACK in FORM_DESIGN.M with the given input arguments.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%      FORM_DESIGN('Property','Value',...) creates a new FORM_DESIGN or raises the</span>
+0019 <span class="comment">%      existing singleton*.  Starting from the left, property value pairs are</span>
+0020 <span class="comment">%      applied to the GUI before form_design_OpeningFcn gets called.  An</span>
+0021 <span class="comment">%      unrecognized property name or invalid value makes property application</span>
+0022 <span class="comment">%      stop.  All inputs are passed to form_design_OpeningFcn via varargin.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one</span>
+0025 <span class="comment">%      instance to run (singleton)&quot;.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+0028 
+0029 <span class="comment">% Edit the above text to modify the response to help form_design</span>
+0030 
+0031 <span class="comment">% Last Modified by GUIDE v2.5 17-Dec-2016 23:47:14</span>
+0032 
+0033 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0034 gui_Singleton = 1;
+0035 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0036                    <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0037                    <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction form_design_OpeningFcn(hObject, eventdata, handles, varargin)">form_design_OpeningFcn</a>, <span class="keyword">...</span>
+0038                    <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = form_design_OutputFcn(hObject, eventdata, handles)">form_design_OutputFcn</a>, <span class="keyword">...</span>
+0039                    <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0040                    <span class="string">'gui_Callback'</span>,   []);
+0041 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0042     gui_State.gui_Callback = str2func(varargin{1});
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="keyword">if</span> nargout
+0046     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0047 <span class="keyword">else</span>
+0048     gui_mainfcn(gui_State, varargin{:});
+0049 <span class="keyword">end</span>
+0050 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0051 
+0052 
+0053 <span class="comment">% --- Executes just before form_design is made visible.</span>
+0054 <a name="_sub1" href="#_subfunctions" class="code">function form_design_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0055 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0056 <span class="comment">% hObject    handle to figure</span>
+0057 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0058 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0059 <span class="comment">% varargin   command line arguments to form_design (see VARARGIN)</span>
+0060 
+0061 <span class="comment">% Choose default command line output for form_design</span>
+0062 handles.output = hObject;
+0063 
+0064 <span class="comment">% Update handles structure</span>
+0065 guidata(hObject, handles);
+0066 
+0067 <span class="comment">% UIWAIT makes form_design wait for user response (see UIRESUME)</span>
+0068 <span class="comment">% uiwait(handles.form_design);</span>
+0069 
+0070 
+0071 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0072 <a name="_sub2" href="#_subfunctions" class="code">function varargout = form_design_OutputFcn(hObject, eventdata, handles) </a>
+0073 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0074 <span class="comment">% hObject    handle to figure</span>
+0075 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0076 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0077 
+0078 <span class="comment">% Get default command line output from handles structure</span>
+0079 varargout{1} = handles.output;
+0080 
+0081 
+0082 
+0083 <a name="_sub3" href="#_subfunctions" class="code">function other_p_Callback(hObject, eventdata, handles)</a>
+0084 <span class="comment">% hObject    handle to other_p (see GCBO)</span>
+0085 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0086 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0087 
+0088 <span class="comment">% Hints: get(hObject,'String') returns contents of other_p as text</span>
+0089 <span class="comment">%        str2double(get(hObject,'String')) returns contents of other_p as a double</span>
+0090 
+0091 
+0092 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0093 <a name="_sub4" href="#_subfunctions" class="code">function other_p_CreateFcn(hObject, eventdata, handles)</a>
+0094 <span class="comment">% hObject    handle to other_p (see GCBO)</span>
+0095 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0096 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0097 
+0098 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0099 <span class="comment">%       See ISPC and COMPUTER.</span>
+0100 <span class="keyword">global</span> design;
+0101 
+0102 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0103     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0104 <span class="keyword">end</span>
+0105 handles.p = design.p;
+0106 set(hObject, <span class="string">'String'</span>, handles.p);
+0107 <span class="keyword">if</span> design.p == 0 || design.p == 1
+0108     set(hObject, <span class="string">'Enable'</span>, <span class="string">'off'</span>);
+0109 <span class="keyword">else</span>
+0110     set(hObject, <span class="string">'Enable'</span>, <span class="string">'on'</span>);
+0111 <span class="keyword">end</span>
+0112 
+0113 
+0114 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0115 <a name="_sub5" href="#_subfunctions" class="code">function form_design_CreateFcn(hObject, eventdata, handles)</a>
+0116 <span class="comment">% hObject    handle to form_design (see GCBO)</span>
+0117 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0118 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0119 
+0120 <span class="comment">% Initial data:</span>
+0121 <span class="keyword">global</span> design;
+0122 <span class="keyword">if</span> design.exact == 0
+0123     handles.approximated = 1.0;
+0124 <span class="keyword">else</span>
+0125     handles.approximated = 0.0;
+0126 <span class="keyword">end</span>
+0127 handles.p = design.p;
+0128 
+0129 
+0130 
+0131 guidata(hObject,handles)
+0132 
+0133 
+0134 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0135 <a name="_sub6" href="#_subfunctions" class="code">function approximated_CreateFcn(hObject, eventdata, handles)</a>
+0136 <span class="comment">% hObject    handle to approximated (see GCBO)</span>
+0137 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0138 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0139 set(hObject, <span class="string">'Value'</span>, handles.approximated);
+0140 
+0141 
+0142 
+0143 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0144 <a name="_sub7" href="#_subfunctions" class="code">function exact_CreateFcn(hObject, eventdata, handles)</a>
+0145 <span class="comment">% hObject    handle to exact (see GCBO)</span>
+0146 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0147 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0148 <span class="keyword">global</span> design;
+0149 <span class="keyword">if</span> design.exact == 1
+0150     set(hObject, <span class="string">'Value'</span>, 1);
+0151 <span class="keyword">else</span>
+0152     set(hObject, <span class="string">'Value'</span>, 0);
+0153 <span class="keyword">end</span>;
+0154 
+0155 
+0156 <span class="comment">% --- Executes on button press in approximated.</span>
+0157 <a name="_sub8" href="#_subfunctions" class="code">function approximated_Callback(hObject, eventdata, handles)</a>
+0158 <span class="comment">% hObject    handle to approximated (see GCBO)</span>
+0159 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0160 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0161 
+0162 <span class="comment">% Hint: get(hObject,'Value') returns toggle state of approximated</span>
+0163 
+0164 
+0165 <span class="comment">% --- Executes on button press in exact.</span>
+0166 <a name="_sub9" href="#_subfunctions" class="code">function exact_Callback(hObject, eventdata, handles)</a>
+0167 <span class="comment">% hObject    handle to exact (see GCBO)</span>
+0168 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0169 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0170 
+0171 <span class="comment">% Hint: get(hObject,'Value') returns toggle state of exact</span>
+0172 
+0173 
+0174 <span class="comment">% --- Executes when selected object is changed in design_buttongroup.</span>
+0175 <a name="_sub10" href="#_subfunctions" class="code">function design_buttongroup_SelectionChangedFcn(hObject, eventdata, handles)</a>
+0176 <span class="comment">% hObject    handle to the selected object in design_buttongroup</span>
+0177 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0178 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0179 <span class="keyword">if</span> get(handles.approximated, <span class="string">'Value'</span>) == 1.0
+0180     set(handles.exact_buttongroup, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+0181 <span class="keyword">elseif</span> get(handles.exact, <span class="string">'Value'</span>) == 1.0
+0182     set(handles.exact_buttongroup, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+0183 <span class="keyword">end</span>
+0184 
+0185 
+0186 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0187 <a name="_sub11" href="#_subfunctions" class="code">function exact_buttongroup_CreateFcn(hObject, eventdata, handles)</a>
+0188 <span class="comment">% hObject    handle to exact_buttongroup (see GCBO)</span>
+0189 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0190 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0191 <span class="keyword">if</span> handles.approximated == 0
+0192     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+0193 <span class="keyword">else</span>
+0194     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+0195 <span class="keyword">end</span>
+0196 
+0197 
+0198 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0199 <a name="_sub12" href="#_subfunctions" class="code">function AD_buttongroup_CreateFcn(hObject, eventdata, handles)</a>
+0200 <span class="comment">% hObject    handle to AD_buttongroup (see GCBO)</span>
+0201 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0202 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0203 
+0204 
+0205 <span class="comment">% --- Executes when selected object is changed in AD_buttongroup.</span>
+0206 <a name="_sub13" href="#_subfunctions" class="code">function AD_buttongroup_SelectionChangedFcn(hObject, eventdata, handles)</a>
+0207 <span class="comment">% hObject    handle to the selected object in AD_buttongroup</span>
+0208 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0209 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0210 <span class="keyword">if</span> get(handles.dDesign, <span class="string">'Value'</span>) == 1.0
+0211     set(handles.other_p, <span class="string">'Enable'</span>, <span class="string">'off'</span>);
+0212     handles.p = 0;
+0213     set(handles.other_p, <span class="string">'String'</span>, handles.p);
+0214 <span class="keyword">elseif</span> get(handles.aDesign, <span class="string">'Value'</span>) == 1.0
+0215     set(handles.other_p, <span class="string">'Enable'</span>, <span class="string">'off'</span>);
+0216     handles.p = 1;
+0217     set(handles.other_p, <span class="string">'String'</span>, handles.p);
+0218 <span class="keyword">elseif</span> get(handles.other, <span class="string">'Value'</span>) == 1.0
+0219     set(handles.other_p, <span class="string">'Enable'</span>, <span class="string">'on'</span>);
+0220 <span class="keyword">end</span>
+0221 
+0222 
+0223 <span class="comment">% --- Executes on button press in save.</span>
+0224 <a name="_sub14" href="#_subfunctions" class="code">function save_Callback(hObject, eventdata, handles)</a>
+0225 <span class="comment">% hObject    handle to save (see GCBO)</span>
+0226 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0227 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0228 
+0229 <span class="keyword">global</span> design opt file problem_line;
+0230 old_exact = design.exact;
+0231 design.p = str2num(get(handles.other_p, <span class="string">'String'</span>));
+0232 design.exact = get(handles.exact, <span class="string">'Value'</span>); 
+0233 
+0234 <span class="comment">% Change desgin_text in form_main</span>
+0235 <span class="keyword">if</span> design.exact == 0
+0236     <span class="keyword">if</span> design.p == 0
+0237         design_text = <span class="string">'Appro. D-design'</span>;
+0238     <span class="keyword">elseif</span> design.p == 1
+0239         design_text = <span class="string">'Appro. A-Design'</span>;
+0240     <span class="keyword">else</span>
+0241         design_text = [<span class="string">'Appro. Other: p = '</span> num2str(design.p) <span class="string">' design'</span>];
+0242     <span class="keyword">end</span>
+0243     <span class="keyword">if</span> old_exact == 1 <span class="comment">% Reload problem original m</span>
+0244         opt = <a href="design_opt_load.html" class="code" title="function opt=design_opt_load(file,line)">design_opt_load</a>(file,problem_line);
+0245     <span class="keyword">end</span>
+0246 <span class="keyword">else</span>
+0247     <span class="keyword">if</span> design.p == 0
+0248         design_text = <span class="string">'Exact. D-design'</span>;
+0249     <span class="keyword">elseif</span> design.p == 1
+0250         design_text = <span class="string">'Exact. A-Design'</span>;
+0251     <span class="keyword">else</span>
+0252         design_text = [<span class="string">'Exact. Other: p = '</span> num2str(design.p) <span class="string">' design'</span>];
+0253     <span class="keyword">end</span>
+0254     opt.m = str2num(get(handles.n_expsub, <span class="string">'String'</span>));
+0255 <span class="keyword">end</span>
+0256 
+0257 design_text_ob = findobj(<span class="string">'Tag'</span>,<span class="string">'design_text'</span>);
+0258 set(design_text_ob, <span class="string">'String'</span>, design_text);
+0259 
+0260 close;
+0261 
+0262 
+0263 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0264 <a name="_sub15" href="#_subfunctions" class="code">function dDesign_CreateFcn(hObject, eventdata, handles)</a>
+0265 <span class="comment">% hObject    handle to dDesign (see GCBO)</span>
+0266 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0267 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0268 <span class="keyword">global</span> design;
+0269 <span class="keyword">if</span> design.p == 0
+0270     set(hObject, <span class="string">'Value'</span>, 1);
+0271 <span class="keyword">end</span>
+0272 
+0273 
+0274 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0275 <a name="_sub16" href="#_subfunctions" class="code">function aDesign_CreateFcn(hObject, eventdata, handles)</a>
+0276 <span class="comment">% hObject    handle to aDesign (see GCBO)</span>
+0277 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0278 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0279 <span class="keyword">global</span> design;
+0280 <span class="keyword">if</span> design.p == 1
+0281     set(hObject, <span class="string">'Value'</span>, 1);
+0282 <span class="keyword">end</span>
+0283 
+0284 
+0285 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0286 <a name="_sub17" href="#_subfunctions" class="code">function other_CreateFcn(hObject, eventdata, handles)</a>
+0287 <span class="comment">% hObject    handle to other (see GCBO)</span>
+0288 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0289 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0290 <span class="keyword">global</span> design;
+0291 <span class="keyword">if</span> design.p ~= 0 | design.p ~= 1
+0292     set(hObject, <span class="string">'Value'</span>, 1);
+0293 <span class="keyword">end</span>
+0294 
+0295 
+0296 
+0297 <a name="_sub18" href="#_subfunctions" class="code">function n_expsub_Callback(hObject, eventdata, handles)</a>
+0298 <span class="comment">% hObject    handle to n_expsub (see GCBO)</span>
+0299 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0300 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0301 
+0302 <span class="comment">% Hints: get(hObject,'String') returns contents of n_expsub as text</span>
+0303 <span class="comment">%        str2double(get(hObject,'String')) returns contents of n_expsub as a double</span>
+0304 
+0305 
+0306 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0307 <a name="_sub19" href="#_subfunctions" class="code">function n_expsub_CreateFcn(hObject, eventdata, handles)</a>
+0308 <span class="comment">% hObject    handle to n_expsub (see GCBO)</span>
+0309 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0310 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0311 
+0312 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0313 <span class="comment">%       See ISPC and COMPUTER.</span>
+0314 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0315     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0316 <span class="keyword">end</span>
+0317 
+0318 <span class="keyword">global</span> opt;
+0319 set(hObject, <span class="string">'String'</span>, opt.m);</pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

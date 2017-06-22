@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of genetic_algorithm</title>
+  <meta name="keywords" content="genetic_algorithm">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; genetic_algorithm.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>genetic_algorithm
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [ x_opt, f_opt, results, output_f ] = genetic_algorithm( f, LB, UB, population, opt, options_exact ) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="myoutputGA1.html" class="code" title="function [state,options,optchanged] = myoutputGA(options,state,flag,interval)">myoutputGA1</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="solver.html" class="code" title="function [ x_opt, f_opt, results, output_f ] = solver( current_alg, fun, LB, UB, population_ini, opt_h, options_exact )">solver</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [ x_opt, f_opt, results, output_f ] = genetic_algorithm( f, LB, UB, population, opt, options_exact )</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008     <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0009     <span class="comment">%   f - function to optimize</span>
+0010     <span class="comment">%   LB - Lower bound to define space´s restrictions</span>
+0011     <span class="comment">%   UB - Upper bound to define space´s restrictions</span>
+0012     <span class="comment">%   population - matrix of population: each row is a set of points</span>
+0013     <span class="comment">%   opt - Options to configure different exact algorithms</span>
+0014     <span class="comment">%       mfinal - maximum number of successful evaluations</span>
+0015     <span class="comment">%       display - in order to print results each iteration: 'iter', 'none'</span>
+0016     <span class="comment">%       FE_max - maximum number of iterations to be reinitialized</span>
+0017     <span class="comment">%       pob_size - absolute size of the population</span>
+0018     <span class="comment">%       valgenlimit - number of populations without changes</span>
+0019     <span class="comment">%       n - total number of variables: number of points per number of var</span>
+0020     <span class="comment">%       tolfun - ........</span>
+0021     <span class="comment">%   options_exact - options related to exact algorithms</span>
+0022     <span class="comment">%</span>
+0023     <span class="comment">%--- OUTPUT ------</span>
+0024     <span class="comment">%   x_opt - is the solution vector of points</span>
+0025     <span class="comment">%   f_opt - is the value of the optimized quality function</span>
+0026     <span class="comment">%   results - funcion´s value of each iteration</span>
+0027     <span class="comment">%   output_f - information about algorithms evaluations</span>
+0028     <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0029     
+0030     <span class="comment">%%%%%%%%%</span>
+0031     <span class="comment">% Setting options</span>
+0032     <span class="comment">%%%%%%%%%</span>
+0033     
+0034     <span class="keyword">global</span> best_solution_consola iter_cont_consola time_cont_consola;  <span class="comment">% This variable is necesary to store the results to be shown by screen</span>
+0035     best_solution_consola=[];   <span class="comment">% Initialization</span>
+0036     iter_cont_consola=[];
+0037     time_cont_consola = [];
+0038     <span class="keyword">global</span> GAdatos;              <span class="comment">% Structure that contains the data for the GA</span>
+0039     
+0040     GAdatos.M=0;    
+0041     GAdatos.fval=realmax;
+0042     GAdatos.funcCount = 0;
+0043     GAdatos.Mfinal=opt.mfinal;
+0044     GAdatos.fun=f;
+0045     GAdatos.LB=LB;
+0046     GAdatos.UB=UB;
+0047     GAdatos.options_exact = options_exact;
+0048     
+0049     displ = opt.display;
+0050     FE_max = opt.FE_max;
+0051     PopulationSize = opt.pob_size;
+0052     ValStallGenLimit = opt.valgenlimit;
+0053     N = opt.n;
+0054     tolfun = opt.tolfun;
+0055     
+0056     Generations= ceil(FE_max/PopulationSize); 
+0057     
+0058     options=gaoptimset(<span class="string">'OutputFcn'</span>, @<a href="myoutputGA1.html" class="code" title="function [state,options,optchanged] = myoutputGA(options,state,flag,interval)">myoutputGA1</a>,<span class="string">'Display'</span>,displ,<span class="string">'Generations'</span>,Generations,<span class="keyword">...</span>
+0059         <span class="string">'InitialPopulation'</span>,population,<span class="string">'PopulationSize'</span>,PopulationSize,<span class="string">'TolFun'</span>,tolfun,<span class="string">'StallGenLimit'</span>,ValStallGenLimit);
+0060     
+0061     <span class="comment">%%%%%%%%%</span>
+0062     <span class="comment">% Execution</span>
+0063     <span class="comment">%%%%%%%%%</span>
+0064     
+0065     tic;
+0066     [x_opt,f_opt,exitFlag,output_f,population,scores]=ga(f,N,[],[],[],[],LB,UB,[],options);
+0067   
+0068     output_f.time = toc;
+0069     output_f.funcCount = GAdatos.funcCount;
+0070     
+0071     results = [best_solution_consola; iter_cont_consola; time_cont_consola]';
+0072  
+0073     <span class="comment">% Print total results</span>
+0074     
+0075     <span class="keyword">if</span> opt.mfinal == Inf
+0076         msg = <span class="string">'Genetic Algorithm'</span>;
+0077     <span class="keyword">else</span>
+0078         msg = [<span class="string">'Genetic Algorithm'</span>, <span class="string">' '</span>, options_exact.alg];
+0079     <span class="keyword">end</span>
+0080         
+0081     disp([<span class="string">'*********  FINAL RESULTS '</span>, msg, <span class="string">'  *************************'</span>]);
+0082     g = sprintf(<span class="string">'%f '</span>, x_opt);
+0083     fprintf(<span class="string">'x opt: %s\n'</span>, g);
+0084     fprintf(<span class="string">'f value: %f\n'</span>, f_opt);
+0085     fprintf(<span class="string">'Number of evaluations: %d\n'</span>, output_f.funcCount);
+0086     fprintf(<span class="string">'Total time: %f seconds\n'</span>, output_f.time);
+0087     disp(<span class="string">'**********************************************************************'</span>);
+0088 
+0089 <span class="keyword">end</span>
+0090</pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

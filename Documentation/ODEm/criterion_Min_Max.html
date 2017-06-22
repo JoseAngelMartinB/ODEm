@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of criterion_Min_Max</title>
+  <meta name="keywords" content="criterion_Min_Max">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; criterion_Min_Max.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>criterion_Min_Max
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function Phi_MM_max=criterion_Min_Max(X,omega,opt) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="criterion_MM.html" class="code" title="function Phi = criterion_MM(X,omega,theta,opt )">criterion_MM</a>	</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="criterion.html" class="code" title="function Phi = criterion(X,omega,opt )">criterion</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function Phi_MM_max=criterion_Min_Max(X,omega,opt)</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="comment">% theta is a vector of parameters that will be formated to a two column</span>
+0009 <span class="comment">% matrix, one column per category</span>
+0010 
+0011 tolerancia=1e-3;
+0012     f_MM=@(theta) -<a href="criterion_MM.html" class="code" title="function Phi = criterion_MM(X,omega,theta,opt )">criterion_MM</a>(X,omega,reshape(theta,[opt.co+1,2]),opt ); 
+0013       <span class="keyword">for</span> i=1:3  
+0014           <span class="keyword">if</span> i==1
+0015     options = optimoptions(<span class="string">'fmincon'</span>,<span class="string">'Algorithm'</span>,<span class="string">'active-set'</span>,<span class="string">'Display'</span>,<span class="string">'None'</span>,<span class="string">'TolCon'</span>,tolerancia,<span class="string">'TolFun'</span>,tolerancia,<span class="string">'TolX'</span>,tolerancia);   
+0016           <span class="keyword">elseif</span> i==2
+0017     options = optimoptions(<span class="string">'fmincon'</span>,<span class="string">'Algorithm'</span>,<span class="string">'interior-point'</span>,<span class="string">'Display'</span>,<span class="string">'None'</span>,<span class="string">'TolCon'</span>,tolerancia,<span class="string">'TolFun'</span>,tolerancia,<span class="string">'TolX'</span>,tolerancia);     
+0018           <span class="keyword">elseif</span> i==3
+0019     options = optimoptions(<span class="string">'fmincon'</span>,<span class="string">'Algorithm'</span>,<span class="string">'sqp'</span>,<span class="string">'Display'</span>,<span class="string">'None'</span>,<span class="string">'TolCon'</span>,tolerancia,<span class="string">'TolFun'</span>,tolerancia,<span class="string">'TolX'</span>,tolerancia);
+0020           <span class="keyword">end</span>
+0021           <span class="keyword">if</span> i==1
+0022       PUNTO_INICIAL=zeros(1,opt.k);
+0023           <span class="keyword">else</span>
+0024               PUNTO_INICIAL=x_opt;
+0025           <span class="keyword">end</span>
+0026         
+0027     LB=opt.bounds_MM(:,1);
+0028     UB=opt.bounds_MM(:,2);
+0029     <span class="comment">%tic</span>
+0030     [x_opt,Phi_MM_aux, exitflag,output]=fmincon(f_MM, PUNTO_INICIAL,[],[],[],[],LB,UB,[],options);
+0031     Phi_MM(i)=-Phi_MM_aux;
+0032       <span class="keyword">end</span>
+0033       Phi_MM
+0034 Phi_MM_max=max(Phi_MM);
+0035 <span class="keyword">end</span>
+0036 
+0037  <span class="comment">%toc</span>
+0038 
+0039</pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

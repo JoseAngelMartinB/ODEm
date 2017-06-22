@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of Experiments</title>
+  <meta name="keywords" content="Experiments">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; Experiments.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>Experiments
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [global_data, CPU] = Experiments( name_problem, opt, file_names, exp_conf ) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="solver.html" class="code" title="function [ x_opt, f_opt, results, output_f ] = solver( current_alg, fun, LB, UB, population_ini, opt_h, options_exact )">solver</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="Fmin_Experiments.html" class="code" title="function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin )">Fmin_Experiments</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [global_data, CPU] = Experiments( name_problem, opt, file_names, exp_conf )</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">% --------- PARAMETERS OF THE NUMERICAL EXPERIMENTS ------------</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0013 <span class="keyword">global</span> alg_exacts alg_types; <span class="comment">%list_pob list_nc;</span>
+0014 
+0015 ficheroExp = file_names.ficheroExp;
+0016 directory_res = file_names.directory_res;
+0017 
+0018 list_alg = exp_conf.alg_types;
+0019 list_exacts = exp_conf.alg_exacts;
+0020 list_popul = exp_conf.list_pob;
+0021 l_nc = exp_conf.list_nc;
+0022 
+0023 alg_exacts = {<span class="string">'active-set'</span>; <span class="comment">% E - 1</span>
+0024     <span class="string">'interior-point'</span>;       <span class="comment">% E - 2</span>
+0025     <span class="string">'sqp'</span>;                  <span class="comment">% E - 3</span>
+0026     <span class="string">'nealder-mead'</span>;         <span class="comment">% E - 4</span>
+0027     <span class="string">'pattern-search'</span>};      <span class="comment">% E - 5</span>
+0028 
+0029 alg_types = {<span class="string">'SPSO'</span>,<span class="string">'SPSO 2011'</span>;                <span class="comment">% H - 1</span>
+0030     <span class="string">'GA'</span>,<span class="string">'Genetic Algorithm'</span>;                   <span class="comment">% H - 2</span>
+0031     <span class="string">'SA'</span>,<span class="string">'Simulated Annealing'</span>;                 <span class="comment">% H - 3</span>
+0032     <span class="string">'active-set'</span>,<span class="string">'Active Set'</span>;                  <span class="comment">% E - 4</span>
+0033     <span class="string">'interior-point'</span>,<span class="string">'Interior Point'</span>;          <span class="comment">% E - 5</span>
+0034     <span class="string">'sqp'</span>,<span class="string">'Sequential Quadratic Programming'</span>;   <span class="comment">% E - 6</span>
+0035     <span class="string">'nealder-mead'</span>,<span class="string">'Nealder Mead'</span>;              <span class="comment">% E - 7</span>
+0036     <span class="string">'pattern-search'</span>,<span class="string">'Pattern Search'</span>};         <span class="comment">% E - 8</span>
+0037 
+0038 Nreplicas = exp_conf.replicas;             <span class="comment">% Number of replicas</span>
+0039 nc_min = 1;
+0040 nc_max = length(l_nc);   
+0041 PobMin = 1;
+0042 PobMax = length(list_popul);
+0043 AlgMin = 1;
+0044 AlgMax = size(alg_types, 1);
+0045 AlgMinExac = 1;
+0046 AlgMaxExac = size(alg_exacts,1);
+0047 <span class="comment">%%%%%%%%%%%%%%%</span>
+0048 FE_max = exp_conf.iter_max;
+0049 FE_max_SA = 50; <span class="comment">% Number of iterations of the SA to be reinitialized - 50</span>
+0050 FE_max_ex = exp_conf.iter_exact; <span class="comment">% Maximum number of evaluations of exacts algorithms in heuristics alg.-100</span>
+0051 <span class="comment">%%%%%%%%%%%%%%%</span>
+0052 ficheroRes = [directory_res <span class="string">'Res_'</span> name_problem <span class="string">'.mat'</span>];
+0053 displ=<span class="string">'iter'</span>;
+0054 <span class="comment">%%%%%%%%%%%%%%%</span>
+0055 PopulationSize_Max = 125;
+0056 fich_popul = [directory_res <span class="string">'Population_'</span> name_problem <span class="string">'.mat'</span>];
+0057 Generation_population = <span class="string">'yes'</span>;    <span class="comment">% 'yes' or 'no'</span>
+0058 <span class="comment">%%%%%%%%%%%%%%%</span>
+0059 ValStallGenLimit = 100;    <span class="comment">% Number of populations without change</span>
+0060 <span class="comment">%%% Options for exact algorithms without heuristic algs.</span>
+0061 options_exact.display = displ;
+0062 options_exact.tolcon = 1e-12;
+0063 <span class="comment">%%%%%%%%%%%%%%%</span>
+0064 N = opt.N;
+0065 LB = opt.xlow;
+0066 UB = opt.xup;
+0067 fun = opt.fun;
+0068 extra_sa = opt.info_problem;
+0069 <span class="comment">%%%%%%%%%%%%%%%</span>
+0070 global_data.best_value = Inf;
+0071 global_data.best_solution = zeros(1, N);
+0072 CPU = {};
+0073 <span class="comment">%%%%%%%%%%%%%%%</span>
+0074 
+0075 
+0076 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0077 <span class="comment">%</span>
+0078 <span class="comment">% ---------------- LOADING EXPERIMENTS ----------------------</span>
+0079 <span class="comment">%</span>
+0080 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0081 
+0082 l_experiments = {};
+0083 
+0084 <span class="keyword">if</span> exist(ficheroExp, <span class="string">'file'</span>) == 2
+0085     load(ficheroExp, <span class="string">'l_experiments'</span>); <span class="comment">% load all experiments</span>
+0086 <span class="keyword">end</span>
+0087 
+0088 
+0089 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0090 <span class="comment">%</span>
+0091 <span class="comment">% ---------------- DEFINICION INITIAL POPULATION ------------</span>
+0092 <span class="comment">%</span>
+0093 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0094 
+0095 population=zeros(PopulationSize_Max,N);
+0096 
+0097 <span class="keyword">if</span> (strcmp(Generation_population,<span class="string">'yes'</span>))
+0098    <span class="keyword">for</span> i_aux=1:PopulationSize_Max
+0099        population(i_aux,:)=rand(1,N).*(UB-LB)+LB;
+0100    <span class="keyword">end</span>
+0101    population_ini=population;
+0102    <span class="comment">%save(fich_popul,'population');</span>
+0103 <span class="keyword">elseif</span> (strcmp(Generation_population,<span class="string">'no'</span>) &amp;&amp; exist(fich_popul, <span class="string">'file'</span>) == 2)
+0104    <span class="comment">%load(fich_popul,'population');</span>
+0105    <span class="comment">%population_ini=population;</span>
+0106 <span class="keyword">end</span>
+0107 
+0108 
+0109 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0110 <span class="comment">%</span>
+0111 <span class="comment">% -------------- EXPERIMENTS INITIALIZATION  -----------------</span>
+0112 <span class="comment">%</span>
+0113 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0114 
+0115 <span class="keyword">for</span> j = AlgMin : AlgMax     <span class="comment">% number of algorithms % Use algorithm-&gt; SPSO, GA, SA todos (all)</span>
+0116     
+0117     <span class="keyword">if</span> (j&lt;=0) || ~ismember(j, list_alg)
+0118         <span class="keyword">continue</span>;
+0119     <span class="keyword">elseif</span>(j&gt;size(alg_types,1))
+0120         <span class="keyword">break</span>;
+0121     <span class="keyword">end</span>
+0122     
+0123     current_alg.type = alg_types{j,1};
+0124     current_alg.name = alg_types{j,2};
+0125     
+0126     <span class="keyword">if</span> (ismember(current_alg.type, alg_exacts)) <span class="comment">% to ignore parameters related to heuristic alg.</span>
+0127         AlgMinExac_aux = 1;
+0128         AlgMaxExac_aux = 1;
+0129         PobMin_aux = 1;
+0130         PobMax_aux = 1;
+0131         nc_min_aux = 1;
+0132         nc_max_aux = 1;
+0133         options_exact.fe_max = FE_max;
+0134         options_exact.into_heuristic = 0;
+0135     <span class="keyword">else</span>
+0136         AlgMinExac_aux = AlgMinExac;
+0137         AlgMaxExac_aux = AlgMaxExac;
+0138         PobMin_aux = PobMin;
+0139         PobMax_aux = PobMax;
+0140         nc_min_aux = nc_min;
+0141         nc_max_aux = nc_max;
+0142         options_exact.fe_max = FE_max_ex;
+0143         options_exact.into_heuristic = 1;
+0144     <span class="keyword">end</span>
+0145     
+0146     <span class="keyword">for</span> j_e = AlgMinExac_aux : AlgMaxExac_aux
+0147         
+0148         <span class="keyword">if</span> ((j_e&lt;=0) || ~ismember(j_e, list_exacts)) &amp;&amp; ~(AlgMinExac_aux == 1 &amp;&amp; AlgMaxExac_aux == 1)
+0149             <span class="keyword">continue</span>;
+0150         <span class="keyword">elseif</span>(j_e&gt;size(alg_exacts,1))
+0151             <span class="keyword">break</span>;
+0152         <span class="keyword">end</span>
+0153         
+0154         <span class="keyword">for</span> pob = PobMin_aux : PobMax_aux
+0155 
+0156             PopulationSize = list_popul(pob);
+0157 
+0158             <span class="keyword">for</span> nc = nc_min_aux : nc_max_aux
+0159                 
+0160                 Mfinal = l_nc(nc);
+0161 
+0162                 <span class="keyword">for</span> replica = 1 : Nreplicas
+0163 
+0164                     <span class="comment">% configure the options for heuristic algorithm</span>
+0165                     <span class="comment">% SPSO</span>
+0166                     opt_h.err=1e-10;
+0167                     opt_h.opt_f=1e-10;
+0168                     opt_h.norm=0;
+0169                     <span class="comment">% GA</span>
+0170                     opt_h.valgenlimit = ValStallGenLimit;
+0171                     opt_h.tolfun = 1.e-20;
+0172                     <span class="comment">% SA</span>
+0173                     opt_h.problem = extra_sa;
+0174                     opt_h.FE_max_SA = FE_max_SA;
+0175                     <span class="comment">% ALL</span>
+0176                     opt_h.pob = pob;
+0177                     opt_h.replica = replica;
+0178                     opt_h.FE_max = FE_max;
+0179                     opt_h.nc = nc;
+0180                     opt_h.pob_size = PopulationSize;
+0181                     opt_h.n = N;
+0182                     opt_h.display = displ;
+0183                     opt_h.mfinal = Mfinal;
+0184                     options_exact.alg = alg_exacts{j_e};
+0185 
+0186                     [ x_opt, f_opt, results, output_f ] = <a href="solver.html" class="code" title="function [ x_opt, f_opt, results, output_f ] = solver( current_alg, fun, LB, UB, population_ini, opt_h, options_exact )">solver</a>( current_alg, fun, LB, UB, population_ini, opt_h, options_exact );
+0187 
+0188                     <span class="comment">% save solver results in a cell</span>
+0189                     CPU{j,j_e,pob,nc,replica,1} = f_opt;
+0190                     CPU{j,j_e,pob,nc,replica,2} = x_opt;
+0191                     CPU{j,j_e,pob,nc,replica,3} = output_f.funcCount;
+0192                     CPU{j,j_e,pob,nc,replica,4} = results;
+0193                     CPU{j,j_e,pob,nc,replica,5} = output_f.time;
+0194                     
+0195                     <span class="comment">% save the best value of the objetive function</span>
+0196                     <span class="keyword">if</span> (global_data.best_value &gt; f_opt)
+0197                         global_data.best_value = f_opt;
+0198                         global_data.best_solution = x_opt;
+0199                     <span class="keyword">end</span>
+0200 
+0201                     <span class="comment">% save partial results in a file and its state</span>
+0202                     <span class="comment">% save(ficheroRes, 'CPU', 'global_data', 'j', 'j_e', 'pob', 'nc', 'replica');</span>
+0203 
+0204                 <span class="keyword">end</span>   
+0205                 
+0206                 <span class="comment">% Save into a file all posible experiments</span>
+0207                 <span class="keyword">if</span> (options_exact.into_heuristic)
+0208                     str_experiments = sprintf(<span class="string">'%s_%s_%s_%s'</span>, alg_types{j,1}, alg_exacts{j_e}, num2str(list_popul(pob)), num2str(l_nc(nc)));
+0209                 <span class="keyword">else</span>
+0210                     str_experiments = sprintf(<span class="string">'%s'</span>, alg_types{j,1});
+0211                 <span class="keyword">end</span>
+0212                 
+0213                 <span class="keyword">if</span> isempty(l_experiments)
+0214                     aux_strs = {};
+0215                 <span class="keyword">else</span>
+0216                     aux_strs = {l_experiments{:,1}}; 
+0217                 <span class="keyword">end</span>
+0218 
+0219                 <span class="keyword">if</span> ismember(str_experiments, aux_strs) == 0
+0220 
+0221                     index_exp = size(l_experiments, 1) + 1;
+0222                     l_experiments{index_exp, 1} = str_experiments;
+0223 
+0224                     str.type = j;
+0225                     str.exact = j_e;
+0226                     str.pob = pob;
+0227                     str.nc = nc;
+0228                     l_experiments{index_exp, 2} = str;
+0229 
+0230                     save(ficheroExp, <span class="string">'l_experiments'</span>);
+0231                 <span class="keyword">end</span>
+0232                 
+0233             <span class="keyword">end</span> <span class="comment">% nc</span>
+0234         <span class="keyword">end</span> <span class="comment">% pob</span>
+0235     <span class="keyword">end</span> <span class="comment">% exact</span>
+0236 <span class="keyword">end</span> <span class="comment">% heuristic</span>
+0237 
+0238 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

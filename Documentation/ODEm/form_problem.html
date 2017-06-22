@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of form_problem</title>
+  <meta name="keywords" content="form_problem">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; form_problem.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>form_problem
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = form_problem(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="design_opt_load.html" class="code" title="function opt=design_opt_load(file,line)">design_opt_load</a>	ODEm - Optimal Design Experiments with Matlab</li><li><a href="form_new_problem.html" class="code" title="function varargout = form_new_problem(varargin)">form_new_problem</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="form_main.html" class="code" title="function varargout = form_main(varargin)">form_main</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function form_problem_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = form_problem_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function new_problem_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function problems_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function problems_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function select_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function refresh_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function refresh(problems)</a></li><li><a href="#_sub9" class="code">function form_problem_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function edit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub11" class="code">function cancel_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub12" class="code">function remove_Callback(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = form_problem(varargin)</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="comment">% FORM_PROBLEM MATLAB code for form_problem.fig</span>
+0009 <span class="comment">%      FORM_PROBLEM, by itself, creates a new FORM_PROBLEM or raises the existing</span>
+0010 <span class="comment">%      singleton*.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%      H = FORM_PROBLEM returns the handle to a new FORM_PROBLEM or the handle to</span>
+0013 <span class="comment">%      the existing singleton*.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%      FORM_PROBLEM('CALLBACK',hObject,eventData,handles,...) calls the local</span>
+0016 <span class="comment">%      function named CALLBACK in FORM_PROBLEM.M with the given input arguments.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%      FORM_PROBLEM('Property','Value',...) creates a new FORM_PROBLEM or raises the</span>
+0019 <span class="comment">%      existing singleton*.  Starting from the left, property value pairs are</span>
+0020 <span class="comment">%      applied to the GUI before form_problem_OpeningFcn gets called.  An</span>
+0021 <span class="comment">%      unrecognized property name or invalid value makes property application</span>
+0022 <span class="comment">%      stop.  All inputs are passed to form_problem_OpeningFcn via varargin.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one</span>
+0025 <span class="comment">%      instance to run (singleton)&quot;.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+0028 
+0029 <span class="comment">% Edit the above text to modify the response to help form_problem</span>
+0030 
+0031 <span class="comment">% Last Modified by GUIDE v2.5 19-Sep-2016 11:02:04</span>
+0032 
+0033 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0034 gui_Singleton = 1;
+0035 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0036                    <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0037                    <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction form_problem_OpeningFcn(hObject, eventdata, handles, varargin)">form_problem_OpeningFcn</a>, <span class="keyword">...</span>
+0038                    <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = form_problem_OutputFcn(hObject, eventdata, handles)">form_problem_OutputFcn</a>, <span class="keyword">...</span>
+0039                    <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0040                    <span class="string">'gui_Callback'</span>,   []);
+0041 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0042     gui_State.gui_Callback = str2func(varargin{1});
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="keyword">if</span> nargout
+0046     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0047 <span class="keyword">else</span>
+0048     gui_mainfcn(gui_State, varargin{:});
+0049 <span class="keyword">end</span>
+0050 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0051 
+0052 
+0053 <span class="comment">% --- Executes just before form_problem is made visible.</span>
+0054 <a name="_sub1" href="#_subfunctions" class="code">function form_problem_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0055 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0056 <span class="comment">% hObject    handle to figure</span>
+0057 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0058 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0059 <span class="comment">% varargin   command line arguments to form_problem (see VARARGIN)</span>
+0060 
+0061 <span class="comment">% Choose default command line output for form_problem</span>
+0062 handles.output = hObject;
+0063 
+0064 <span class="comment">% Update handles structure</span>
+0065 guidata(hObject, handles);
+0066 
+0067 <span class="comment">% UIWAIT makes form_problem wait for user response (see UIRESUME)</span>
+0068 <span class="comment">% uiwait(handles.form_problem);</span>
+0069 
+0070 
+0071 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0072 <a name="_sub2" href="#_subfunctions" class="code">function varargout = form_problem_OutputFcn(hObject, eventdata, handles) </a>
+0073 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0074 <span class="comment">% hObject    handle to figure</span>
+0075 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0076 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0077 
+0078 <span class="comment">% Get default command line output from handles structure</span>
+0079 varargout{1} = handles.output;
+0080 
+0081 
+0082 <span class="comment">% --- Executes on button press in new_problem.</span>
+0083 <a name="_sub3" href="#_subfunctions" class="code">function new_problem_Callback(hObject, eventdata, handles)</a>
+0084 <span class="comment">% hObject    handle to new_problem (see GCBO)</span>
+0085 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0086 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0087 
+0088 setappdata(handles.form_problem, <span class="string">'line_problem_edit'</span>, -1);
+0089 <a href="form_new_problem.html" class="code" title="function varargout = form_new_problem(varargin)">form_new_problem</a>;
+0090 
+0091 
+0092 <span class="comment">% --- Executes on selection change in problems.</span>
+0093 <a name="_sub4" href="#_subfunctions" class="code">function problems_Callback(hObject, eventdata, handles)</a>
+0094 <span class="comment">% hObject    handle to problems (see GCBO)</span>
+0095 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0096 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0097 
+0098 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns problems contents as cell array</span>
+0099 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from problems</span>
+0100 
+0101 
+0102 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0103 <a name="_sub5" href="#_subfunctions" class="code">function problems_CreateFcn(hObject, eventdata, handles)</a>
+0104 <span class="comment">% hObject    handle to problems (see GCBO)</span>
+0105 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0106 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0107 
+0108 <span class="comment">% Hint: listbox controls usually have a white background on Windows.</span>
+0109 <span class="comment">%       See ISPC and COMPUTER.</span>
+0110 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0111     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0112 <span class="keyword">end</span>
+0113 
+0114 <span class="comment">% Load problems</span>
+0115 <a href="#_sub8" class="code" title="subfunction refresh(problems)">refresh</a>(hObject);
+0116 
+0117 
+0118 <span class="comment">% --- Executes on button press in select.</span>
+0119 <a name="_sub6" href="#_subfunctions" class="code">function select_Callback(hObject, eventdata, handles)</a>
+0120 <span class="comment">% hObject    handle to select (see GCBO)</span>
+0121 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0122 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0123 
+0124 <span class="keyword">global</span> file problem_line;
+0125 problem = get(handles.problems, <span class="string">'Value'</span>);
+0126 n_problem = 0;
+0127 error = 0;
+0128 problem_finded = false;
+0129 problem_line = -1;
+0130 <span class="comment">% Open file and search for problems</span>
+0131 fd = fopen(file,<span class="string">'r'</span>);
+0132 <span class="keyword">if</span> fd == -1
+0133     set(handles.info,<span class="string">'String'</span>,<span class="string">'Cannot open file.'</span>);
+0134     set(handles.info,<span class="string">'FontSize'</span>,12);
+0135     error = 1;
+0136 <span class="keyword">else</span>
+0137     set(handles.info,<span class="string">'FontSize'</span>,10);
+0138     
+0139     Data = textscan(fd, <span class="string">'%s'</span>, <span class="string">'delimiter'</span>, <span class="string">'\n'</span>, <span class="string">'whitespace'</span>, <span class="string">''</span>);
+0140     CStr = Data{1};
+0141     fclose(fd);
+0142 
+0143     i = 1;
+0144     <span class="keyword">while</span> strcmp(CStr(i), <span class="string">'%%%END_PROBLEMS%%%'</span>) ~= true &amp;&amp; ~problem_finded
+0145         <span class="keyword">if</span> strcmp(CStr(i), <span class="string">'%%%%PROBLEM%%%%'</span>)
+0146             n_problem = n_problem + 1;
+0147             <span class="keyword">if</span> problem == n_problem
+0148                 <span class="comment">% Line of the file where the problem starts</span>
+0149                 problem_finded = true;
+0150                 <span class="comment">% Store the line where the problem selected start</span>
+0151                 h = findobj(<span class="string">'Tag'</span>,<span class="string">'form_main'</span>);
+0152                 setappdata(h, <span class="string">'line_problem'</span>, i);
+0153                 problem_name_cell = CStr(i + 1);
+0154                 problem_line = i;
+0155                 error = 0;
+0156             <span class="keyword">end</span>
+0157         <span class="keyword">end</span>
+0158         i = i + 1;
+0159     <span class="keyword">end</span> 
+0160 <span class="keyword">end</span>
+0161 
+0162 <span class="keyword">if</span> error == 0  
+0163    <span class="comment">% LOAD PROBLEM FUNCTIONS</span>
+0164    <span class="keyword">global</span> problem_name opt design;
+0165    opt = <a href="design_opt_load.html" class="code" title="function opt=design_opt_load(file,line)">design_opt_load</a>(file,problem_line);
+0166    problem_name = problem_name_cell{:};
+0167    design.exact = 0;
+0168    design.p = 0;
+0169    
+0170    problem_name_label = findobj(<span class="string">'Tag'</span>,<span class="string">'problem_name'</span>);
+0171    set(problem_name_label, <span class="string">'String'</span>, problem_name_cell{:});
+0172    set(problem_name_label, <span class="string">'ForegroundColor'</span> , <span class="string">'black'</span>);
+0173     
+0174 <span class="keyword">end</span>
+0175 
+0176 close;
+0177 
+0178 
+0179 <span class="comment">% --- Executes on button press in refresh.</span>
+0180 <a name="_sub7" href="#_subfunctions" class="code">function refresh_Callback(hObject, eventdata, handles)</a>
+0181 <span class="comment">% hObject    handle to refresh (see GCBO)</span>
+0182 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0183 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0184 <a href="#_sub8" class="code" title="subfunction refresh(problems)">refresh</a>(handles.problems);
+0185 
+0186 
+0187 <a name="_sub8" href="#_subfunctions" class="code">function refresh(problems)</a>
+0188 <span class="comment">% Refresh the problem list</span>
+0189 <span class="keyword">global</span> file;
+0190 error = 0;
+0191 <span class="comment">% Open file and search for problems</span>
+0192 fd = fopen(file,<span class="string">'r'</span>);
+0193 <span class="keyword">if</span> fd == -1
+0194     set(problems,<span class="string">'String'</span>,<span class="string">'Cannot open file.'</span>);
+0195     set(problems,<span class="string">'FontSize'</span>,14);
+0196     error = 1;
+0197 <span class="keyword">else</span>
+0198     set(problems,<span class="string">'FontSize'</span>,10);
+0199     problems_str = <span class="string">''</span>;
+0200     
+0201     Data = textscan(fd, <span class="string">'%s'</span>, <span class="string">'delimiter'</span>, <span class="string">'\n'</span>, <span class="string">'whitespace'</span>, <span class="string">''</span>);
+0202     CStr = Data{1};
+0203     fclose(fd);
+0204 
+0205     i = 1;
+0206     <span class="keyword">while</span> strcmp(CStr(i), <span class="string">'%%%END_PROBLEMS%%%'</span>) ~= true
+0207         <span class="keyword">if</span> strcmp(CStr(i), <span class="string">'%%%%PROBLEM%%%%'</span>)
+0208             problems_str = [problems_str CStr(i + 1)];
+0209         <span class="keyword">end</span>
+0210         i = i + 1;
+0211     <span class="keyword">end</span>
+0212     set(problems, <span class="string">'Value'</span>, 1);
+0213     set(problems, <span class="string">'String'</span>, problems_str);
+0214 
+0215     
+0216 <span class="keyword">end</span>
+0217 
+0218 
+0219 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0220 <a name="_sub9" href="#_subfunctions" class="code">function form_problem_CreateFcn(hObject, eventdata, handles)</a>
+0221 <span class="comment">% hObject    handle to form_problem (see GCBO)</span>
+0222 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0223 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0224 <span class="comment">% refresh(handles);</span>
+0225 
+0226 
+0227 <span class="comment">% --- Executes on button press in edit.</span>
+0228 <a name="_sub10" href="#_subfunctions" class="code">function edit_Callback(hObject, eventdata, handles)</a>
+0229 <span class="comment">% hObject    handle to edit (see GCBO)</span>
+0230 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0231 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0232 
+0233 <span class="keyword">global</span> file;
+0234 problem = get(handles.problems, <span class="string">'Value'</span>);
+0235 n_problem = 0;
+0236 error = 0;
+0237 problem_finded = false;
+0238 <span class="comment">% Open file and search for problems</span>
+0239 fd = fopen(file,<span class="string">'r'</span>);
+0240 <span class="keyword">if</span> fd == -1
+0241     set(handles.info,<span class="string">'String'</span>,<span class="string">'Cannot open file.'</span>);
+0242     set(handles.info,<span class="string">'FontSize'</span>,12);
+0243     error = 1;
+0244 <span class="keyword">else</span>
+0245     set(handles.info,<span class="string">'FontSize'</span>,10);
+0246     
+0247     Data = textscan(fd, <span class="string">'%s'</span>, <span class="string">'delimiter'</span>, <span class="string">'\n'</span>, <span class="string">'whitespace'</span>, <span class="string">''</span>);
+0248     CStr = Data{1};
+0249     fclose(fd);
+0250 
+0251     i = 1;
+0252     <span class="keyword">while</span> strcmp(CStr(i), <span class="string">'%%%END_PROBLEMS%%%'</span>) ~= true &amp;&amp; ~problem_finded
+0253         <span class="keyword">if</span> strcmp(CStr(i), <span class="string">'%%%%PROBLEM%%%%'</span>)
+0254             n_problem = n_problem + 1;
+0255             <span class="keyword">if</span> problem == n_problem
+0256                 <span class="comment">% Line of the file where the problem starts</span>
+0257                 problem_finded = true;
+0258                 <span class="comment">% Store the line where the problem start for the form_edit_problem</span>
+0259                 setappdata(handles.form_problem, <span class="string">'line_problem_edit'</span>, i);
+0260                 <a href="form_new_problem.html" class="code" title="function varargout = form_new_problem(varargin)">form_new_problem</a>;
+0261             <span class="keyword">end</span>
+0262         <span class="keyword">end</span>
+0263         i = i + 1;
+0264     <span class="keyword">end</span> 
+0265 <span class="keyword">end</span>
+0266     
+0267 
+0268 
+0269 <span class="comment">% --- Executes on button press in cancel.</span>
+0270 <a name="_sub11" href="#_subfunctions" class="code">function cancel_Callback(hObject, eventdata, handles)</a>
+0271 <span class="comment">% hObject    handle to cancel (see GCBO)</span>
+0272 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0273 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0274 close;
+0275 
+0276 
+0277 <span class="comment">% --- Executes on button press in remove.</span>
+0278 <a name="_sub12" href="#_subfunctions" class="code">function remove_Callback(hObject, eventdata, handles)</a>
+0279 <span class="comment">% hObject    handle to remove (see GCBO)</span>
+0280 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0281 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0282 
+0283 <span class="keyword">global</span> file;
+0284 problem = get(handles.problems, <span class="string">'Value'</span>);
+0285 n_problem = 0;
+0286 error = 0;
+0287 problem_finded = false;
+0288 <span class="comment">% Open file and search for problems</span>
+0289 fd = fopen(file,<span class="string">'r'</span>);
+0290 <span class="keyword">if</span> fd == -1
+0291     set(handles.info,<span class="string">'String'</span>,<span class="string">'Cannot open file.'</span>);
+0292     error = 1;
+0293 <span class="keyword">else</span>   
+0294     Data = textscan(fd, <span class="string">'%s'</span>, <span class="string">'delimiter'</span>, <span class="string">'\n'</span>, <span class="string">'whitespace'</span>, <span class="string">''</span>);
+0295     CStr = Data{1};
+0296     fclose(fd);
+0297 
+0298     i = 1;
+0299     <span class="keyword">while</span> strcmp(CStr(i), <span class="string">'%%%END_PROBLEMS%%%'</span>) ~= true &amp;&amp; ~problem_finded
+0300         <span class="keyword">if</span> strcmp(CStr(i), <span class="string">'%%%%PROBLEM%%%%'</span>)
+0301             n_problem = n_problem + 1;
+0302             <span class="keyword">if</span> problem == n_problem
+0303                 <span class="comment">% i --&gt; Line of the file where the problem starts</span>
+0304                 problem_start_line = i;
+0305                 <span class="keyword">while</span> strcmp(CStr(i), <span class="string">'%%%EOP%%%'</span>) ~= true
+0306                     i = i + 1;
+0307                 <span class="keyword">end</span> 
+0308                 problem_finish_line = i + 1;
+0309                 problem_finded = true;
+0310             <span class="keyword">end</span>
+0311         <span class="keyword">end</span>
+0312         i = i + 1;
+0313     <span class="keyword">end</span>    
+0314     
+0315     <span class="comment">% Delete the problem</span>
+0316     <span class="keyword">if</span> problem_finded
+0317         CStr(problem_start_line:problem_finish_line) = [];
+0318     <span class="keyword">end</span>
+0319         
+0320     fd = fopen(file,<span class="string">'r+'</span>);
+0321     <span class="keyword">if</span> fd == -1
+0322         set(handles.info,<span class="string">'String'</span>,<span class="string">'Cannot open file.'</span>)
+0323         error = 1;
+0324     <span class="keyword">else</span>
+0325         fprintf(fd, <span class="string">'%s\n'</span>,CStr{:});
+0326         fclose(fd);
+0327         <a href="#_sub8" class="code" title="subfunction refresh(problems)">refresh</a>(handles.problems);
+0328     <span class="keyword">end</span>    
+0329 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

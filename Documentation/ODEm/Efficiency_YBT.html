@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of Efficiency_YBT</title>
+  <meta name="keywords" content="Efficiency_YBT">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; Efficiency_YBT.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>Efficiency_YBT
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt ) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="make_result_table.html" class="code" title="function make_result_table()">make_result_table</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Phi,Eff,Phi_L] = Efficiency_YBT(X,omega,opt )</a>
+0002 <span class="keyword">global</span> design
+0003 
+0004 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0005 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0006 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0007 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0008 
+0009 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0010 <span class="comment">% omega         weights</span>
+0011 <span class="comment">% X             A matrix with the support points. Each row is a point</span>
+0012 <span class="comment">% opt             is a structure containing the parameters of the experiment</span>
+0013 <span class="comment">% opt.Ixi(x)    is the information matrix at a single point x</span>
+0014 <span class="comment">% opt.k         number of parameters</span>
+0015 <span class="comment">% opt.Der_g     derivatives of the fuction g(\theta) to be estimated</span>
+0016 <span class="comment">% opt.pro       weight of the prior design</span>
+0017 <span class="comment">% opt.I_xi_0    information matrix of the prior design</span>
+0018 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0019 
+0020 <span class="comment">% Impose that the sum of the probabillities is equal to 1</span>
+0021  omega=omega/sum(omega);
+0022 m=length(omega);
+0023 I_xi=zeros(opt.k);
+0024 
+0025 <span class="comment">%%%%</span>
+0026 <span class="comment">%% Information matrix of the design</span>
+0027 <span class="comment">%%%%%%</span>
+0028 
+0029 <span class="keyword">for</span> i=1:m
+0030     I_xi=I_xi+omega(i)*opt.Ixi(X(i,:));
+0031 <span class="keyword">end</span>
+0032 
+0033 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0034 <span class="comment">% Information matrix of the two stage design</span>
+0035 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0036 
+0037 Sigma=opt.Der_g* (opt.pro*opt.I_xi_0+(1-opt.pro)*I_xi)^(-1)*opt.Der_g';
+0038 
+0039 <span class="comment">%%%%%%%%%%%</span>
+0040 <span class="comment">% Calculation of the matrix A of YBT</span>
+0041 <span class="comment">%%%%%%%%%%%</span>
+0042 
+0043 I_0=(opt.pro*opt.I_xi_0+(1-opt.pro)*I_xi)^(-1);
+0044 p1=(opt.n1/(opt.n0+opt.n1));
+0045 A=@(x) p1*opt.Der_g *I_0*(opt.Ixi(x')-I_xi)*I_0*opt.Der_g';
+0046 
+0047 <span class="keyword">if</span> design.p==0
+0048     Z_LB=@(x) -trace(Sigma^(-1)*A(x));
+0049     
+0050 <span class="keyword">elseif</span> design.p==1
+0051     v=min(size(opt.Der_g));
+0052     Z_LB=@(x) -trace(A(x))/v;
+0053 <span class="keyword">else</span>
+0054     v=min(size(opt.Der_g));
+0055     p=design.p;
+0056     Z_LB=@(x) -((trace(Sigma^p))^((1/p)-1))*trace(Sigma^(p-1)*A(x))/v^p;
+0057 <span class="keyword">end</span>
+0058 
+0059 <span class="comment">%%%%%%%%%%%%%% Solution of model to obtain the lower bounds</span>
+0060 aux=opt.bounds;
+0061 aux=aux(1:(size(aux,1)-1),:);
+0062 LB=aux(:,1);
+0063 UB=aux(:,2);
+0064 tolerancia=1e-50;
+0065 <span class="keyword">for</span> i=1:3
+0066     <span class="keyword">if</span> i==1
+0067         options = optimoptions(<span class="string">'fmincon'</span>,<span class="string">'Algorithm'</span>,<span class="string">'active-set'</span>,<span class="string">'Display'</span>,<span class="string">'iter'</span>,<span class="string">'TolCon'</span>,tolerancia,<span class="string">'TolFun'</span>,tolerancia,<span class="string">'TolX'</span>,tolerancia);
+0068     <span class="keyword">elseif</span> i==2
+0069         options = optimoptions(<span class="string">'fmincon'</span>,<span class="string">'Algorithm'</span>,<span class="string">'interior-point'</span>,<span class="string">'Display'</span>,<span class="string">'iter'</span>,<span class="string">'TolCon'</span>,tolerancia,<span class="string">'TolFun'</span>,tolerancia,<span class="string">'TolX'</span>,tolerancia);
+0070     <span class="keyword">elseif</span> i==3
+0071         options = optimoptions(<span class="string">'fmincon'</span>,<span class="string">'Algorithm'</span>,<span class="string">'sqp'</span>,<span class="string">'Display'</span>,<span class="string">'iter'</span>,<span class="string">'TolCon'</span>,tolerancia,<span class="string">'TolFun'</span>,tolerancia,<span class="string">'TolX'</span>,tolerancia);
+0072     <span class="keyword">end</span>
+0073     <span class="comment">%if i==1</span>
+0074     pto_ini=0.5*LB+0.5*UB;
+0075     <span class="comment">%else</span>
+0076     <span class="comment">%    pto_ini=x_opt;</span>
+0077     <span class="comment">%end</span>
+0078     [x_opt,f_opt_aux(i), exitflag,output]=fmincon(Z_LB,pto_ini,[],[],[],[],LB,UB,[],options);
+0079     
+0080     
+0081 <span class="keyword">end</span>
+0082 f_opt=min(f_opt_aux);
+0083 
+0084 <span class="keyword">if</span> design.p==0
+0085     v=min(size(opt.Der_g));
+0086     Phi_0=det(Sigma)^(1/v);
+0087     Phi_0_tilde=log(det(Sigma));
+0088     Phi_0=exp(Phi_0_tilde)^(1/v);
+0089     Eff_0=exp(f_opt/v);
+0090     Phi_0_tilde_L=Phi_0_tilde+f_opt;
+0091     Phi_0_L=exp(Phi_0_tilde_L)^(1/v);
+0092     Phi=Phi_0;
+0093     Eff=Eff_0;
+0094     Phi_L=Phi_0_L;
+0095 <span class="keyword">else</span>
+0096     <span class="comment">%Phi_1=trace(Sigma)/size(opt.Der_g,1)</span>
+0097     v=min(size(opt.Der_g));
+0098     Phi_p=((trace(Sigma^design.p))/v)^(1/design.p);
+0099     Eff_p=1+f_opt/Phi_p;
+0100     Phi_p_L=Phi_p+f_opt;
+0101     Phi=Phi_p;
+0102     Eff=Eff_p;
+0103     Phi_L=Phi_p_L;
+0104 <span class="keyword">end</span>
+0105 
+0106 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,1303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of form_new_problem</title>
+  <meta name="keywords" content="form_new_problem">
+  <meta name="description" content="ODEm - Optimal Design Experiments with Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ODEm</a> &gt; form_new_problem.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ODEm&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>form_new_problem
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODEm - Optimal Design Experiments with Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = form_new_problem(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODEm - Optimal Design Experiments with Matlab
+ Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
+ Department of Mathematics, Escuela Superior de Informática. University of
+ Castilla-La Mancha. Ciudad Real, Spain.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="form_problem.html" class="code" title="function varargout = form_problem(varargin)">form_problem</a>	ODEm - Optimal Design Experiments with Matlab</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function form_new_problem_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = form_new_problem_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function save_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function cancel_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function f_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function f_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function name_design_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function name_design_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function linear_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function non_linear_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub11" class="code">function model_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub12" class="code">function model_SelectionChangedFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub13" class="code">function all_matrix_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub14" class="code">function matrix_to_estimate_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub15" class="code">function matrix_to_estimate_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub16" class="code">function theta_0_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub17" class="code">function theta_0_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub18" class="code">function k_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub19" class="code">function k_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub20" class="code">function m_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub21" class="code">function m_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub22" class="code">function co_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub23" class="code">function co_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub24" class="code">function bounds_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub25" class="code">function bounds_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub26" class="code">function all_matrix_KeyPressFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub27" class="code">function all_matrix_ButtonDownFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub28" class="code">function uibuttongroup2_SelectionChangedFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub29" class="code">function matrix_to_estimate_box_SelectionChangedFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub30" class="code">function matrix_specify_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub31" class="code">function matrix_all_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub32" class="code">function edit9_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub33" class="code">function edit9_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub34" class="code">function save_KeyPressFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub35" class="code">function cancel_KeyPressFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub36" class="code">function X_0_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub37" class="code">function X_0_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub38" class="code">function n0_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub39" class="code">function n0_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub40" class="code">function n1_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub41" class="code">function n1_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub42" class="code">function X_0_table_ButtonDownFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub43" class="code">function n_points_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub44" class="code">function n_points_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub45" class="code">function form_new_problem_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub46" class="code">function X_0_table_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub47" class="code">function matrix_to_estimate_DeleteFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub48" class="code">function stages_SelectionChangedFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub49" class="code">function linear_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub50" class="code">function non_linear_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub51" class="code">function f_text_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub52" class="code">function theta_0_text_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub53" class="code">function one_stage_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub54" class="code">function multistage_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub55" class="code">function n0_text_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub56" class="code">function n1_text_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub57" class="code">function omega_0_text_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub58" class="code">function n_points_text_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub59" class="code">function X_0_text_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub60" class="code">function omega_0_table_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub61" class="code">function auxiliar_functions_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub62" class="code">function auxiliar_functions_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub63" class="code">function slider1_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub64" class="code">function slider1_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub65" class="code">function auxiliar_funts_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub66" class="code">function auxiliar_funts_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub67" class="code">function model_SizeChangedFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub68" class="code">function auxiliar_funts_text1_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub69" class="code">function auxiliar_funts_text2_CreateFcn(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = form_new_problem(varargin)</a>
+0002 
+0003 <span class="comment">% ODEm - Optimal Design Experiments with Matlab</span>
+0004 <span class="comment">% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García</span>
+0005 <span class="comment">% Department of Mathematics, Escuela Superior de Informática. University of</span>
+0006 <span class="comment">% Castilla-La Mancha. Ciudad Real, Spain.</span>
+0007 
+0008 <span class="comment">% FORM_NEW_PROBLEM MATLAB code for form_new_problem.fig</span>
+0009 <span class="comment">%      FORM_NEW_PROBLEM, by itself, creates a new FORM_NEW_PROBLEM or raises the existing</span>
+0010 <span class="comment">%      singleton*.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%      H = FORM_NEW_PROBLEM returns the handle to a new FORM_NEW_PROBLEM or the handle to</span>
+0013 <span class="comment">%      the existing singleton*.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%      FORM_NEW_PROBLEM('CALLBACK',hObject,eventData,handles,...) calls the local</span>
+0016 <span class="comment">%      function named CALLBACK in FORM_NEW_PROBLEM.M with the given input arguments.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%      FORM_NEW_PROBLEM('Property','Value',...) creates a new FORM_NEW_PROBLEM or raises the</span>
+0019 <span class="comment">%      existing singleton*.  Starting from the left, property value pairs are</span>
+0020 <span class="comment">%      applied to the GUI before form_new_problem_OpeningFcn gets called.  An</span>
+0021 <span class="comment">%      unrecognized property name or invalid value makes property application</span>
+0022 <span class="comment">%      stop.  All inputs are passed to form_new_problem_OpeningFcn via varargin.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one</span>
+0025 <span class="comment">%      instance to run (singleton)&quot;.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+0028 
+0029 <span class="comment">% Edit the above text to modify the response to help form_new_problem</span>
+0030 
+0031 <span class="comment">% Last Modified by GUIDE v2.5 07-Oct-2016 17:39:15</span>
+0032 
+0033 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0034 gui_Singleton = 1;
+0035 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0036                    <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0037                    <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction form_new_problem_OpeningFcn(hObject, eventdata, handles, varargin)">form_new_problem_OpeningFcn</a>, <span class="keyword">...</span>
+0038                    <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = form_new_problem_OutputFcn(hObject, eventdata, handles)">form_new_problem_OutputFcn</a>, <span class="keyword">...</span>
+0039                    <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0040                    <span class="string">'gui_Callback'</span>,   []);
+0041 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0042     gui_State.gui_Callback = str2func(varargin{1});
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="keyword">if</span> nargout
+0046     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0047 <span class="keyword">else</span>
+0048     gui_mainfcn(gui_State, varargin{:});
+0049 <span class="keyword">end</span>
+0050 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0051 
+0052 
+0053 
+0054 <span class="comment">% --- Executes just before form_new_problem is made visible.</span>
+0055 <a name="_sub1" href="#_subfunctions" class="code">function form_new_problem_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0056 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0057 <span class="comment">% hObject    handle to figure</span>
+0058 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0059 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0060 <span class="comment">% varargin   command line arguments to form_new_problem (see VARARGIN)</span>
+0061 
+0062 <span class="comment">% Choose default command line output for form_new_problem</span>
+0063 handles.output = hObject;
+0064 
+0065 <span class="comment">% Update handles structure</span>
+0066 guidata(hObject, handles);
+0067 
+0068 <span class="comment">% UIWAIT makes form_new_problem wait for user response (see UIRESUME)</span>
+0069 <span class="comment">% uiwait(handles.form_new_problem);</span>
+0070 
+0071 
+0072 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0073 <a name="_sub2" href="#_subfunctions" class="code">function varargout = form_new_problem_OutputFcn(hObject, eventdata, handles) </a>
+0074 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0075 <span class="comment">% hObject    handle to figure</span>
+0076 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0077 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0078 
+0079 <span class="comment">% Get default command line output from handles structure</span>
+0080 varargout{1} = handles.output;
+0081 
+0082 
+0083 <span class="comment">% --- Executes on button press in save.</span>
+0084 <a name="_sub3" href="#_subfunctions" class="code">function save_Callback(hObject, eventdata, handles)</a>
+0085 <span class="comment">% hObject    handle to save (see GCBO)</span>
+0086 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0087 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0088 
+0089 <span class="keyword">global</span> file;
+0090 error = 0;
+0091 
+0092 <span class="comment">% Obtain the line othe problem to be modify</span>
+0093 line = -1;
+0094 h = findobj(<span class="string">'Tag'</span>,<span class="string">'form_problem'</span>);
+0095 <span class="keyword">if</span> ~isempty(h)
+0096     line = getappdata(h, <span class="string">'line_problem_edit'</span>);
+0097 <span class="keyword">end</span>
+0098 
+0099 <span class="keyword">if</span> line == -1
+0100     <span class="comment">% CREATE A NEW PROBLEM</span>
+0101     <span class="comment">% Open file and search for the END_PROBLEMS label</span>
+0102     fd = fopen(file,<span class="string">'r'</span>); <span class="comment">% r -&gt; read, w -&gt; write, r+ -&gt; read and write</span>
+0103     <span class="keyword">if</span> fd == -1
+0104         set(handles.info,<span class="string">'String'</span>,<span class="string">'Cannot open file.'</span>);
+0105         error = 1;
+0106     <span class="keyword">end</span>
+0107     Data = textscan(fd, <span class="string">'%s'</span>, <span class="string">'delimiter'</span>, <span class="string">'\n'</span>, <span class="string">'whitespace'</span>, <span class="string">''</span>);
+0108     CStr = Data{1};
+0109     fclose(fd);
+0110 
+0111     Index = find(strcmp(CStr, <span class="string">'%%%END_PROBLEMS%%%'</span>), 1);
+0112 
+0113     <span class="comment">% Store the problem</span>
+0114     <span class="keyword">if</span> error == 0
+0115         fd = fopen(file,<span class="string">'r+'</span>);
+0116         <span class="keyword">if</span> fd == -1
+0117             set(handles.info,<span class="string">'String'</span>,<span class="string">'Cannot open file.'</span>)
+0118             error = 1;
+0119         <span class="keyword">end</span>
+0120 
+0121         linear_model = get(handles.linear, <span class="string">'Value'</span>); <span class="comment">% 1 Linear, 0 Non-Linear</span>
+0122         name_design = get(handles.name_design, <span class="string">'String'</span>);
+0123         CStr(Index) = cellstr(<span class="string">'%%%%PROBLEM%%%%'</span>);
+0124         CStr(Index + 1) = cellstr(name_design);
+0125         <span class="keyword">if</span> linear_model == 1 <span class="comment">% LINEAR MODEL</span>
+0126             CStr(Index + 2) = cellstr(<span class="string">'linear_model'</span>);
+0127             CStr(Index + 3) = cellstr(get(handles.f, <span class="string">'String'</span>));
+0128             CStr(Index + 4) = cellstr(<span class="string">' '</span>);
+0129         <span class="keyword">elseif</span> linear_model == 0 <span class="comment">% Non-Linear</span>
+0130             CStr(Index + 2) = cellstr(<span class="string">'non-linear_model'</span>);
+0131             CStr(Index + 3) = cellstr(get(handles.f, <span class="string">'String'</span>));
+0132             CStr(Index + 4) = cellstr(get(handles.theta_0, <span class="string">'String'</span>));
+0133             auxiliar_functions = cellstr(get(handles.auxiliar_funts, <span class="string">'String'</span>));
+0134             size_af = size(auxiliar_functions);
+0135             lines = size_af(1);
+0136             Index = Index + 1; 
+0137             CStr(Index + 4) = cellstr(num2str(lines));
+0138             <span class="keyword">for</span> i = 1:lines
+0139                 Index = Index + 1; 
+0140                 CStr(Index + 4) = auxiliar_functions(i);
+0141             <span class="keyword">end</span>           
+0142         <span class="keyword">end</span>
+0143         CStr(Index + 5) = cellstr(get(handles.k, <span class="string">'String'</span>));
+0144         CStr(Index + 6) = cellstr(get(handles.m, <span class="string">'String'</span>));
+0145         CStr(Index + 7) = cellstr(get(handles.co, <span class="string">'String'</span>));
+0146         <span class="comment">% Matrix to estimate</span>
+0147         M_e = get(handles.matrix_to_estimate, <span class="string">'Data'</span>);
+0148         <span class="comment">% Delete the rows with all 0 form the matrix</span>
+0149         size_M_e = size(M_e);
+0150         <span class="keyword">if</span> norm(M_e(2:size_M_e(1),:)) == 0
+0151             M_e = M_e(1,:)
+0152         <span class="keyword">end</span>
+0153         
+0154         k = str2num(get(handles.k, <span class="string">'String'</span>));
+0155         matrix_to_estimate_string = <span class="string">''</span>;
+0156         [m,n] = size(M_e);
+0157         <span class="keyword">for</span> i = 1:m
+0158             matrix_to_estimate_string = [matrix_to_estimate_string num2str(M_e(i,:))];
+0159             <span class="keyword">if</span> i ~= m
+0160                 matrix_to_estimate_string = [matrix_to_estimate_string <span class="string">';  '</span>];
+0161             <span class="keyword">end</span>
+0162         <span class="keyword">end</span>
+0163         CStr(Index + 8) = cellstr(matrix_to_estimate_string);
+0164         CStr(Index + 9) = cellstr(get(handles.bounds, <span class="string">'String'</span>));
+0165 
+0166         stage = get(handles.one_stage, <span class="string">'Value'</span>); <span class="comment">% 1 one stage, 0 multistage design</span>
+0167         <span class="keyword">if</span> stage == 1 <span class="comment">% ONE STAGE</span>
+0168             CStr(Index + 10) = cellstr(<span class="string">'one-stage'</span>);
+0169             CStr(Index + 11) = cellstr(<span class="string">''</span>);
+0170             CStr(Index + 12) = cellstr(<span class="string">''</span>);
+0171             CStr(Index + 13) = cellstr(<span class="string">''</span>);
+0172             CStr(Index + 14) = cellstr(<span class="string">''</span>);
+0173             CStr(Index + 15) = cellstr(<span class="string">''</span>);
+0174         <span class="keyword">elseif</span> stage == 0 <span class="comment">% MULTI STAGE</span>
+0175             CStr(Index + 10) = cellstr(<span class="string">'multistage'</span>);
+0176             CStr(Index + 11) = cellstr(get(handles.n0, <span class="string">'String'</span>));
+0177             CStr(Index + 12) = cellstr(get(handles.n1, <span class="string">'String'</span>));
+0178             <span class="comment">% Initial weight</span>
+0179             n_points = str2num(get(handles.n_points, <span class="string">'String'</span>));
+0180             omega_0 = get(handles.omega_0_table, <span class="string">'Data'</span>);
+0181             omega_0_string = <span class="string">''</span>;
+0182             <span class="keyword">for</span> i = 1:n_points
+0183                 omega_0_string = [omega_0_string num2str(omega_0(i,:))];
+0184                 <span class="keyword">if</span> i ~= n_points
+0185                     omega_0_string = [omega_0_string <span class="string">';  '</span>];
+0186                 <span class="keyword">end</span>
+0187             <span class="keyword">end</span>
+0188             CStr(Index + 13) = cellstr(omega_0_string);
+0189             CStr(Index + 14) = cellstr(get(handles.n_points, <span class="string">'String'</span>));
+0190             x_0 = get(handles.X_0_table, <span class="string">'Data'</span>);
+0191             x_0_string = <span class="string">''</span>;
+0192             <span class="keyword">for</span> i = 1:n_points
+0193                 x_0_string = [x_0_string num2str(x_0(i,:))];
+0194                 <span class="keyword">if</span> i ~= n_points
+0195                     x_0_string = [x_0_string <span class="string">';  '</span>];
+0196                 <span class="keyword">end</span>
+0197             <span class="keyword">end</span>
+0198             CStr(Index + 15) = cellstr(x_0_string);
+0199         <span class="keyword">end</span>
+0200         CStr(Index + 16) = cellstr(<span class="string">'%%%EOP%%%'</span>);
+0201         CStr(Index + 17) = cellstr(<span class="string">''</span>);
+0202         CStr(Index + 18) = cellstr(<span class="string">'%%%END_PROBLEMS%%%'</span>);
+0203         fprintf(fd, <span class="string">'%s\n'</span>,CStr{:});
+0204         fclose(fd);
+0205     <span class="keyword">end</span>
+0206 
+0207 <span class="keyword">else</span>
+0208     <span class="comment">% MODIFY AN EXISTING PROBLEM</span>
+0209     <span class="comment">% Open file and read it</span>
+0210     fd = fopen(file,<span class="string">'r'</span>);
+0211     <span class="keyword">if</span> fd == -1
+0212         set(handles.info,<span class="string">'String'</span>,<span class="string">'Cannot open file.'</span>);
+0213         error = 1;
+0214     <span class="keyword">end</span>
+0215     Data = textscan(fd, <span class="string">'%s'</span>, <span class="string">'delimiter'</span>, <span class="string">'\n'</span>, <span class="string">'whitespace'</span>, <span class="string">''</span>);
+0216     CStr = Data{1};
+0217     CStr_old = Data{1};
+0218     size_old_CStr = size(CStr_old);
+0219     finish_line = size_old_CStr(1);
+0220     fclose(fd);    
+0221 
+0222     <span class="comment">% Store the problem</span>
+0223     <span class="keyword">if</span> error == 0
+0224         fd = fopen(file,<span class="string">'r+'</span>);
+0225         <span class="keyword">if</span> fd == -1
+0226             set(handles.info,<span class="string">'String'</span>,<span class="string">'Cannot open file to modify Problem.'</span>)
+0227             error = 1;
+0228         <span class="keyword">end</span>
+0229         
+0230         Index = line;
+0231         Index_old = line;
+0232         <span class="comment">% Was the problem not linear? Necesary to calculate the new of lines</span>
+0233         <span class="keyword">if</span> strcmp(CStr(line + 2), <span class="string">'non-linear_model'</span>)
+0234             n_auxiliarf_cell = CStr(line + 5);
+0235             n_auxiliarf = str2num(n_auxiliarf_cell{:});
+0236             Index_old = Index_old + n_auxiliarf + 1;
+0237         <span class="keyword">end</span>        
+0238         
+0239         linear_model = get(handles.linear, <span class="string">'Value'</span>); <span class="comment">% 1 Linear, 0 Non-Linear</span>
+0240         name_design = get(handles.name_design, <span class="string">'String'</span>);
+0241         CStr(Index) = cellstr(<span class="string">'%%%%PROBLEM%%%%'</span>);
+0242         CStr(Index + 1) = cellstr(name_design);
+0243         <span class="keyword">if</span> linear_model == 1 <span class="comment">% LINEAR MODEL</span>
+0244             CStr(Index + 2) = cellstr(<span class="string">'linear_model'</span>);
+0245             CStr(Index + 3) = cellstr(get(handles.f, <span class="string">'String'</span>));
+0246             CStr(Index + 4) = cellstr(<span class="string">' '</span>);
+0247         <span class="keyword">elseif</span> linear_model == 0 <span class="comment">% Non-Linear</span>
+0248             CStr(Index + 2) = cellstr(<span class="string">'non-linear_model'</span>);
+0249             CStr(Index + 3) = cellstr(get(handles.f, <span class="string">'String'</span>));
+0250             CStr(Index + 4) = cellstr(get(handles.theta_0, <span class="string">'String'</span>));
+0251             auxiliar_functions = cellstr(get(handles.auxiliar_funts, <span class="string">'String'</span>));
+0252             size_af = size(auxiliar_functions);
+0253             lines = size_af(1);
+0254             Index = Index + 1; 
+0255             CStr(Index + 4) = cellstr(num2str(lines));
+0256             <span class="keyword">for</span> i = 1:lines
+0257                 Index = Index + 1; 
+0258                 CStr(Index + 4) = auxiliar_functions(i);
+0259             <span class="keyword">end</span>  
+0260         <span class="keyword">end</span>
+0261         CStr(Index + 5) = cellstr(get(handles.k, <span class="string">'String'</span>));
+0262         CStr(Index + 6) = cellstr(get(handles.m, <span class="string">'String'</span>));
+0263         CStr(Index + 7) = cellstr(get(handles.co, <span class="string">'String'</span>));
+0264         <span class="comment">% Matrix to estimate</span>
+0265         M_e = get(handles.matrix_to_estimate, <span class="string">'Data'</span>);
+0266         k = str2num(get(handles.k, <span class="string">'String'</span>));
+0267         <span class="comment">% Delete the rows with all 0 form the matrix</span>
+0268         size_M_e = size(M_e);
+0269         <span class="keyword">if</span> norm(M_e(2:size_M_e(1),:)) == 0
+0270             M_e = M_e(1,:)
+0271         <span class="keyword">end</span>
+0272         
+0273         matrix_to_estimate_string = <span class="string">''</span>;
+0274         [m,n] = size(M_e);
+0275         <span class="keyword">for</span> i = 1:m
+0276             matrix_to_estimate_string = [matrix_to_estimate_string num2str(M_e(i,:))];
+0277             <span class="keyword">if</span> i ~= m
+0278                 matrix_to_estimate_string = [matrix_to_estimate_string <span class="string">';  '</span>];
+0279             <span class="keyword">end</span>
+0280         <span class="keyword">end</span>
+0281         CStr(Index + 8) = cellstr(matrix_to_estimate_string);
+0282         CStr(Index + 9) = cellstr(get(handles.bounds, <span class="string">'String'</span>));
+0283 
+0284         stage = get(handles.one_stage, <span class="string">'Value'</span>); <span class="comment">% 1 one stage, 0 multistage design</span>
+0285         <span class="keyword">if</span> stage == 1 <span class="comment">% ONE STAGE</span>
+0286             CStr(Index + 10) = cellstr(<span class="string">'one-stage'</span>);
+0287             CStr(Index + 11) = cellstr(<span class="string">''</span>);
+0288             CStr(Index + 12) = cellstr(<span class="string">''</span>);
+0289             CStr(Index + 13) = cellstr(<span class="string">''</span>);
+0290             CStr(Index + 14) = cellstr(<span class="string">''</span>);
+0291             CStr(Index + 15) = cellstr(<span class="string">''</span>);
+0292         <span class="keyword">elseif</span> stage == 0 <span class="comment">% MULTI STAGE</span>
+0293             CStr(Index + 10) = cellstr(<span class="string">'multistage'</span>);
+0294             CStr(Index + 11) = cellstr(get(handles.n0, <span class="string">'String'</span>));
+0295             CStr(Index + 12) = cellstr(get(handles.n1, <span class="string">'String'</span>));
+0296             <span class="comment">% Initial weight</span>
+0297             n_points = str2num(get(handles.n_points, <span class="string">'String'</span>));
+0298             omega_0 = get(handles.omega_0_table, <span class="string">'Data'</span>);
+0299             omega_0_string = <span class="string">''</span>;
+0300             <span class="keyword">for</span> i = 1:n_points
+0301                 omega_0_string = [omega_0_string num2str(omega_0(i,:))];
+0302                 <span class="keyword">if</span> i ~= n_points
+0303                     omega_0_string = [omega_0_string <span class="string">';  '</span>];
+0304                 <span class="keyword">end</span>
+0305             <span class="keyword">end</span>
+0306             CStr(Index + 13) = cellstr(omega_0_string);
+0307             CStr(Index + 14) = cellstr(get(handles.n_points, <span class="string">'String'</span>));
+0308             W = get(handles.X_0_table, <span class="string">'Data'</span>);
+0309             weight_string = <span class="string">''</span>;
+0310             <span class="keyword">for</span> i = 1:n_points
+0311                 weight_string = [weight_string num2str(W(i,:))];
+0312                 <span class="keyword">if</span> i ~= n_points
+0313                     weight_string = [weight_string <span class="string">';  '</span>];
+0314                 <span class="keyword">end</span>
+0315             <span class="keyword">end</span>
+0316             CStr(Index + 15) = cellstr(weight_string);
+0317         <span class="keyword">end</span>
+0318         CStr(Index + 16) = cellstr(<span class="string">'%%%EOP%%%'</span>);
+0319         <span class="comment">% Store the rest of the file as it was</span>
+0320         CStr(Index + 17:finish_line + (Index - Index_old)) = CStr_old(Index_old + 17:finish_line);
+0321         <span class="keyword">if</span> (Index - Index_old) &lt; 0
+0322             CStr(finish_line + (Index - Index_old)+1:finish_line) = [];
+0323         <span class="keyword">end</span>
+0324         fprintf(fd, <span class="string">'%s\n'</span>,CStr{:});
+0325         fclose(fd);
+0326     <span class="keyword">end</span>
+0327 <span class="keyword">end</span>
+0328     
+0329 <span class="keyword">if</span> error == 0
+0330     close;
+0331 <span class="keyword">end</span>
+0332 
+0333 
+0334 <span class="comment">% --- Executes on button press in cancel.</span>
+0335 <a name="_sub4" href="#_subfunctions" class="code">function cancel_Callback(hObject, eventdata, handles)</a>
+0336 <span class="comment">% hObject    handle to cancel (see GCBO)</span>
+0337 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0338 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0339 close;
+0340 
+0341 
+0342 
+0343 <a name="_sub5" href="#_subfunctions" class="code">function f_Callback(hObject, eventdata, handles)</a>
+0344 <span class="comment">% hObject    handle to f (see GCBO)</span>
+0345 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0346 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0347 
+0348 <span class="comment">% Hints: get(hObject,'String') returns contents of f as text</span>
+0349 <span class="comment">%        str2double(get(hObject,'String')) returns contents of f as a double</span>
+0350 
+0351 
+0352 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0353 <a name="_sub6" href="#_subfunctions" class="code">function f_CreateFcn(hObject, eventdata, handles)</a>
+0354 <span class="comment">% hObject    handle to f (see GCBO)</span>
+0355 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0356 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0357 
+0358 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0359 <span class="comment">%       See ISPC and COMPUTER.</span>
+0360 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0361     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0362 <span class="keyword">end</span>
+0363 set(hObject, <span class="string">'String'</span>, handles.f);
+0364 
+0365 
+0366 
+0367 <a name="_sub7" href="#_subfunctions" class="code">function name_design_Callback(hObject, eventdata, handles)</a>
+0368 <span class="comment">% hObject    handle to name_design (see GCBO)</span>
+0369 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0370 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0371 
+0372 <span class="comment">% Hints: get(hObject,'String') returns contents of name_design as text</span>
+0373 <span class="comment">%        str2double(get(hObject,'String')) returns contents of name_design as a double</span>
+0374 
+0375 
+0376 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0377 <a name="_sub8" href="#_subfunctions" class="code">function name_design_CreateFcn(hObject, eventdata, handles)</a>
+0378 <span class="comment">% hObject    handle to name_design (see GCBO)</span>
+0379 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0380 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0381 
+0382 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0383 <span class="comment">%       See ISPC and COMPUTER.</span>
+0384 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0385     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0386 <span class="keyword">end</span>
+0387 set(hObject, <span class="string">'String'</span>, handles.name);
+0388 
+0389 
+0390 <span class="comment">% --- Executes on button press in linear.</span>
+0391 <a name="_sub9" href="#_subfunctions" class="code">function linear_Callback(hObject, eventdata, handles)</a>
+0392 <span class="comment">% hObject    handle to linear (see GCBO)</span>
+0393 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0394 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0395 
+0396 <span class="comment">% Hint: get(hObject,'Value') returns toggle state of linear</span>
+0397 
+0398 
+0399 <span class="comment">% --- Executes on button press in non_linear.</span>
+0400 <a name="_sub10" href="#_subfunctions" class="code">function non_linear_Callback(hObject, eventdata, handles)</a>
+0401 <span class="comment">% hObject    handle to non_linear (see GCBO)</span>
+0402 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0403 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0404 
+0405 <span class="comment">% Hint: get(hObject,'Value') returns toggle state of non_linear</span>
+0406 
+0407 
+0408 <a name="_sub11" href="#_subfunctions" class="code">function model_CreateFcn(hObject, eventdata, handles)</a>
+0409 
+0410 
+0411 <span class="comment">% --- Executes when selected object is changed in model.</span>
+0412 <a name="_sub12" href="#_subfunctions" class="code">function model_SelectionChangedFcn(hObject, eventdata, handles)</a>
+0413 <span class="comment">% hObject    handle to the selected object in model</span>
+0414 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0415 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0416 <span class="keyword">if</span> hObject == handles.linear 
+0417     <span class="comment">% We have a lineral model</span>
+0418     set(handles.f_text,<span class="string">'String'</span>,<span class="string">'f'</span>);
+0419     set(handles.theta_0,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0420     set(handles.theta_0_text,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0421     <span class="comment">% We change the example input</span>
+0422     set(handles.f,<span class="string">'String'</span>,<span class="string">'@(x) [1,x(1),x(1)^2,x(2),x(1)*x(2)]'''</span>);
+0423     set(handles.k,<span class="string">'String'</span>,<span class="string">'5'</span>);
+0424     set(handles.m,<span class="string">'String'</span>,<span class="string">'10'</span>);
+0425     set(handles.co,<span class="string">'String'</span>,<span class="string">'2'</span>);
+0426     set(handles.matrix_to_estimate,<span class="string">'Data'</span>,eye(5));
+0427     set(handles.bounds,<span class="string">'String'</span>,<span class="string">'-1 1; 0 1; 0 1'</span>);
+0428     set(handles.auxiliar_funts,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0429     set(handles.auxiliar_funts_text1,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0430     set(handles.auxiliar_funts_text2,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0431     
+0432 <span class="keyword">elseif</span> hObject == handles.non_linear
+0433     set(handles.f_text,<span class="string">'String'</span>,<span class="string">'Ixi'</span>);
+0434     set(handles.theta_0,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0435     set(handles.theta_0_text,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0436     <span class="comment">% We change the example input</span>
+0437     set(handles.f,<span class="string">'String'</span>,<span class="string">'@(x,theta) [exp(-theta(2)*x); -x*theta(1)*exp(-theta(2)*x); exp(-theta(4)*x);-x*theta(3)*exp(-theta(4)*x)]'</span>);
+0438     set(handles.k,<span class="string">'String'</span>,<span class="string">'4'</span>);
+0439     set(handles.m,<span class="string">'String'</span>,<span class="string">'4'</span>);
+0440     set(handles.co,<span class="string">'String'</span>,<span class="string">'1'</span>);
+0441     set(handles.matrix_to_estimate,<span class="string">'Data'</span>,[1 0 0 0; 0 0 1 0]);
+0442     set(handles.bounds,<span class="string">'String'</span>,<span class="string">'0 3; 0 1'</span>);
+0443     set(handles.auxiliar_funts,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0444     set(handles.auxiliar_funts_text1,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0445     set(handles.auxiliar_funts_text2,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0446     
+0447 <span class="keyword">end</span>
+0448 
+0449 
+0450 <span class="comment">% --- Executes on button press in all_matrix.</span>
+0451 <a name="_sub13" href="#_subfunctions" class="code">function all_matrix_Callback(hObject, eventdata, handles)</a>
+0452 <span class="comment">% hObject    handle to all_matrix (see GCBO)</span>
+0453 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0454 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0455 
+0456 <span class="comment">% Hint: get(hObject,'Value') returns toggle state of all_matrix</span>
+0457 
+0458 
+0459 
+0460 <a name="_sub14" href="#_subfunctions" class="code">function matrix_to_estimate_Callback(hObject, eventdata, handles)</a>
+0461 <span class="comment">% hObject    handle to matrix_to_estimate (see GCBO)</span>
+0462 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0463 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0464 
+0465 <span class="comment">% Hints: get(hObject,'String') returns contents of matrix_to_estimate as text</span>
+0466 <span class="comment">%        str2double(get(hObject,'String')) returns contents of matrix_to_estimate as a double</span>
+0467 
+0468 
+0469 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0470 <a name="_sub15" href="#_subfunctions" class="code">function matrix_to_estimate_CreateFcn(hObject, eventdata, handles)</a>
+0471 <span class="comment">% hObject    handle to matrix_to_estimate (see GCBO)</span>
+0472 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0473 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0474 
+0475 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0476 <span class="comment">%       See ISPC and COMPUTER.</span>
+0477 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0478     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0479 <span class="keyword">end</span>
+0480 set(hObject, <span class="string">'ColumnEditable'</span>, true);
+0481 set(hObject,<span class="string">'Data'</span>, handles.matrix_to_estimate);
+0482 
+0483 
+0484 
+0485 <a name="_sub16" href="#_subfunctions" class="code">function theta_0_Callback(hObject, eventdata, handles)</a>
+0486 <span class="comment">% hObject    handle to theta_0 (see GCBO)</span>
+0487 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0488 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0489 
+0490 <span class="comment">% Hints: get(hObject,'String') returns contents of theta_0 as text</span>
+0491 <span class="comment">%        str2double(get(hObject,'String')) returns contents of theta_0 as a double</span>
+0492 
+0493 
+0494 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0495 <a name="_sub17" href="#_subfunctions" class="code">function theta_0_CreateFcn(hObject, eventdata, handles)</a>
+0496 <span class="comment">% hObject    handle to theta_0 (see GCBO)</span>
+0497 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0498 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0499 
+0500 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0501 <span class="comment">%       See ISPC and COMPUTER.</span>
+0502 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0503     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0504 <span class="keyword">end</span>
+0505 set(hObject, <span class="string">'String'</span>, handles.theta_0);
+0506 <span class="keyword">if</span> handles.linear == 1
+0507     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+0508 <span class="keyword">else</span>
+0509     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+0510 <span class="keyword">end</span>
+0511 
+0512 
+0513 
+0514 <a name="_sub18" href="#_subfunctions" class="code">function k_Callback(hObject, eventdata, handles)</a>
+0515 <span class="comment">% hObject    handle to k (see GCBO)</span>
+0516 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0517 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0518 
+0519 <span class="comment">% Hints: get(hObject,'String') returns contents of k as text</span>
+0520 <span class="comment">%        str2double(get(hObject,'String')) returns contents of k as a double</span>
+0521 
+0522 <span class="comment">% Change the matrix to estimate</span>
+0523 set(handles.matrix_to_estimate, <span class="string">'Data'</span>, eye(str2num((get(handles.k, <span class="string">'String'</span>))))); 
+0524 
+0525 
+0526 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0527 <a name="_sub19" href="#_subfunctions" class="code">function k_CreateFcn(hObject, eventdata, handles)</a>
+0528 <span class="comment">% hObject    handle to k (see GCBO)</span>
+0529 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0530 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0531 
+0532 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0533 <span class="comment">%       See ISPC and COMPUTER.</span>
+0534 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0535     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0536 <span class="keyword">end</span>
+0537 set(hObject,<span class="string">'String'</span>, handles.k);
+0538 
+0539 
+0540 
+0541 <a name="_sub20" href="#_subfunctions" class="code">function m_Callback(hObject, eventdata, handles)</a>
+0542 <span class="comment">% hObject    handle to m (see GCBO)</span>
+0543 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0544 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0545 
+0546 <span class="comment">% Hints: get(hObject,'String') returns contents of m as text</span>
+0547 <span class="comment">%        str2double(get(hObject,'String')) returns contents of m as a double</span>
+0548 
+0549 
+0550 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0551 <a name="_sub21" href="#_subfunctions" class="code">function m_CreateFcn(hObject, eventdata, handles)</a>
+0552 <span class="comment">% hObject    handle to m (see GCBO)</span>
+0553 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0554 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0555 
+0556 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0557 <span class="comment">%       See ISPC and COMPUTER.</span>
+0558 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0559     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0560 <span class="keyword">end</span>
+0561 set(hObject,<span class="string">'String'</span>, handles.m);
+0562 
+0563 
+0564 
+0565 <a name="_sub22" href="#_subfunctions" class="code">function co_Callback(hObject, eventdata, handles)</a>
+0566 <span class="comment">% hObject    handle to co (see GCBO)</span>
+0567 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0568 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0569 
+0570 <span class="comment">% Hints: get(hObject,'String') returns contents of co as text</span>
+0571 <span class="comment">%        str2double(get(hObject,'String')) returns contents of co as a double</span>
+0572 
+0573 X_0 = zeros(str2num(get(handles.n_points, <span class="string">'String'</span>)), str2num(get(handles.co, <span class="string">'String'</span>)));
+0574 set(handles.X_0_table, <span class="string">'Data'</span>, X_0);
+0575 
+0576 
+0577 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0578 <a name="_sub23" href="#_subfunctions" class="code">function co_CreateFcn(hObject, eventdata, handles)</a>
+0579 <span class="comment">% hObject    handle to co (see GCBO)</span>
+0580 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0581 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0582 
+0583 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0584 <span class="comment">%       See ISPC and COMPUTER.</span>
+0585 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0586     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0587 <span class="keyword">end</span>
+0588 set(hObject,<span class="string">'String'</span>, handles.co);
+0589 
+0590 
+0591 
+0592 <a name="_sub24" href="#_subfunctions" class="code">function bounds_Callback(hObject, eventdata, handles)</a>
+0593 <span class="comment">% hObject    handle to bounds (see GCBO)</span>
+0594 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0595 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0596 
+0597 <span class="comment">% Hints: get(hObject,'String') returns contents of bounds as text</span>
+0598 <span class="comment">%        str2double(get(hObject,'String')) returns contents of bounds as a double</span>
+0599 
+0600 
+0601 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0602 <a name="_sub25" href="#_subfunctions" class="code">function bounds_CreateFcn(hObject, eventdata, handles)</a>
+0603 <span class="comment">% hObject    handle to bounds (see GCBO)</span>
+0604 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0605 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0606 
+0607 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0608 <span class="comment">%       See ISPC and COMPUTER.</span>
+0609 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0610     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0611 <span class="keyword">end</span>
+0612 set(hObject,<span class="string">'String'</span>, handles.bounds);
+0613 
+0614 
+0615 <span class="comment">% --- Executes on key press with focus on all_matrix and none of its controls.</span>
+0616 <a name="_sub26" href="#_subfunctions" class="code">function all_matrix_KeyPressFcn(hObject, eventdata, handles)</a>
+0617 <span class="comment">% hObject    handle to all_matrix (see GCBO)</span>
+0618 <span class="comment">% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.UICONTROL)</span>
+0619 <span class="comment">%    Key: name of the key that was pressed, in lower case</span>
+0620 <span class="comment">%    Character: character interpretation of the key(s) that was pressed</span>
+0621 <span class="comment">%    Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed</span>
+0622 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0623 
+0624 
+0625 <span class="comment">% --- If Enable == 'on', executes on mouse press in 5 pixel border.</span>
+0626 <span class="comment">% --- Otherwise, executes on mouse press in 5 pixel border or over all_matrix.</span>
+0627 <a name="_sub27" href="#_subfunctions" class="code">function all_matrix_ButtonDownFcn(hObject, eventdata, handles)</a>
+0628 <span class="comment">% hObject    handle to all_matrix (see GCBO)</span>
+0629 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0630 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0631 
+0632 
+0633 
+0634 <span class="comment">% --- Executes when selected object is changed in uibuttongroup2.</span>
+0635 <a name="_sub28" href="#_subfunctions" class="code">function uibuttongroup2_SelectionChangedFcn(hObject, eventdata, handles)</a>
+0636 <span class="comment">% hObject    handle to the selected object in uibuttongroup2</span>
+0637 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0638 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0639 
+0640 
+0641 <span class="comment">% --- Executes when selected object is changed in matrix_to_estimate_box.</span>
+0642 <a name="_sub29" href="#_subfunctions" class="code">function matrix_to_estimate_box_SelectionChangedFcn(hObject, eventdata, handles)</a>
+0643 <span class="comment">% hObject    handle to the selected object in matrix_to_estimate_box</span>
+0644 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0645 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0646 <span class="keyword">if</span> hObject == handles.matrix_all
+0647     k = str2num(get(handles.k,<span class="string">'string'</span>));
+0648     Eye_matrix = eye(k);
+0649     set(handles.matrix_to_estimate,<span class="string">'Data'</span>,Eye_matrix);
+0650     set(handles.matrix_to_estimate,<span class="string">'Enable'</span>,<span class="string">'off'</span>);
+0651 <span class="keyword">elseif</span> hObject == handles.matrix_specify
+0652     set(handles.matrix_to_estimate,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+0653 <span class="keyword">end</span>
+0654 
+0655 
+0656 <span class="comment">% --- Executes on button press in matrix_specify.</span>
+0657 <a name="_sub30" href="#_subfunctions" class="code">function matrix_specify_Callback(hObject, eventdata, handles)</a>
+0658 <span class="comment">% hObject    handle to matrix_specify (see GCBO)</span>
+0659 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0660 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0661 
+0662 <span class="comment">% Hint: get(hObject,'Value') returns toggle state of matrix_specify</span>
+0663 
+0664 
+0665 <span class="comment">% --- Executes on button press in matrix_all.</span>
+0666 <a name="_sub31" href="#_subfunctions" class="code">function matrix_all_Callback(hObject, eventdata, handles)</a>
+0667 <span class="comment">% hObject    handle to matrix_all (see GCBO)</span>
+0668 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0669 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0670 
+0671 <span class="comment">% Hint: get(hObject,'Value') returns toggle state of matrix_all</span>
+0672 
+0673 
+0674 
+0675 <a name="_sub32" href="#_subfunctions" class="code">function edit9_Callback(hObject, eventdata, handles)</a>
+0676 <span class="comment">% hObject    handle to edit9 (see GCBO)</span>
+0677 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0678 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0679 
+0680 <span class="comment">% Hints: get(hObject,'String') returns contents of edit9 as text</span>
+0681 <span class="comment">%        str2double(get(hObject,'String')) returns contents of edit9 as a double</span>
+0682 
+0683 
+0684 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0685 <a name="_sub33" href="#_subfunctions" class="code">function edit9_CreateFcn(hObject, eventdata, handles)</a>
+0686 <span class="comment">% hObject    handle to edit9 (see GCBO)</span>
+0687 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0688 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0689 
+0690 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0691 <span class="comment">%       See ISPC and COMPUTER.</span>
+0692 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0693     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0694 <span class="keyword">end</span>
+0695 
+0696 
+0697 <span class="comment">% --- Executes on key press with focus on save and none of its controls.</span>
+0698 <a name="_sub34" href="#_subfunctions" class="code">function save_KeyPressFcn(hObject, eventdata, handles)</a>
+0699 <span class="comment">% hObject    handle to save (see GCBO)</span>
+0700 <span class="comment">% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.UICONTROL)</span>
+0701 <span class="comment">%    Key: name of the key that was pressed, in lower case</span>
+0702 <span class="comment">%    Character: character interpretation of the key(s) that was pressed</span>
+0703 <span class="comment">%    Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed</span>
+0704 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0705 
+0706 
+0707 <span class="comment">% --- Executes on key press with focus on cancel and none of its controls.</span>
+0708 <a name="_sub35" href="#_subfunctions" class="code">function cancel_KeyPressFcn(hObject, eventdata, handles)</a>
+0709 <span class="comment">% hObject    handle to cancel (see GCBO)</span>
+0710 <span class="comment">% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.UICONTROL)</span>
+0711 <span class="comment">%    Key: name of the key that was pressed, in lower case</span>
+0712 <span class="comment">%    Character: character interpretation of the key(s) that was pressed</span>
+0713 <span class="comment">%    Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed</span>
+0714 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0715 
+0716 
+0717 
+0718 <a name="_sub36" href="#_subfunctions" class="code">function X_0_Callback(hObject, eventdata, handles)</a>
+0719 <span class="comment">% hObject    handle to X_0 (see GCBO)</span>
+0720 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0721 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0722 
+0723 <span class="comment">% Hints: get(hObject,'String') returns contents of X_0 as text</span>
+0724 <span class="comment">%        str2double(get(hObject,'String')) returns contents of X_0 as a double</span>
+0725 
+0726 
+0727 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0728 <a name="_sub37" href="#_subfunctions" class="code">function X_0_CreateFcn(hObject, eventdata, handles)</a>
+0729 <span class="comment">% hObject    handle to X_0 (see GCBO)</span>
+0730 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0731 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0732 
+0733 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0734 <span class="comment">%       See ISPC and COMPUTER.</span>
+0735 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0736     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0737 <span class="keyword">end</span>
+0738 
+0739 
+0740 
+0741 <a name="_sub38" href="#_subfunctions" class="code">function n0_Callback(hObject, eventdata, handles)</a>
+0742 <span class="comment">% hObject    handle to n0 (see GCBO)</span>
+0743 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0744 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0745 
+0746 <span class="comment">% Hints: get(hObject,'String') returns contents of n0 as text</span>
+0747 <span class="comment">%        str2double(get(hObject,'String')) returns contents of n0 as a double</span>
+0748 
+0749 
+0750 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0751 <a name="_sub39" href="#_subfunctions" class="code">function n0_CreateFcn(hObject, eventdata, handles)</a>
+0752 <span class="comment">% hObject    handle to n0 (see GCBO)</span>
+0753 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0754 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0755 
+0756 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0757 <span class="comment">%       See ISPC and COMPUTER.</span>
+0758 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0759     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0760 <span class="keyword">end</span>
+0761 <span class="keyword">if</span> handles.stage == 1
+0762     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+0763 <span class="keyword">else</span>
+0764     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+0765 <span class="keyword">end</span>
+0766 set(hObject, <span class="string">'String'</span>, handles.n0);
+0767 
+0768 
+0769 
+0770 <a name="_sub40" href="#_subfunctions" class="code">function n1_Callback(hObject, eventdata, handles)</a>
+0771 <span class="comment">% hObject    handle to n1 (see GCBO)</span>
+0772 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0773 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0774 
+0775 <span class="comment">% Hints: get(hObject,'String') returns contents of n1 as text</span>
+0776 <span class="comment">%        str2double(get(hObject,'String')) returns contents of n1 as a double</span>
+0777 
+0778 
+0779 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0780 <a name="_sub41" href="#_subfunctions" class="code">function n1_CreateFcn(hObject, eventdata, handles)</a>
+0781 <span class="comment">% hObject    handle to n1 (see GCBO)</span>
+0782 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0783 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0784 
+0785 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0786 <span class="comment">%       See ISPC and COMPUTER.</span>
+0787 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0788     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0789 <span class="keyword">end</span>
+0790 <span class="keyword">if</span> handles.stage == 1
+0791     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+0792 <span class="keyword">else</span>
+0793     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+0794 <span class="keyword">end</span>
+0795 set(hObject, <span class="string">'String'</span>, handles.n1);
+0796 
+0797 
+0798 <span class="comment">% --------------------------------------------------------------------</span>
+0799 <a name="_sub42" href="#_subfunctions" class="code">function X_0_table_ButtonDownFcn(hObject, eventdata, handles)</a>
+0800 <span class="comment">% hObject    handle to X_0_table (see GCBO)</span>
+0801 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0802 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0803 
+0804 
+0805 
+0806 <a name="_sub43" href="#_subfunctions" class="code">function n_points_Callback(hObject, eventdata, handles)</a>
+0807 <span class="comment">% hObject    handle to n_points (see GCBO)</span>
+0808 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0809 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0810 
+0811 <span class="comment">% Hints: get(hObject,'String') returns contents of n_points as text</span>
+0812 <span class="comment">%        str2double(get(hObject,'String')) returns contents of n_points as a double</span>
+0813 X_0 = zeros(str2num(get(handles.n_points, <span class="string">'String'</span>)), str2num(get(handles.co, <span class="string">'String'</span>)));
+0814 omega_0 = zeros(str2num(get(handles.n_points, <span class="string">'String'</span>)), 1);
+0815 set(handles.X_0_table, <span class="string">'Data'</span>, X_0);
+0816 set(handles.omega_0_table, <span class="string">'Data'</span>, omega_0);
+0817 
+0818 
+0819 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0820 <a name="_sub44" href="#_subfunctions" class="code">function n_points_CreateFcn(hObject, eventdata, handles)</a>
+0821 <span class="comment">% hObject    handle to n_points (see GCBO)</span>
+0822 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0823 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0824 
+0825 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0826 <span class="comment">%       See ISPC and COMPUTER.</span>
+0827 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0828     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0829 <span class="keyword">end</span>
+0830 
+0831 <span class="keyword">if</span> handles.stage == 1
+0832     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+0833 <span class="keyword">else</span>
+0834     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+0835 <span class="keyword">end</span>
+0836 set(hObject, <span class="string">'String'</span>, handles.n_points);
+0837 
+0838 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0839 <a name="_sub45" href="#_subfunctions" class="code">function form_new_problem_CreateFcn(hObject, eventdata, handles)</a>
+0840 <span class="comment">% hObject    handle to form_new_problem (see GCBO)</span>
+0841 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0842 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0843 
+0844 <span class="keyword">global</span> file;
+0845 
+0846 <span class="comment">% Obtain the line othe problem to be modify</span>
+0847 line = -1;
+0848 h = findobj(<span class="string">'Tag'</span>,<span class="string">'form_problem'</span>);
+0849 <span class="keyword">if</span> ~isempty(h)
+0850     line = getappdata(h, <span class="string">'line_problem_edit'</span>);
+0851 <span class="keyword">end</span>
+0852 
+0853     handles.name=<span class="string">'Example1'</span>;
+0854     handles.linear = 1;
+0855     handles.f = <span class="string">'@(x) [1,x(1),x(1)^2,x(2),x(1)*x(2)]'''</span>;
+0856     handles.auxiliar_funts = sprintf(<span class="string">'g=@(x) [1,x]''\nJ=@(x) g(x)*g(x)''\nPI=@(x,i) exp(g(x)''*theta(:,i))/(1+exp(g(x)''*theta(:,1))+exp(g(x)''*theta(:,2)))'</span>);
+0857     handles.theta_0 = <span class="string">'1,1,1,2'</span>;
+0858     handles.k = 5;
+0859     handles.m = 10;
+0860     handles.co = 2;
+0861     handles.matrix_to_estimate = eye (handles.k);
+0862     handles.bounds = <span class="string">'-1 1; 0 1; 0 1'</span>;
+0863     handles.stage = 1; <span class="comment">% 1 one stage, 0 multistage design</span>
+0864     handles.n0 = 0;
+0865     handles.n1 = 1;
+0866     handles.omega_0 = str2num(<span class="string">'1/4; 1/4; 1/4; 1/4'</span>);
+0867     handles.n_points = 4;
+0868     handles.X_0 = zeros(handles.n_points, handles.co);
+0869     
+0870 <span class="keyword">if</span> line == -1 <span class="comment">% This will be a new problem</span>
+0871     <span class="comment">% NEW PROBLEM</span>
+0872 <span class="keyword">else</span> <span class="comment">% This is an existing problem</span>
+0873     error = 0;
+0874     
+0875     <span class="comment">% Open file and search for the line where the problem starts</span>
+0876     fd = fopen(file, <span class="string">'r'</span>); 
+0877     <span class="keyword">if</span> fd == -1
+0878         error = 1;
+0879     <span class="keyword">end</span>
+0880     Data = textscan(fd, <span class="string">'%s'</span>, <span class="string">'delimiter'</span>, <span class="string">'\n'</span>, <span class="string">'whitespace'</span>, <span class="string">''</span>);
+0881     CStr = Data{1};
+0882     fclose(fd);
+0883 
+0884     <span class="comment">% Name</span>
+0885     name = CStr(line + 1);
+0886     handles.name = name{:};
+0887     <span class="comment">% Type</span>
+0888     <span class="keyword">if</span> strcmp(CStr(line + 2), <span class="string">'linear_model'</span>)
+0889         handles.linear = 1;
+0890     <span class="keyword">elseif</span> strcmp(CStr(line + 2), <span class="string">'non-linear_model'</span>)
+0891         handles.linear = 0;
+0892     <span class="keyword">end</span>
+0893     <span class="comment">% Function</span>
+0894     f = CStr(line + 3);
+0895     handles.f = f{:};
+0896     <span class="comment">% Theta_0</span>
+0897     theta_0 = CStr(line + 4);
+0898     handles.theta_0 = theta_0{:};
+0899     <span class="comment">% Auxiliar functions</span>
+0900     auxiliarf = [];
+0901     <span class="keyword">if</span> handles.linear == 0
+0902         line = line + 1;
+0903         n_auxiliarf_cell = CStr(line + 4);
+0904         n_auxiliarf = str2num(n_auxiliarf_cell{:});
+0905         <span class="keyword">for</span> i = 1:n_auxiliarf
+0906             line = line + 1;
+0907             auxiliarf_cell = CStr(line + 4);
+0908             auxiliarf = [auxiliarf auxiliarf_cell];
+0909         <span class="keyword">end</span>
+0910     <span class="keyword">end</span>
+0911     handles.auxiliar_funts = auxiliarf;
+0912     <span class="comment">% k</span>
+0913     k = CStr(line + 5);
+0914     handles.k = k{:};
+0915     <span class="comment">% m</span>
+0916     m = CStr(line + 6);
+0917     handles.m = m{:};
+0918     <span class="comment">% co</span>
+0919     co = CStr(line + 7);
+0920     handles.co = co{:};
+0921     <span class="comment">% Matrix to estimate</span>
+0922     matrix_cell = CStr(line + 8);
+0923     handles.matrix_to_estimate = str2num(matrix_cell{:});
+0924     <span class="comment">% Bounds</span>
+0925     bounds = CStr(line + 9);
+0926     handles.bounds = bounds{:};
+0927     <span class="comment">% Stage</span>
+0928     <span class="keyword">if</span> strcmp(CStr(line + 10), <span class="string">'one-stage'</span>)
+0929         handles.stage = 1;
+0930     <span class="keyword">elseif</span> strcmp(CStr(line + 10), <span class="string">'multistage'</span>)
+0931         handles.stage = 0;
+0932     <span class="keyword">end</span>
+0933     <span class="comment">% n0</span>
+0934     n0 = CStr(line + 11);
+0935     handles.n0 = n0{:};
+0936     <span class="comment">% n1</span>
+0937     n1 = CStr(line + 12);
+0938     handles.n1 = n1{:};
+0939     <span class="comment">% omega_0</span>
+0940     omega_0 =  CStr(line + 13);
+0941     handles.omega_0 = str2num(omega_0{:});
+0942     <span class="comment">% n_points</span>
+0943     n_points = CStr(line + 14);
+0944     handles.n_points = n_points{:};
+0945     <span class="comment">% Weigth</span>
+0946     weigth = CStr(line + 15);
+0947     handles.X_0 = str2num(weigth{:});
+0948     
+0949 <span class="keyword">end</span>
+0950 
+0951 guidata(hObject,handles)
+0952 
+0953 
+0954 
+0955 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0956 <a name="_sub46" href="#_subfunctions" class="code">function X_0_table_CreateFcn(hObject, eventdata, handles)</a>
+0957 <span class="comment">% hObject    handle to X_0_table (see GCBO)</span>
+0958 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0959 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0960 set(hObject, <span class="string">'ColumnEditable'</span>, true);
+0961 <span class="keyword">if</span> handles.stage == 1
+0962     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+0963 <span class="keyword">else</span>
+0964     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+0965 <span class="keyword">end</span>
+0966 set(hObject, <span class="string">'Data'</span>, handles.X_0);
+0967 
+0968 
+0969 <span class="comment">% --- Executes during object deletion, before destroying properties.</span>
+0970 <a name="_sub47" href="#_subfunctions" class="code">function matrix_to_estimate_DeleteFcn(hObject, eventdata, handles)</a>
+0971 <span class="comment">% hObject    handle to matrix_to_estimate (see GCBO)</span>
+0972 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0973 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0974 
+0975 
+0976 <span class="comment">% --- Executes when selected object is changed in stages.</span>
+0977 <a name="_sub48" href="#_subfunctions" class="code">function stages_SelectionChangedFcn(hObject, eventdata, handles)</a>
+0978 <span class="comment">% hObject    handle to the selected object in stages</span>
+0979 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0980 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0981 <span class="keyword">if</span> hObject == handles.one_stage 
+0982     <span class="comment">% One stage design</span>
+0983     set(handles.n0,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0984     set(handles.n0_text,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0985     set(handles.n1,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0986     set(handles.n1_text,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0987     set(handles.omega_0_table,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0988     set(handles.omega_0_text,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0989     set(handles.n_points,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0990     set(handles.n_points_text,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0991     set(handles.X_0_table,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0992     set(handles.X_0_text,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0993 <span class="keyword">elseif</span> hObject == handles.multistage
+0994     <span class="comment">% Multistage design</span>
+0995     X_0 = zeros(str2num(get(handles.n_points, <span class="string">'String'</span>)), str2num(get(handles.co, <span class="string">'String'</span>)));
+0996     set(handles.X_0_table, <span class="string">'Data'</span>, X_0);
+0997     
+0998     set(handles.n0,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0999     set(handles.n0_text,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1000     set(handles.n1,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1001     set(handles.n1_text,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1002     set(handles.omega_0_table,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1003     set(handles.omega_0_text,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1004     set(handles.n_points,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1005     set(handles.n_points_text,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1006     set(handles.X_0_table,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1007     set(handles.X_0_text,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1008 <span class="keyword">end</span>
+1009 
+1010 
+1011 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1012 <a name="_sub49" href="#_subfunctions" class="code">function linear_CreateFcn(hObject, eventdata, handles)</a>
+1013 <span class="comment">% hObject    handle to linear (see GCBO)</span>
+1014 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1015 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1016 set(hObject, <span class="string">'Value'</span>, handles.linear);
+1017 
+1018 
+1019 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1020 <a name="_sub50" href="#_subfunctions" class="code">function non_linear_CreateFcn(hObject, eventdata, handles)</a>
+1021 <span class="comment">% hObject    handle to non_linear (see GCBO)</span>
+1022 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1023 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1024 <span class="keyword">if</span> handles.linear == 0
+1025     set(hObject, <span class="string">'Value'</span>, 1);
+1026 <span class="keyword">else</span>
+1027     set(hObject, <span class="string">'Value'</span>, 0);
+1028 <span class="keyword">end</span>;
+1029 
+1030 
+1031 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1032 <a name="_sub51" href="#_subfunctions" class="code">function f_text_CreateFcn(hObject, eventdata, handles)</a>
+1033 <span class="comment">% hObject    handle to f_text (see GCBO)</span>
+1034 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1035 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1036 <span class="keyword">if</span> handles.linear == 1
+1037     set(hObject, <span class="string">'String'</span>, <span class="string">'f'</span>);
+1038 <span class="keyword">else</span>
+1039     set(hObject, <span class="string">'String'</span>, <span class="string">'Ixi'</span>);
+1040 <span class="keyword">end</span>;
+1041 
+1042 
+1043 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1044 <a name="_sub52" href="#_subfunctions" class="code">function theta_0_text_CreateFcn(hObject, eventdata, handles)</a>
+1045 <span class="comment">% hObject    handle to theta_0_text (see GCBO)</span>
+1046 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1047 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1048 <span class="keyword">if</span> handles.linear == 1
+1049     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1050 <span class="keyword">else</span>
+1051     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1052 <span class="keyword">end</span>
+1053 
+1054 
+1055 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1056 <a name="_sub53" href="#_subfunctions" class="code">function one_stage_CreateFcn(hObject, eventdata, handles)</a>
+1057 <span class="comment">% hObject    handle to one_stage (see GCBO)</span>
+1058 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1059 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1060 set(hObject, <span class="string">'Value'</span>, handles.stage);
+1061 
+1062 
+1063 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1064 <a name="_sub54" href="#_subfunctions" class="code">function multistage_CreateFcn(hObject, eventdata, handles)</a>
+1065 <span class="comment">% hObject    handle to multistage (see GCBO)</span>
+1066 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1067 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1068 <span class="keyword">if</span> handles.stage == 0
+1069     set(hObject, <span class="string">'Value'</span>, 1);
+1070 <span class="keyword">else</span>
+1071     set(hObject, <span class="string">'Value'</span>, 0);
+1072 <span class="keyword">end</span>
+1073 
+1074 
+1075 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1076 <a name="_sub55" href="#_subfunctions" class="code">function n0_text_CreateFcn(hObject, eventdata, handles)</a>
+1077 <span class="comment">% hObject    handle to n0_text (see GCBO)</span>
+1078 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1079 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1080 <span class="keyword">if</span> handles.stage == 1
+1081     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1082 <span class="keyword">else</span>
+1083     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1084 <span class="keyword">end</span>
+1085 
+1086 
+1087 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1088 <a name="_sub56" href="#_subfunctions" class="code">function n1_text_CreateFcn(hObject, eventdata, handles)</a>
+1089 <span class="comment">% hObject    handle to n1_text (see GCBO)</span>
+1090 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1091 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1092 <span class="keyword">if</span> handles.stage == 1
+1093     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1094 <span class="keyword">else</span>
+1095     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1096 <span class="keyword">end</span>
+1097 
+1098 
+1099 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1100 <a name="_sub57" href="#_subfunctions" class="code">function omega_0_text_CreateFcn(hObject, eventdata, handles)</a>
+1101 <span class="comment">% hObject    handle to omega_0_text (see GCBO)</span>
+1102 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1103 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1104 <span class="keyword">if</span> handles.stage == 1
+1105     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1106 <span class="keyword">else</span>
+1107     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1108 <span class="keyword">end</span>
+1109 
+1110 
+1111 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1112 <a name="_sub58" href="#_subfunctions" class="code">function n_points_text_CreateFcn(hObject, eventdata, handles)</a>
+1113 <span class="comment">% hObject    handle to n_points_text (see GCBO)</span>
+1114 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1115 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1116 <span class="keyword">if</span> handles.stage == 1
+1117     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1118 <span class="keyword">else</span>
+1119     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1120 <span class="keyword">end</span>
+1121 
+1122 
+1123 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1124 <a name="_sub59" href="#_subfunctions" class="code">function X_0_text_CreateFcn(hObject, eventdata, handles)</a>
+1125 <span class="comment">% hObject    handle to X_0_text (see GCBO)</span>
+1126 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1127 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1128 <span class="keyword">if</span> handles.stage == 1
+1129     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1130 <span class="keyword">else</span>
+1131     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1132 <span class="keyword">end</span>
+1133 
+1134 
+1135 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1136 <a name="_sub60" href="#_subfunctions" class="code">function omega_0_table_CreateFcn(hObject, eventdata, handles)</a>
+1137 <span class="comment">% hObject    handle to omega_0_table (see GCBO)</span>
+1138 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1139 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1140 set(hObject, <span class="string">'ColumnEditable'</span>, true);
+1141 <span class="keyword">if</span> handles.stage == 1
+1142     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1143 <span class="keyword">else</span>
+1144     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1145 <span class="keyword">end</span>
+1146 set(hObject, <span class="string">'Data'</span>, handles.omega_0);
+1147 
+1148 
+1149 
+1150 <a name="_sub61" href="#_subfunctions" class="code">function auxiliar_functions_Callback(hObject, eventdata, handles)</a>
+1151 <span class="comment">% hObject    handle to auxiliar_functions (see GCBO)</span>
+1152 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1153 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+1154 
+1155 <span class="comment">% Hints: get(hObject,'String') returns contents of auxiliar_functions as text</span>
+1156 <span class="comment">%        str2double(get(hObject,'String')) returns contents of auxiliar_functions as a double</span>
+1157 
+1158 
+1159 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1160 <a name="_sub62" href="#_subfunctions" class="code">function auxiliar_functions_CreateFcn(hObject, eventdata, handles)</a>
+1161 <span class="comment">% hObject    handle to auxiliar_functions (see GCBO)</span>
+1162 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1163 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1164 
+1165 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+1166 <span class="comment">%       See ISPC and COMPUTER.</span>
+1167 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+1168     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+1169 <span class="keyword">end</span>
+1170 
+1171 
+1172 <span class="comment">% --- Executes on slider movement.</span>
+1173 <a name="_sub63" href="#_subfunctions" class="code">function slider1_Callback(hObject, eventdata, handles)</a>
+1174 <span class="comment">% hObject    handle to slider1 (see GCBO)</span>
+1175 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1176 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+1177 
+1178 <span class="comment">% Hints: get(hObject,'Value') returns position of slider</span>
+1179 <span class="comment">%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider</span>
+1180 
+1181 
+1182 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1183 <a name="_sub64" href="#_subfunctions" class="code">function slider1_CreateFcn(hObject, eventdata, handles)</a>
+1184 <span class="comment">% hObject    handle to slider1 (see GCBO)</span>
+1185 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1186 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1187 
+1188 <span class="comment">% Hint: slider controls usually have a light gray background.</span>
+1189 <span class="keyword">if</span> isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+1190     set(hObject,<span class="string">'BackgroundColor'</span>,[.9 .9 .9]);
+1191 <span class="keyword">end</span>
+1192 
+1193 
+1194 
+1195 <a name="_sub65" href="#_subfunctions" class="code">function auxiliar_funts_Callback(hObject, eventdata, handles)</a>
+1196 <span class="comment">% hObject    handle to auxiliar_funts (see GCBO)</span>
+1197 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1198 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+1199 
+1200 <span class="comment">% Hints: get(hObject,'String') returns contents of auxiliar_funts as text</span>
+1201 <span class="comment">%        str2double(get(hObject,'String')) returns contents of auxiliar_funts as a double</span>
+1202 
+1203 
+1204 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1205 <a name="_sub66" href="#_subfunctions" class="code">function auxiliar_funts_CreateFcn(hObject, eventdata, handles)</a>
+1206 <span class="comment">% hObject    handle to auxiliar_funts (see GCBO)</span>
+1207 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1208 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1209 
+1210 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+1211 <span class="comment">%       See ISPC and COMPUTER.</span>
+1212 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+1213     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+1214 <span class="keyword">end</span>
+1215 set(hObject,<span class="string">'String'</span>,handles.auxiliar_funts);
+1216 <span class="keyword">if</span> handles.linear == 1
+1217     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1218 <span class="keyword">else</span>
+1219     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1220 <span class="keyword">end</span>
+1221 
+1222 
+1223 <span class="comment">% --- Executes when model is resized.</span>
+1224 <a name="_sub67" href="#_subfunctions" class="code">function model_SizeChangedFcn(hObject, eventdata, handles)</a>
+1225 <span class="comment">% hObject    handle to model (see GCBO)</span>
+1226 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1227 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+1228 
+1229 
+1230 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1231 <a name="_sub68" href="#_subfunctions" class="code">function auxiliar_funts_text1_CreateFcn(hObject, eventdata, handles)</a>
+1232 <span class="comment">% hObject    handle to auxiliar_funts_text1 (see GCBO)</span>
+1233 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1234 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1235 <span class="keyword">if</span> handles.linear == 1
+1236     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1237 <span class="keyword">else</span>
+1238     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1239 <span class="keyword">end</span>
+1240 
+1241 
+1242 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+1243 <a name="_sub69" href="#_subfunctions" class="code">function auxiliar_funts_text2_CreateFcn(hObject, eventdata, handles)</a>
+1244 <span class="comment">% hObject    handle to auxiliar_funts_text2 (see GCBO)</span>
+1245 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+1246 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+1247 <span class="keyword">if</span> handles.linear == 1
+1248     set(hObject, <span class="string">'Visible'</span>, <span class="string">'off'</span>);
+1249 <span class="keyword">else</span>
+1250     set(hObject, <span class="string">'Visible'</span>, <span class="string">'on'</span>);
+1251 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
