@@ -123,40 +123,4 @@ one-stage
 %%%EOP%%%
 
 %%%END_PROBLEMS%%%
-mple1
-linear_model
-@(x) [1,x(1),x(1)^2,x(2),x(1)*x(2)]'
 
-5
-10
-2
-1  0  0  0  0;  0  1  0  0  0;  0  0  1  0  0;  0  0  0  1  0;  0  0  0  0  1
--1 1; 0 1; 0 1
-one-stage
-
-
-
-
-
-%%%EOP%%%
-
-%%%END_PROBLEMS%%%
-%%%
-mple1
-linear_model
-@(x) [1,x(1),x(1)^2,x(2),x(1)*x(2)]'
-
-5
-10
-2
-1  0  0  0  0;  0  1  0  0  0;  0  0  1  0  0;  0  0  0  1  0;  0  0  0  0  1
--1 1; 0 1; 0 1
-one-stage
-
-
-
-
-
-%%%EOP%%%
-
-%%%END_PROBLEMS%%%
