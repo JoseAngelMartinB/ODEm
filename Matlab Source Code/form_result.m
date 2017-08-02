@@ -28,7 +28,7 @@ function varargout = form_result(varargin)
 
 % Edit the above text to modify the response to help form_result
 
-% Last Modified by GUIDE v2.5 07-Jun-2017 10:07:11
+% Last Modified by GUIDE v2.5 02-Aug-2017 12:50:42
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -63,6 +63,26 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
+
+%%% Allow LaTeX strings %%%
+% TEXT annotations need an axes as parent so create an invisible axes which
+% is as big as the figure
+handles.laxis = axes('parent',hObject,'units','normalized','position',[0 0 1 1],'visible','off');
+% Find all static text UICONTROLS whose 'Tag' starts with latex_
+lbls = findobj(hObject,'-regexp','tag','latex_*');
+for i=1:length(lbls)
+      l = lbls(i);
+      % Get current text, position and tag
+      set(l,'units','normalized');
+      s = get(l,'string');
+      p = get(l,'position');
+      t = get(l,'tag');
+      % Remove the UICONTROL
+      delete(l);
+      % Replace it with a TEXT object 
+      handles.(t) = text(p(1),p(2),s,'interpreter','latex');
+end
+
 
 % UIWAIT makes form_result wait for user response (see UIRESUME)
 % uiwait(handles.results);
@@ -283,3 +303,10 @@ function long_method_name_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 global results;
 set(hObject, 'String', results{1}.longName);
+
+
+% --- Executes during object creation, after setting all properties.
+function latex_text6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to latex_text6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called

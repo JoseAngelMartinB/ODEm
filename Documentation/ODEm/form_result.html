@@ -44,7 +44,7 @@ This function is called by:
 
 <h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
 <ul style="list-style-image:url(../matlabicon.gif)">
-<li><a href="#_sub1" class="code">function form_result_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = form_result_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function design_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function w_table_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function close_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function method_popup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function method_popup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function fill_table(alg_pos, w_table)</a></li><li><a href="#_sub9" class="code">function fill_z(alg_pos, z)</a></li><li><a href="#_sub10" class="code">function fill_time(alg_pos, cpu_time)</a></li><li><a href="#_sub11" class="code">function fill_eff(alg_pos, eff)</a></li><li><a href="#_sub12" class="code">function z_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub13" class="code">function cpu_time_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub14" class="code">function efficiency_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub15" class="code">function results_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub16" class="code">function save_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub17" class="code">function appro_exact_design_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub18" class="code">function uitable4_CellEditCallback(hObject, eventdata, handles)</a></li><li><a href="#_sub19" class="code">function long_method_name_CreateFcn(hObject, eventdata, handles)</a></li></ul>
+<li><a href="#_sub1" class="code">function form_result_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = form_result_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function design_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function w_table_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function close_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function method_popup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function method_popup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function fill_table(alg_pos, w_table)</a></li><li><a href="#_sub9" class="code">function fill_z(alg_pos, z)</a></li><li><a href="#_sub10" class="code">function fill_time(alg_pos, cpu_time)</a></li><li><a href="#_sub11" class="code">function fill_eff(alg_pos, eff)</a></li><li><a href="#_sub12" class="code">function z_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub13" class="code">function cpu_time_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub14" class="code">function efficiency_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub15" class="code">function results_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub16" class="code">function save_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub17" class="code">function appro_exact_design_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub18" class="code">function uitable4_CellEditCallback(hObject, eventdata, handles)</a></li><li><a href="#_sub19" class="code">function long_method_name_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub20" class="code">function latex_text6_CreateFcn(hObject, eventdata, handles)</a></li></ul>
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = form_result(varargin)</a>
@@ -77,7 +77,7 @@ This function is called by:
 0028 
 0029 <span class="comment">% Edit the above text to modify the response to help form_result</span>
 0030 
-0031 <span class="comment">% Last Modified by GUIDE v2.5 07-Jun-2017 10:07:11</span>
+0031 <span class="comment">% Last Modified by GUIDE v2.5 02-Aug-2017 12:50:42</span>
 0032 
 0033 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
 0034 gui_Singleton = 1;
@@ -113,225 +113,252 @@ This function is called by:
 0064 <span class="comment">% Update handles structure</span>
 0065 guidata(hObject, handles);
 0066 
-0067 <span class="comment">% UIWAIT makes form_result wait for user response (see UIRESUME)</span>
-0068 <span class="comment">% uiwait(handles.results);</span>
-0069 
-0070 
-0071 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
-0072 <a name="_sub2" href="#_subfunctions" class="code">function varargout = form_result_OutputFcn(hObject, eventdata, handles) </a>
-0073 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
-0074 <span class="comment">% hObject    handle to figure</span>
-0075 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0076 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
-0077 
-0078 <span class="comment">% Get default command line output from handles structure</span>
-0079 varargout{1} = handles.output;
-0080 
-0081 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0082 <a name="_sub3" href="#_subfunctions" class="code">function design_CreateFcn(hObject, eventdata, handles)</a>
-0083 <span class="comment">% hObject    handle to design (see GCBO)</span>
-0084 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0085 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0086 <span class="keyword">global</span> design;
-0087 <span class="keyword">if</span> design.p == 0
-0088     set(hObject, <span class="string">'String'</span>, <span class="string">'D-Design'</span>);
-0089 <span class="keyword">elseif</span> design.p == 1
-0090     set(hObject, <span class="string">'String'</span>, <span class="string">'A-Design'</span>);
-0091 <span class="keyword">else</span>
-0092     set(hObject, <span class="string">'String'</span>, [<span class="string">'Other design: p = '</span> num2str(design.p)]);
-0093 <span class="keyword">end</span>
-0094 
-0095 
-0096 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0097 <a name="_sub4" href="#_subfunctions" class="code">function w_table_CreateFcn(hObject, eventdata, handles)</a>
-0098 <span class="comment">% hObject    handle to w_table (see GCBO)</span>
-0099 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0100 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0101 <a href="#_sub8" class="code" title="subfunction fill_table(alg_pos, w_table)">fill_table</a>(1, hObject);
-0102 
-0103 
-0104 <span class="comment">% --- Executes on button press in close.</span>
-0105 <a name="_sub5" href="#_subfunctions" class="code">function close_Callback(hObject, eventdata, handles)</a>
-0106 <span class="comment">% hObject    handle to close (see GCBO)</span>
-0107 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0108 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
-0109 close;
-0110 
-0111 
-0112 <span class="comment">% --- Executes on selection change in method_popup.</span>
-0113 <a name="_sub6" href="#_subfunctions" class="code">function method_popup_Callback(hObject, eventdata, handles)</a>
-0114 <span class="comment">% hObject    handle to method_popup (see GCBO)</span>
-0115 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0116 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
-0117 
-0118 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns method_popup contents as cell array</span>
-0119 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from method_popup</span>
-0120 <span class="keyword">global</span> alg hybrid results;
-0121 set(handles.loading, <span class="string">'String'</span>, <span class="string">'Loading...'</span>);
-0122 drawnow;
-0123 pos = get(hObject, <span class="string">'Value'</span>);
-0124 
-0125 
-0126 
-0127 
-0128 <a href="#_sub8" class="code" title="subfunction fill_table(alg_pos, w_table)">fill_table</a>(pos, handles.w_table);
-0129 <a href="#_sub9" class="code" title="subfunction fill_z(alg_pos, z)">fill_z</a>(pos, handles.z)
-0130 <a href="#_sub10" class="code" title="subfunction fill_time(alg_pos, cpu_time)">fill_time</a>(pos, handles.cpu_time)
-0131 <a href="#_sub11" class="code" title="subfunction fill_eff(alg_pos, eff)">fill_eff</a>(pos, handles.efficiency);
-0132 set(handles.loading, <span class="string">'String'</span>, <span class="string">''</span>);
-0133 set(handles.long_method_name, <span class="string">'String'</span>, results{pos}.longName);
-0134 drawnow;
-0135 
-0136 
-0137 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0138 <a name="_sub7" href="#_subfunctions" class="code">function method_popup_CreateFcn(hObject, eventdata, handles)</a>
-0139 <span class="comment">% hObject    handle to method_popup (see GCBO)</span>
-0140 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0141 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0142 
-0143 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
-0144 <span class="comment">%       See ISPC and COMPUTER.</span>
-0145 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
-0146     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
-0147 <span class="keyword">end</span>
-0148 <span class="keyword">global</span> list_alg;
-0149 
-0150 set(hObject, <span class="string">'String'</span>, list_alg);
-0151 
-0152 
-0153 <a name="_sub8" href="#_subfunctions" class="code">function fill_table(alg_pos, w_table)</a>
-0154 <span class="keyword">global</span> design results;
+0067 <span class="comment">%%% Allow LaTeX strings %%%</span>
+0068 <span class="comment">% TEXT annotations need an axes as parent so create an invisible axes which</span>
+0069 <span class="comment">% is as big as the figure</span>
+0070 handles.laxis = axes(<span class="string">'parent'</span>,hObject,<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0 0 1 1],<span class="string">'visible'</span>,<span class="string">'off'</span>);
+0071 <span class="comment">% Find all static text UICONTROLS whose 'Tag' starts with latex_</span>
+0072 lbls = findobj(hObject,<span class="string">'-regexp'</span>,<span class="string">'tag'</span>,<span class="string">'latex_*'</span>);
+0073 <span class="keyword">for</span> i=1:length(lbls)
+0074       l = lbls(i);
+0075       <span class="comment">% Get current text, position and tag</span>
+0076       set(l,<span class="string">'units'</span>,<span class="string">'normalized'</span>);
+0077       s = get(l,<span class="string">'string'</span>);
+0078       p = get(l,<span class="string">'position'</span>);
+0079       t = get(l,<span class="string">'tag'</span>);
+0080       <span class="comment">% Remove the UICONTROL</span>
+0081       delete(l);
+0082       <span class="comment">% Replace it with a TEXT object</span>
+0083       handles.(t) = text(p(1),p(2),s,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>);
+0084 <span class="keyword">end</span>
+0085 
+0086 
+0087 <span class="comment">% UIWAIT makes form_result wait for user response (see UIRESUME)</span>
+0088 <span class="comment">% uiwait(handles.results);</span>
+0089 
+0090 
+0091 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0092 <a name="_sub2" href="#_subfunctions" class="code">function varargout = form_result_OutputFcn(hObject, eventdata, handles) </a>
+0093 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0094 <span class="comment">% hObject    handle to figure</span>
+0095 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0096 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0097 
+0098 <span class="comment">% Get default command line output from handles structure</span>
+0099 varargout{1} = handles.output;
+0100 
+0101 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0102 <a name="_sub3" href="#_subfunctions" class="code">function design_CreateFcn(hObject, eventdata, handles)</a>
+0103 <span class="comment">% hObject    handle to design (see GCBO)</span>
+0104 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0105 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0106 <span class="keyword">global</span> design;
+0107 <span class="keyword">if</span> design.p == 0
+0108     set(hObject, <span class="string">'String'</span>, <span class="string">'D-Design'</span>);
+0109 <span class="keyword">elseif</span> design.p == 1
+0110     set(hObject, <span class="string">'String'</span>, <span class="string">'A-Design'</span>);
+0111 <span class="keyword">else</span>
+0112     set(hObject, <span class="string">'String'</span>, [<span class="string">'Other design: p = '</span> num2str(design.p)]);
+0113 <span class="keyword">end</span>
+0114 
+0115 
+0116 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0117 <a name="_sub4" href="#_subfunctions" class="code">function w_table_CreateFcn(hObject, eventdata, handles)</a>
+0118 <span class="comment">% hObject    handle to w_table (see GCBO)</span>
+0119 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0120 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0121 <a href="#_sub8" class="code" title="subfunction fill_table(alg_pos, w_table)">fill_table</a>(1, hObject);
+0122 
+0123 
+0124 <span class="comment">% --- Executes on button press in close.</span>
+0125 <a name="_sub5" href="#_subfunctions" class="code">function close_Callback(hObject, eventdata, handles)</a>
+0126 <span class="comment">% hObject    handle to close (see GCBO)</span>
+0127 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0128 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0129 close;
+0130 
+0131 
+0132 <span class="comment">% --- Executes on selection change in method_popup.</span>
+0133 <a name="_sub6" href="#_subfunctions" class="code">function method_popup_Callback(hObject, eventdata, handles)</a>
+0134 <span class="comment">% hObject    handle to method_popup (see GCBO)</span>
+0135 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0136 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0137 
+0138 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns method_popup contents as cell array</span>
+0139 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from method_popup</span>
+0140 <span class="keyword">global</span> alg hybrid results;
+0141 set(handles.loading, <span class="string">'String'</span>, <span class="string">'Loading...'</span>);
+0142 drawnow;
+0143 pos = get(hObject, <span class="string">'Value'</span>);
+0144 
+0145 
+0146 
+0147 
+0148 <a href="#_sub8" class="code" title="subfunction fill_table(alg_pos, w_table)">fill_table</a>(pos, handles.w_table);
+0149 <a href="#_sub9" class="code" title="subfunction fill_z(alg_pos, z)">fill_z</a>(pos, handles.z)
+0150 <a href="#_sub10" class="code" title="subfunction fill_time(alg_pos, cpu_time)">fill_time</a>(pos, handles.cpu_time)
+0151 <a href="#_sub11" class="code" title="subfunction fill_eff(alg_pos, eff)">fill_eff</a>(pos, handles.efficiency);
+0152 set(handles.loading, <span class="string">'String'</span>, <span class="string">''</span>);
+0153 set(handles.long_method_name, <span class="string">'String'</span>, results{pos}.longName);
+0154 drawnow;
 0155 
-0156 data = results{alg_pos}.data;
-0157 
-0158 <span class="comment">% Color of the weigth colum</span>
-0159 data = reshape(strtrim(cellstr(num2str(data(:)))), size(data));
-0160 
-0161 <span class="keyword">if</span> design.exact == 0
-0162     data(:,1) = cellfun(@(x) [<span class="string">'&lt;html&gt;&lt;table border=0 width=400 bgcolor=#B2ADB2&gt;&lt;TR&gt;&lt;TD&gt;'</span> x <span class="string">'&lt;/TD&gt;&lt;/TR&gt; &lt;/table&gt;&lt;/html&gt;'</span>], data(:,1), <span class="string">'UniformOutput'</span>, false);
-0163 <span class="keyword">else</span>
-0164     data(:,1) = cellfun(@(x) [<span class="string">'-----------------'</span>], data(:,1), <span class="string">'UniformOutput'</span>, false);
-0165 <span class="keyword">end</span>
-0166 
-0167 set(w_table, <span class="string">'Data'</span>, data);
-0168     
+0156 
+0157 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0158 <a name="_sub7" href="#_subfunctions" class="code">function method_popup_CreateFcn(hObject, eventdata, handles)</a>
+0159 <span class="comment">% hObject    handle to method_popup (see GCBO)</span>
+0160 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0161 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0162 
+0163 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
+0164 <span class="comment">%       See ISPC and COMPUTER.</span>
+0165 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0166     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0167 <span class="keyword">end</span>
+0168 <span class="keyword">global</span> list_alg;
 0169 
-0170 <a name="_sub9" href="#_subfunctions" class="code">function fill_z(alg_pos, z)</a>
-0171 <span class="keyword">global</span> design results;
-0172 <span class="keyword">if</span> design.p == 0
-0173     <span class="keyword">if</span> results{alg_pos}.Phi == -1
-0174         f_opt = <span class="string">'---'</span>;
-0175     <span class="keyword">else</span>
-0176         f_opt = results{alg_pos}.Phi;
-0177     <span class="keyword">end</span>
-0178 <span class="keyword">else</span>
-0179     f_opt = results{alg_pos}.f_opt;
-0180 <span class="keyword">end</span>
-0181 set(z, <span class="string">'String'</span>, f_opt);
-0182 
-0183 
-0184 <a name="_sub10" href="#_subfunctions" class="code">function fill_time(alg_pos, cpu_time)</a>
-0185 <span class="keyword">global</span> results;
-0186 time = results{alg_pos}.time;
-0187 set(cpu_time, <span class="string">'String'</span>, time);
-0188 
+0170 set(hObject, <span class="string">'String'</span>, list_alg);
+0171 
+0172 
+0173 <a name="_sub8" href="#_subfunctions" class="code">function fill_table(alg_pos, w_table)</a>
+0174 <span class="keyword">global</span> design results;
+0175 
+0176 data = results{alg_pos}.data;
+0177 
+0178 <span class="comment">% Color of the weigth colum</span>
+0179 data = reshape(strtrim(cellstr(num2str(data(:)))), size(data));
+0180 
+0181 <span class="keyword">if</span> design.exact == 0
+0182     data(:,1) = cellfun(@(x) [<span class="string">'&lt;html&gt;&lt;table border=0 width=400 bgcolor=#B2ADB2&gt;&lt;TR&gt;&lt;TD&gt;'</span> x <span class="string">'&lt;/TD&gt;&lt;/TR&gt; &lt;/table&gt;&lt;/html&gt;'</span>], data(:,1), <span class="string">'UniformOutput'</span>, false);
+0183 <span class="keyword">else</span>
+0184     data(:,1) = cellfun(@(x) [<span class="string">'-----------------'</span>], data(:,1), <span class="string">'UniformOutput'</span>, false);
+0185 <span class="keyword">end</span>
+0186 
+0187 set(w_table, <span class="string">'Data'</span>, data);
+0188     
 0189 
-0190 <a name="_sub11" href="#_subfunctions" class="code">function fill_eff(alg_pos, eff)</a>
-0191 <span class="keyword">global</span> results;
-0192 
-0193 <span class="keyword">if</span> results{alg_pos}.efficiency &gt; 1 || results{alg_pos}.efficiency &lt; 0 <span class="comment">% Avoid wrong efficiency results</span>
-0194     eff_per = sprintf(<span class="string">'---'</span>);
-0195 <span class="keyword">else</span>
-0196     eff_per = sprintf(<span class="string">'%.2f%%'</span>,100*results{alg_pos}.efficiency);
-0197 <span class="keyword">end</span>
-0198 
-0199 set(eff, <span class="string">'String'</span>, eff_per);
-0200 
-0201 
-0202 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0203 <a name="_sub12" href="#_subfunctions" class="code">function z_CreateFcn(hObject, eventdata, handles)</a>
-0204 <span class="comment">% hObject    handle to z (see GCBO)</span>
-0205 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0206 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0207 <a href="#_sub9" class="code" title="subfunction fill_z(alg_pos, z)">fill_z</a>(1, hObject);
+0190 <a name="_sub9" href="#_subfunctions" class="code">function fill_z(alg_pos, z)</a>
+0191 <span class="keyword">global</span> design results;
+0192 <span class="keyword">if</span> design.p == 0
+0193     <span class="keyword">if</span> results{alg_pos}.Phi == -1
+0194         f_opt = <span class="string">'---'</span>;
+0195     <span class="keyword">else</span>
+0196         f_opt = results{alg_pos}.Phi;
+0197     <span class="keyword">end</span>
+0198 <span class="keyword">else</span>
+0199     f_opt = results{alg_pos}.f_opt;
+0200 <span class="keyword">end</span>
+0201 set(z, <span class="string">'String'</span>, f_opt);
+0202 
+0203 
+0204 <a name="_sub10" href="#_subfunctions" class="code">function fill_time(alg_pos, cpu_time)</a>
+0205 <span class="keyword">global</span> results;
+0206 time = results{alg_pos}.time;
+0207 set(cpu_time, <span class="string">'String'</span>, time);
 0208 
 0209 
-0210 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0211 <a name="_sub13" href="#_subfunctions" class="code">function cpu_time_CreateFcn(hObject, eventdata, handles)</a>
-0212 <span class="comment">% hObject    handle to cpu_time (see GCBO)</span>
-0213 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0214 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0215 <a href="#_sub10" class="code" title="subfunction fill_time(alg_pos, cpu_time)">fill_time</a>(1, hObject);
-0216 
-0217 
-0218 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0219 <a name="_sub14" href="#_subfunctions" class="code">function efficiency_CreateFcn(hObject, eventdata, handles)</a>
-0220 <span class="comment">% hObject    handle to efficiency (see GCBO)</span>
-0221 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0222 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0223 <a href="#_sub11" class="code" title="subfunction fill_eff(alg_pos, eff)">fill_eff</a>(1, hObject);
-0224 
-0225 
-0226 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0227 <a name="_sub15" href="#_subfunctions" class="code">function results_CreateFcn(hObject, eventdata, handles)</a>
-0228 <span class="comment">% hObject    handle to results (see GCBO)</span>
-0229 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0230 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0231 
-0232 
-0233 
-0234 <span class="comment">% --- Executes on button press in save.</span>
-0235 <a name="_sub16" href="#_subfunctions" class="code">function save_Callback(hObject, eventdata, handles)</a>
-0236 <span class="comment">% hObject    handle to save (see GCBO)</span>
-0237 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0238 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
-0239 <span class="keyword">global</span> problem_name;
-0240 [file,path] = uiputfile(strcat(problem_name, <span class="string">'.xls'</span>), <span class="string">'Save as'</span>);
-0241 
-0242 <span class="comment">% Obtain the full path name of the file</span>
-0243 file = fullfile(path, file);
+0210 <a name="_sub11" href="#_subfunctions" class="code">function fill_eff(alg_pos, eff)</a>
+0211 <span class="keyword">global</span> results;
+0212 
+0213 <span class="keyword">if</span> results{alg_pos}.efficiency &gt; 1 || results{alg_pos}.efficiency &lt; 0 <span class="comment">% Avoid wrong efficiency results</span>
+0214     eff_per = sprintf(<span class="string">'---'</span>);
+0215 <span class="keyword">else</span>
+0216     eff_per = sprintf(<span class="string">'%.2f%%'</span>,100*results{alg_pos}.efficiency);
+0217 <span class="keyword">end</span>
+0218 
+0219 set(eff, <span class="string">'String'</span>, eff_per);
+0220 
+0221 
+0222 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0223 <a name="_sub12" href="#_subfunctions" class="code">function z_CreateFcn(hObject, eventdata, handles)</a>
+0224 <span class="comment">% hObject    handle to z (see GCBO)</span>
+0225 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0226 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0227 <a href="#_sub9" class="code" title="subfunction fill_z(alg_pos, z)">fill_z</a>(1, hObject);
+0228 
+0229 
+0230 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0231 <a name="_sub13" href="#_subfunctions" class="code">function cpu_time_CreateFcn(hObject, eventdata, handles)</a>
+0232 <span class="comment">% hObject    handle to cpu_time (see GCBO)</span>
+0233 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0234 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0235 <a href="#_sub10" class="code" title="subfunction fill_time(alg_pos, cpu_time)">fill_time</a>(1, hObject);
+0236 
+0237 
+0238 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0239 <a name="_sub14" href="#_subfunctions" class="code">function efficiency_CreateFcn(hObject, eventdata, handles)</a>
+0240 <span class="comment">% hObject    handle to efficiency (see GCBO)</span>
+0241 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0242 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0243 <a href="#_sub11" class="code" title="subfunction fill_eff(alg_pos, eff)">fill_eff</a>(1, hObject);
 0244 
-0245 set(handles.saving, <span class="string">'String'</span>, <span class="string">'Saving...'</span>);
-0246 drawnow;
-0247 
-0248 status = <a href="save_in_xml.html" class="code" title="function status = save_in_xml(file)">save_in_xml</a>(file);
-0249 
-0250 set(handles.saving, <span class="string">'String'</span>, <span class="string">''</span>);
-0251 drawnow;
+0245 
+0246 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0247 <a name="_sub15" href="#_subfunctions" class="code">function results_CreateFcn(hObject, eventdata, handles)</a>
+0248 <span class="comment">% hObject    handle to results (see GCBO)</span>
+0249 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0250 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0251 
 0252 
 0253 
-0254 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0255 <a name="_sub17" href="#_subfunctions" class="code">function appro_exact_design_CreateFcn(hObject, eventdata, handles)</a>
-0256 <span class="comment">% hObject    handle to appro_exact_design (see GCBO)</span>
+0254 <span class="comment">% --- Executes on button press in save.</span>
+0255 <a name="_sub16" href="#_subfunctions" class="code">function save_Callback(hObject, eventdata, handles)</a>
+0256 <span class="comment">% hObject    handle to save (see GCBO)</span>
 0257 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0258 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0259 <span class="keyword">global</span> design opt;
-0260 <span class="keyword">if</span> design.exact == 0
-0261     set(hObject, <span class="string">'String'</span>, <span class="string">'Approximated.'</span>);
-0262 <span class="keyword">else</span>
-0263     set(hObject, <span class="string">'String'</span>, [<span class="string">'Exact. Experimental subjects = '</span> num2str(opt.m)]);
-0264 <span class="keyword">end</span>
-0265 
-0266 
-0267 <span class="comment">% --- Executes when entered data in editable cell(s) in uitable4.</span>
-0268 <a name="_sub18" href="#_subfunctions" class="code">function uitable4_CellEditCallback(hObject, eventdata, handles)</a>
-0269 <span class="comment">% hObject    handle to uitable4 (see GCBO)</span>
-0270 <span class="comment">% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.TABLE)</span>
-0271 <span class="comment">%    Indices: row and column indices of the cell(s) edited</span>
-0272 <span class="comment">%    PreviousData: previous data for the cell(s) edited</span>
-0273 <span class="comment">%    EditData: string(s) entered by the user</span>
-0274 <span class="comment">%    NewData: EditData or its converted form set on the Data property. Empty if Data was not changed</span>
-0275 <span class="comment">%    Error: error string when failed to convert EditData to appropriate value for Data</span>
-0276 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
-0277 
-0278 
-0279 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
-0280 <a name="_sub19" href="#_subfunctions" class="code">function long_method_name_CreateFcn(hObject, eventdata, handles)</a>
-0281 <span class="comment">% hObject    handle to long_method_name (see GCBO)</span>
-0282 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
-0283 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
-0284 <span class="keyword">global</span> results;
-0285 set(hObject, <span class="string">'String'</span>, results{1}.longName);</pre></div>
-<hr><address>Generated on Thu 22-Jun-2017 12:06:26 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+0258 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0259 <span class="keyword">global</span> problem_name;
+0260 [file,path] = uiputfile(strcat(problem_name, <span class="string">'.xls'</span>), <span class="string">'Save as'</span>);
+0261 
+0262 <span class="comment">% Obtain the full path name of the file</span>
+0263 file = fullfile(path, file);
+0264 
+0265 set(handles.saving, <span class="string">'String'</span>, <span class="string">'Saving...'</span>);
+0266 drawnow;
+0267 
+0268 status = <a href="save_in_xml.html" class="code" title="function status = save_in_xml(file)">save_in_xml</a>(file);
+0269 
+0270 set(handles.saving, <span class="string">'String'</span>, <span class="string">''</span>);
+0271 drawnow;
+0272 
+0273 
+0274 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0275 <a name="_sub17" href="#_subfunctions" class="code">function appro_exact_design_CreateFcn(hObject, eventdata, handles)</a>
+0276 <span class="comment">% hObject    handle to appro_exact_design (see GCBO)</span>
+0277 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0278 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0279 <span class="keyword">global</span> design opt;
+0280 <span class="keyword">if</span> design.exact == 0
+0281     set(hObject, <span class="string">'String'</span>, <span class="string">'Approximated.'</span>);
+0282 <span class="keyword">else</span>
+0283     set(hObject, <span class="string">'String'</span>, [<span class="string">'Exact. Experimental subjects = '</span> num2str(opt.m)]);
+0284 <span class="keyword">end</span>
+0285 
+0286 
+0287 <span class="comment">% --- Executes when entered data in editable cell(s) in uitable4.</span>
+0288 <a name="_sub18" href="#_subfunctions" class="code">function uitable4_CellEditCallback(hObject, eventdata, handles)</a>
+0289 <span class="comment">% hObject    handle to uitable4 (see GCBO)</span>
+0290 <span class="comment">% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.TABLE)</span>
+0291 <span class="comment">%    Indices: row and column indices of the cell(s) edited</span>
+0292 <span class="comment">%    PreviousData: previous data for the cell(s) edited</span>
+0293 <span class="comment">%    EditData: string(s) entered by the user</span>
+0294 <span class="comment">%    NewData: EditData or its converted form set on the Data property. Empty if Data was not changed</span>
+0295 <span class="comment">%    Error: error string when failed to convert EditData to appropriate value for Data</span>
+0296 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0297 
+0298 
+0299 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0300 <a name="_sub19" href="#_subfunctions" class="code">function long_method_name_CreateFcn(hObject, eventdata, handles)</a>
+0301 <span class="comment">% hObject    handle to long_method_name (see GCBO)</span>
+0302 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0303 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0304 <span class="keyword">global</span> results;
+0305 set(hObject, <span class="string">'String'</span>, results{1}.longName);
+0306 
+0307 
+0308 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0309 <a name="_sub20" href="#_subfunctions" class="code">function latex_text6_CreateFcn(hObject, eventdata, handles)</a>
+0310 <span class="comment">% hObject    handle to latex_text6 (see GCBO)</span>
+0311 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0312 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span></pre></div>
+<hr><address>Generated on Wed 02-Aug-2017 13:45:50 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

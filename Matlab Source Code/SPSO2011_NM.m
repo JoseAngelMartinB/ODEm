@@ -1,13 +1,7 @@
 function [best_x, best_f, max_FEs, evolt, evolbest_f, evolt_time] = SPSO2011_NM(N,D, FE_max, fun, err, LB, UB, opt_f,normalize,Mfinal,Pob_ini,K,displ,options_exact)
 
-% ODEm - Optimal Design Experiments with Matlab
-% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
-% Department of Mathematics, Escuela Superior de Informática. University of
-% Castilla-La Mancha. Ciudad Real, Spain.
-
 % Standard PSO 2011
 % Developed by: Dr. Mahamed G.H. Omran (omran.m@gust.edu.kw) 7-May-2011
-
 % Modified and improved by: Maurice Clerc 23-May-2011
 
 % x swarm

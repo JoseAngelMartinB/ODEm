@@ -1,13 +1,7 @@
 function y1= alea_normal (mean, std_dev) 
 
-% ODEm - Optimal Design Experiments with Matlab
-% Ricardo García Rodenas, José Ángel Martín Baos, José Carlos García García
-% Department of Mathematics, Escuela Superior de Informática. University of
-% Castilla-La Mancha. Ciudad Real, Spain.
-
 % Use the polar form of the Box-Muller transformation to obtain a pseudo
 % random number from a Gaussian distribution
-%
 % Developed by: Maurice Clerc (May 2011)
     
     w=2;
