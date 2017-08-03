@@ -35,6 +35,10 @@ We recommend reading the program manual before using the software. The manual ca
 Also you can find the code documentation in Documentation folder. One interesting part of the Documentation is the function call tree of the program, which can be found in [Documentation/ODEm/graph.png](Documentation/ODEm/graph.png)
 
 
+## Support
+If you have any kind of problem with the program, please feel free to contact José Ángel Martin at joseangel.martin3@alu.uclm.es and Ricardo García at ricardo.garcia@uclm.es
+
+
 ## Authors
 * Ricardo García Ródenas (ricardo.garcia@uclm.es)
 * José Ángel Martín Baos
