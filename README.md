@@ -13,6 +13,9 @@ You cand find the installer inside the [Windows Installer folder](Windows%20Inst
 A Windows Operating System.
 ```
 
+### Restoring the problem data to default
+If you are using the Windows installer and you want to restore the problem data to default, you will need to remove the Matlab cache. To accomplish this task, you will need to go under directory C:\Users\“your computer user”\AppData\Local\Temp\“your computer user ”\mcrCache9.1 and remove the folder/folders that start with "ODEm".
+
 ## Using Matlab Source Code in any Operating System
 The program can also be used in any other Operating System apart from Windows. You need to open the source files of
 the program located in [Matlab Source Code folder](Matlab%20Source%20Code/) and run the form_main.m file.
