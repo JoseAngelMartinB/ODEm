@@ -39,7 +39,7 @@ Also you can find the code documentation in Documentation folder. One interestin
 
 
 ## Support
-If you have any kind of problem with the program, please feel free to contact José Ángel Martin at joseangel.martin3@alu.uclm.es and Ricardo García at ricardo.garcia@uclm.es
+If you have any kind of problem with the program, please feel free to contact José Ángel Martin at JoseAngel.Martin@uclm.es and Ricardo García at Ricardo.Garcia@uclm.es
 
 
 ## Authors
