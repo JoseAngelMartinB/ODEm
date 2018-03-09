@@ -43,8 +43,8 @@ If you have any kind of problem with the program, please feel free to contact Jo
 
 
 ## Authors
-* Ricardo García Ródenas (ricardo.garcia@uclm.es)
-* José Ángel Martín Baos
+* Ricardo García Ródenas (Ricardo.Garcia@uclm.es)
+* José Ángel Martín Baos (JoseAngel.Martin@uclm.es)
 * José Carlos García García
 
 ----------------------------------------------------
