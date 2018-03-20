@@ -17,6 +17,8 @@ function [global_data, CPU] = Fmin_Experiments( f, xlow, xup, varargin )
 %       . m
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
+    global exp_conf;
+
     opt.fun = f;
     opt.xlow = xlow;
     opt.xup = xup;

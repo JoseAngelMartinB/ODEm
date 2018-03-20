@@ -1,8 +1,8 @@
 function varargout = form_main(varargin)
 
 % ODEm - Optimal Design Experiments with Matlab
-% Ricardo GarcÌa Rodenas, JosÈ ¡ngel MartÌn Baos, JosÈ Carlos GarcÌa GarcÌa
-% Department of Mathematics, Escuela Superior de Inform·tica. University of
+% Ricardo Garc√≠a R√≥denas, Jos√© √Ångel Mart√≠n Baos, Jos√© Carlos Garc√≠a Garc√≠a
+% Department of Mathematics, Escuela Superior de Inform√°tica. University of
 % Castilla-La Mancha. Ciudad Real, Spain.
 
 % THIS IS THE MAIN FILE OF THE PROGRAM. 
@@ -221,7 +221,8 @@ if ~strcmp(problem_name, '%%%none%%%') & isempty(alg) == 0
     % For depuration porpouses:
     %assignin('base','alg_exacts',algs_exacts);
     %assignin('base','alg',alg);
-    %assignin('base','solution',solution);
+    assignin('base','sol',sol);
+    assignin('base','solution',solution);
     assignin('base','results',results);
     
     % Show the results
@@ -264,6 +265,7 @@ more_opt.ill_cond = 0;
 more_opt.eta = 1e-10;
 more_opt.population = 50;
 more_opt.exacts_it = 100;
+more_opt.iter_results = 'none';
 alg_names = {'PSO';     % H - 1
     'GA';               % H - 2
     'SA';               % H - 3

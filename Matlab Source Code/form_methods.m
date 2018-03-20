@@ -1,9 +1,9 @@
 function varargout = form_methods(varargin)
 
 % ODEm - Optimal Design Experiments with Matlab
-% Ricardo GarcÌa Rodenas, JosÈ ¡ngel MartÌn Baos, JosÈ Carlos GarcÌa GarcÌa
-% Department of Mathematics, Escuela Superior de Inform·tica. University of
-% Castilla-La Mancha. Ciudad Real, Spain.
+% Ricardo Garc√≠a R√≥denas, Jos√© √Ångel Mart√≠n Baos, Jos√© Carlos Garc√≠a Garc√≠a
+% Department of Mathematics, Escuela Superior de Inform√°tica. University of
+% Castilla-La Mancha. Ciudad Real, Spain
 
 % FORM_METHODS MATLAB code for form_methods.fig
 %      FORM_METHODS, by itself, creates a new FORM_METHODS or raises the existing
@@ -28,7 +28,7 @@ function varargout = form_methods(varargin)
 
 % Edit the above text to modify the response to help form_methods
 
-% Last Modified by GUIDE v2.5 27-Mar-2017 00:25:09
+% Last Modified by GUIDE v2.5 29-Jan-2018 12:17:22
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -189,6 +189,12 @@ more_opt.ill_cond = get(handles.ill_conditioning, 'Value');
 more_opt.eta = str2num(get(handles.eta, 'String'));
 more_opt.population = str2num(get(handles.population, 'String'));
 more_opt.exacts_it = str2num(get(handles.exacts_it, 'String'));
+
+if get(handles.iter_results, 'Value') == 1
+    more_opt.iter_results = 'iter';
+else
+    more_opt.iter_results = 'none';
+end
 
 
 close;
@@ -651,4 +657,26 @@ if more_opt.ill_cond == 1
     set(hObject, 'Value', 1.0);
 else
     set(hObject, 'Value', 0.0);
+end
+
+
+% --- Executes on button press in iter_results.
+function iter_results_Callback(hObject, eventdata, handles)
+% hObject    handle to iter_results (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of iter_results
+
+
+% --- Executes during object creation, after setting all properties.
+function iter_results_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to iter_results (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+global more_opt;
+if more_opt.iter_results == 'none'
+    set(hObject, 'Value', 0.0);
+else
+    set(hObject, 'Value', 1.0);
 end

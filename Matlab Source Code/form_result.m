@@ -1,9 +1,9 @@
 function varargout = form_result(varargin)
 
 % ODEm - Optimal Design Experiments with Matlab
-% Ricardo GarcÌa Rodenas, JosÈ ¡ngel MartÌn Baos, JosÈ Carlos GarcÌa GarcÌa
-% Department of Mathematics, Escuela Superior de Inform·tica. University of
-% Castilla-La Mancha. Ciudad Real, Spain.
+% Ricardo Garc√≠a R√≥denas, Jos√© √Ångel Mart√≠n Baos, Jos√© Carlos Garc√≠a Garc√≠a
+% Department of Mathematics, Escuela Superior de Inform√°tica. University of
+% Castilla-La Mancha. Ciudad Real, Spain
 
 % FORM_RESULT MATLAB code for form_result.fig
 %      FORM_RESULT, by itself, creates a new FORM_RESULT or raises the existing
@@ -28,7 +28,7 @@ function varargout = form_result(varargin)
 
 % Edit the above text to modify the response to help form_result
 
-% Last Modified by GUIDE v2.5 02-Aug-2017 12:50:42
+% Last Modified by GUIDE v2.5 22-Jan-2018 18:59:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -256,8 +256,21 @@ function save_Callback(hObject, eventdata, handles)
 % hObject    handle to save (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global problem_name;
-[file,path] = uiputfile(strcat(problem_name, '.xls'), 'Save as');
+global problem_name design;
+
+if design.p == 0
+    type_design = 'D';
+elseif design.p == 1
+    type_design = 'A';
+else
+    type_design = ['P-' num2str(design.p)];
+end
+
+mkdir('Results');
+[file,path] = uiputfile(strcat('Results/', problem_name, '_', type_design, '.xls'), 'Save as');
+if file == 0
+    return;
+end
 
 % Obtain the full path name of the file
 file = fullfile(path, file);
@@ -310,3 +323,36 @@ function latex_text6_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to latex_text6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
+
+
+% --- Executes on button press in texTable.
+function texTable_Callback(hObject, eventdata, handles)
+% hObject    handle to texTable (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global problem_name design;
+
+if design.p == 0
+    type_design = 'D';
+elseif design.p == 1
+    type_design = 'A';
+else
+    type_design = ['P-' num2str(design.p)];
+end
+
+mkdir('Results');
+[file,path] = uiputfile(strcat('Results/', problem_name, '_', type_design, '_table.tex'), 'Save as');
+if file == 0
+    return;
+end
+
+% Obtain the full path name of the file
+file = fullfile(path, file);
+
+set(handles.saving, 'String', 'Saving...');
+drawnow;
+
+generate_tex_table(file);
+
+set(handles.saving, 'String', '');
+drawnow;

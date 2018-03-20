@@ -43,6 +43,9 @@ function opt=design_opt_load(file,line)
             opt.f = f;
             opt.Ixi = @(x) f(x)*f(x)';            
         elseif strcmp(CStr(line + 2), 'non-linear_model')
+            useIxi_cell = CStr(line + 3);
+            useIxi = str2num(useIxi_cell{:});
+            line = line + 1;
             line_of_f = line + 3;
             theta_0_cell = CStr(line + 4);
             theta_0 = str2num(theta_0_cell{:});
@@ -66,17 +69,23 @@ function opt=design_opt_load(file,line)
             if n_auxiliarf >= 1
                 f_str = ['opt.f = ' f_cell{:}];
                 eval(f_str);
-                % If Ixi depends on theta
-                if contains(f_str,'theta') == 1
+                if useIxi == 0 % The gradient vector is inserted
                     opt.Ixi = @(x) opt.f(x,theta_0)*opt.f(x,theta_0)';
-                else
+                else % If the information matrix is inserted directly
                     f_str = ['opt.Ixi = ' f_cell{:}];
                     eval(f_str);
                 end
             else
-                opt.f=@(x) f(x,theta_0);
-                opt.Ixi = @(x) f(x,theta_0)*f(x,theta_0)';
+                if useIxi == 0 % The gradient vector is inserted
+                    opt.f=@(x) f(x,theta_0);
+                    opt.Ixi = @(x) f(x,theta_0)*f(x,theta_0)';
+                else % If the information matrix is inserted directly
+                    f_str = ['opt.Ixi = ' f_cell{:}];
+                    eval(f_str);
+                end
             end
+            
+            
         end
         
         k_cell = CStr(line + 5);

@@ -1,14 +1,14 @@
 function [ x_opt, f_opt, results, output_f ] = spso( f, LB, UB, population, opt, options_exact )
 
 % ODEm - Optimal Design Experiments with Matlab
-% Ricardo GarcÌa Rodenas, JosÈ ¡ngel MartÌn Baos, JosÈ Carlos GarcÌa GarcÌa
-% Department of Mathematics, Escuela Superior de Inform·tica. University of
-% Castilla-La Mancha. Ciudad Real, Spain.
+% Ricardo Garc√≠a R√≥denas, Jos√© √Ångel Mart√≠n Baos, Jos√© Carlos Garc√≠a Garc√≠a
+% Department of Mathematics, Escuela Superior de Inform√°tica. University of
+% Castilla-La Mancha. Ciudad Real, Spain
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %   f - function to optimize
-    %   LB - Lower bound to define space¥s restrictions
-    %   UB - Upper bound to define space¥s restrictions
+    %   LB - Lower bound to define spaceÔøΩs restrictions
+    %   UB - Upper bound to define spaceÔøΩs restrictions
     %   population - matrix of population: each row is a set of points   
     %   opt - Options to configure different exact algorithms
     %       err - error value related to spso algorithm
@@ -25,7 +25,7 @@ function [ x_opt, f_opt, results, output_f ] = spso( f, LB, UB, population, opt,
     %--- OUTPUT ------
     %   x_opt - is the solution vector of points
     %   f_opt - is the value of the optimized quality function
-    %   results - funcion¥s value of each iteration
+    %   results - funcionÔøΩs value of each iteration
     %   output_f - information about algorithms evaluations
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
@@ -41,7 +41,9 @@ function [ x_opt, f_opt, results, output_f ] = spso( f, LB, UB, population, opt,
     nc = opt.nc;
     PopulationSize = opt.pob_size;
     N = opt.n;
-    displ = opt.display;
+    global more_opt;
+    displ = more_opt.iter_results;
+    %displ = opt.display;
     Mfinal = opt.mfinal;
     
     % Enviroment size

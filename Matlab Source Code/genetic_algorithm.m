@@ -1,14 +1,14 @@
 function [ x_opt, f_opt, results, output_f ] = genetic_algorithm( f, LB, UB, population, opt, options_exact )
 
 % ODEm - Optimal Design Experiments with Matlab
-% Ricardo GarcÌa Rodenas, JosÈ ¡ngel MartÌn Baos, JosÈ Carlos GarcÌa GarcÌa
-% Department of Mathematics, Escuela Superior de Inform·tica. University of
-% Castilla-La Mancha. Ciudad Real, Spain.
+% Ricardo Garc√≠a R√≥denas, Jos√© √Ångel Mart√≠n Baos, Jos√© Carlos Garc√≠a Garc√≠a
+% Department of Mathematics, Escuela Superior de Inform√°tica. University of
+% Castilla-La Mancha. Ciudad Real, Spain
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %   f - function to optimize
-    %   LB - Lower bound to define space¥s restrictions
-    %   UB - Upper bound to define space¥s restrictions
+    %   LB - Lower bound to define spaceÔøΩs restrictions
+    %   UB - Upper bound to define spaceÔøΩs restrictions
     %   population - matrix of population: each row is a set of points   
     %   opt - Options to configure different exact algorithms
     %       mfinal - maximum number of successful evaluations 
@@ -23,7 +23,7 @@ function [ x_opt, f_opt, results, output_f ] = genetic_algorithm( f, LB, UB, pop
     %--- OUTPUT ------
     %   x_opt - is the solution vector of points
     %   f_opt - is the value of the optimized quality function
-    %   results - funcion¥s value of each iteration
+    %   results - funcionÔøΩs value of each iteration
     %   output_f - information about algorithms evaluations
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
@@ -46,7 +46,9 @@ function [ x_opt, f_opt, results, output_f ] = genetic_algorithm( f, LB, UB, pop
     GAdatos.UB=UB;
     GAdatos.options_exact = options_exact;
     
-    displ = opt.display;
+    global more_opt;
+    displ = more_opt.iter_results;
+    %displ = opt.display;
     FE_max = opt.FE_max;
     PopulationSize = opt.pob_size;
     ValStallGenLimit = opt.valgenlimit;

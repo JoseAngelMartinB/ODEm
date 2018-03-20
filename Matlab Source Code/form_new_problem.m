@@ -1,9 +1,9 @@
 function varargout = form_new_problem(varargin)
 
 % ODEm - Optimal Design Experiments with Matlab
-% Ricardo GarcÌa Rodenas, JosÈ ¡ngel MartÌn Baos, JosÈ Carlos GarcÌa GarcÌa
-% Department of Mathematics, Escuela Superior de Inform·tica. University of
-% Castilla-La Mancha. Ciudad Real, Spain.
+% Ricardo Garc√≠a R√≥denas, Jos√© √Ångel Mart√≠n Baos, Jos√© Carlos Garc√≠a Garc√≠a
+% Department of Mathematics, Escuela Superior de Inform√°tica. University of
+% Castilla-La Mancha. Ciudad Real, Spain
 
 % FORM_NEW_PROBLEM MATLAB code for form_new_problem.fig
 %      FORM_NEW_PROBLEM, by itself, creates a new FORM_NEW_PROBLEM or raises the existing
@@ -28,9 +28,9 @@ function varargout = form_new_problem(varargin)
 
 % Edit the above text to modify the response to help form_new_problem
 
-% Last Modified by GUIDE v2.5 07-Oct-2016 17:39:15
+% Last Modified by GUIDE v2.5 22-Jan-2018 13:37:49
 
-% Begin initialization code - DO NOT EDIT
+% Begin initialization code - DO NOT EDIThandles.('gradient_text')
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
@@ -64,6 +64,7 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
+
 
 % UIWAIT makes form_new_problem wait for user response (see UIRESUME)
 % uiwait(handles.form_new_problem);
@@ -119,6 +120,7 @@ if line == -1
         end
 
         linear_model = get(handles.linear, 'Value'); % 1 Linear, 0 Non-Linear
+        useIxi = get(handles.use_Ixi, 'Value'); % 0 use gradient vector
         name_design = get(handles.name_design, 'String');
         CStr(Index) = cellstr('%%%%PROBLEM%%%%');
         CStr(Index + 1) = cellstr(name_design);
@@ -128,6 +130,8 @@ if line == -1
             CStr(Index + 4) = cellstr(' ');
         elseif linear_model == 0 % Non-Linear
             CStr(Index + 2) = cellstr('non-linear_model');
+            CStr(Index + 3) = cellstr(num2str(useIxi));
+            Index = Index + 1;
             CStr(Index + 3) = cellstr(get(handles.f, 'String'));
             CStr(Index + 4) = cellstr(get(handles.theta_0, 'String'));
             auxiliar_functions = cellstr(get(handles.auxiliar_funts, 'String'));
@@ -233,10 +237,11 @@ else
         if strcmp(CStr(line + 2), 'non-linear_model')
             n_auxiliarf_cell = CStr(line + 5);
             n_auxiliarf = str2num(n_auxiliarf_cell{:});
-            Index_old = Index_old + n_auxiliarf + 1;
+            Index_old = Index_old + n_auxiliarf + 2;
         end        
         
         linear_model = get(handles.linear, 'Value'); % 1 Linear, 0 Non-Linear
+        useIxi = get(handles.use_Ixi, 'Value'); % 0 use gradient vector
         name_design = get(handles.name_design, 'String');
         CStr(Index) = cellstr('%%%%PROBLEM%%%%');
         CStr(Index + 1) = cellstr(name_design);
@@ -246,6 +251,8 @@ else
             CStr(Index + 4) = cellstr(' ');
         elseif linear_model == 0 % Non-Linear
             CStr(Index + 2) = cellstr('non-linear_model');
+            CStr(Index + 3) = cellstr(num2str(useIxi));
+            Index = Index + 1;
             CStr(Index + 3) = cellstr(get(handles.f, 'String'));
             CStr(Index + 4) = cellstr(get(handles.theta_0, 'String'));
             auxiliar_functions = cellstr(get(handles.auxiliar_funts, 'String'));
@@ -428,6 +435,8 @@ if hObject == handles.linear
     set(handles.auxiliar_funts,'Visible','off');
     set(handles.auxiliar_funts_text1,'Visible','off');
     set(handles.auxiliar_funts_text2,'Visible','off');
+    set(handles.InformationMatrix, 'Visible','off');
+    set(handles.use_gradient, 'Value', 1);
     
 elseif hObject == handles.non_linear
     set(handles.f_text,'String','Ixi');
@@ -443,7 +452,12 @@ elseif hObject == handles.non_linear
     set(handles.auxiliar_funts,'Visible','on');
     set(handles.auxiliar_funts_text1,'Visible','on');
     set(handles.auxiliar_funts_text2,'Visible','on');
-    
+    set(handles.InformationMatrix, 'Visible','on');
+    if handles.useIxi_value == 0
+        set(handles.f_text, 'String', 'f');
+    else    
+        set(handles.f_text, 'String', 'Ixi');
+    end
 end
 
 
@@ -852,6 +866,7 @@ end
 
     handles.name='Example1';
     handles.linear = 1;
+    handles.useIxi_value = 0;
     handles.f = '@(x) [1,x(1),x(1)^2,x(2),x(1)*x(2)]''';
     handles.auxiliar_funts = sprintf('g=@(x) [1,x]''\nJ=@(x) g(x)*g(x)''\nPI=@(x,i) exp(g(x)''*theta(:,i))/(1+exp(g(x)''*theta(:,1))+exp(g(x)''*theta(:,2)))');
     handles.theta_0 = '1,1,1,2';
@@ -887,8 +902,12 @@ else % This is an existing problem
     % Type
     if strcmp(CStr(line + 2), 'linear_model')
         handles.linear = 1;
+        handles.useIxi_value = 0;
     elseif strcmp(CStr(line + 2), 'non-linear_model')
         handles.linear = 0;
+        useIxi = CStr(line + 3);
+        handles.useIxi_value = str2num(useIxi{:});
+        line = line + 1;
     end
     % Function
     f = CStr(line + 3);
@@ -1036,7 +1055,11 @@ function f_text_CreateFcn(hObject, eventdata, handles)
 if handles.linear == 1
     set(hObject, 'String', 'f');
 else
-    set(hObject, 'String', 'Ixi');
+    if handles.useIxi_value == 0
+        set(hObject, 'String', 'f');
+    else    
+        set(hObject, 'String', 'Ixi');
+    end
 end;
 
 
@@ -1249,3 +1272,53 @@ if handles.linear == 1
 else
     set(hObject, 'Visible', 'on');
 end
+
+
+% --- Executes when selected object is changed in InformationMatrix.
+function InformationMatrix_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in InformationMatrix 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+if hObject == handles.use_gradient
+    set(handles.f_text,'String','f');
+    handles.useIxi_value = 0;
+elseif hObject == handles.use_Ixi
+    set(handles.f_text,'String','Ixi');
+    handles.useIxi_value = 1;
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function InformationMatrix_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to InformationMatrix (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+if handles.linear == 1
+    set(hObject, 'Visible', 'off');
+else
+    set(hObject, 'Visible', 'on');
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function use_gradient_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to use_gradient (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+if handles.useIxi_value == 0
+    set(hObject, 'Value', 1);
+else
+    set(hObject, 'Value', 0);
+end;
+
+
+% --- Executes during object creation, after setting all properties.
+function use_Ixi_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to use_Ixi (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+if handles.useIxi_value == 1
+    set(hObject, 'Value', 1);
+else
+    set(hObject, 'Value', 0);
+end;

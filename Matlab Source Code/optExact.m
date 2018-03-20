@@ -1,14 +1,14 @@
 function [ x_opt, f_opt, results, output_f] = optExact( f, LB, UB, population, opt )
 
 % ODEm - Optimal Design Experiments with Matlab
-% Ricardo GarcÌa Rodenas, JosÈ ¡ngel MartÌn Baos, JosÈ Carlos GarcÌa GarcÌa
-% Department of Mathematics, Escuela Superior de Inform·tica. University of
-% Castilla-La Mancha. Ciudad Real, Spain.
+% Ricardo Garc√≠a R√≥denas, Jos√© √Ångel Mart√≠n Baos, Jos√© Carlos Garc√≠a Garc√≠a
+% Department of Mathematics, Escuela Superior de Inform√°tica. University of
+% Castilla-La Mancha. Ciudad Real, Spain
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   f - function to optimize
-%   LB - Lower bound to define space¥s restrictions
-%   UB - Upper bound to define space¥s restrictions
+%   LB - Lower bound to define spaceÔøΩs restrictions
+%   UB - Upper bound to define spaceÔøΩs restrictions
 %   population - population   
 %   opt - Options to configure different exact algorithms
 %       alg - the name of the exact algorithm: 'active-set', 'interior-point', 'sqp', 'nealder-mead', 'pattern-search' 
@@ -28,10 +28,12 @@ function [ x_opt, f_opt, results, output_f] = optExact( f, LB, UB, population, o
     %   Setting options
     %%%%%%%%
 
+    global more_opt;
     alg_exacts = {'active-set','interior-point','sqp'};
     
     algorithm = opt.alg;
-    display = opt.display;
+    %display = opt.display;
+    display = more_opt.iter_results;
     tolCon = opt.tolcon;
     FE_max = opt.fe_max;
     into_heuristic = opt.into_heuristic;
